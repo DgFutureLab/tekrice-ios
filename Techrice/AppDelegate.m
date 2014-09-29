@@ -13,6 +13,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [GMSServices provideAPIKey:@"AIzaSyD02od1MXyqSOzrvMI-W_Je4kk_huiwC3I"];
     return YES;
 }
 							
@@ -41,6 +42,32 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(float)getDistance{
+    NSLog(@"getditance");
+    // get data
+    NSString *url = @"http://128.199.191.249/reading/node_2/distance";
+    //NSURLからNSURLRequestを作る
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    //サーバーとの通信を行う
+    NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if (json != nil) {
+        //ローカルに保存
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:result forKey:@"test"];
+        BOOL successful = [defaults synchronize];
+        if (successful) {
+//            NSLog(@"%@", @"データの保存に成功しました。");
+        }
+        //JSONをパース
+        NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
+        float distance =  [[[[array valueForKey:@"data"] valueForKey:@"value"] objectAtIndex:0] floatValue];
+        return distance;
+    }else{
+        return 0;
+    }
 }
 
 @end

@@ -22,6 +22,49 @@
 		B2FA5FA819CABE0C00FCE828 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5F8719CABE0C00FCE828 /* UIKit.framework */; };
 		B2FA5FB019CABE0C00FCE828 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FAE19CABE0C00FCE828 /* InfoPlist.strings */; };
 		B2FA5FB219CABE0C00FCE828 /* TechriceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FB119CABE0C00FCE828 /* TechriceTests.m */; };
+		B2FA5FBF19CAC21500FCE828 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FBC19CAC21500FCE828 /* ConditionViewController.m */; };
+		B2FA5FC019CAC21500FCE828 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FBE19CAC21500FCE828 /* DetailViewController.m */; };
+		B2FA5FC519CAC3E100FCE828 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FC419CAC3E100FCE828 /* GoogleMaps.framework */; };
+		B2FA5FC719CAC45B00FCE828 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FC619CAC45B00FCE828 /* GoogleMaps.bundle */; };
+		B2FA5FC919CAC4E100FCE828 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FC819CAC4E100FCE828 /* AVFoundation.framework */; };
+		B2FA5FCB19CAC4EA00FCE828 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FCA19CAC4EA00FCE828 /* CoreData.framework */; };
+		B2FA5FCD19CAC4F300FCE828 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FCC19CAC4F300FCE828 /* CoreLocation.framework */; };
+		B2FA5FCF19CAC4F900FCE828 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FCE19CAC4F900FCE828 /* CoreText.framework */; };
+		B2FA5FD119CAC50100FCE828 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FD019CAC50100FCE828 /* GLKit.framework */; };
+		B2FA5FD319CAC50A00FCE828 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FD219CAC50A00FCE828 /* ImageIO.framework */; };
+		B2FA5FD519CAC51B00FCE828 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FD419CAC51B00FCE828 /* libc++.dylib */; };
+		B2FA5FD719CAC52A00FCE828 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FD619CAC52A00FCE828 /* libicucore.dylib */; };
+		B2FA5FD919CAC53200FCE828 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FD819CAC53200FCE828 /* libz.dylib */; };
+		B2FA5FDB19CAC54700FCE828 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FDA19CAC54700FCE828 /* OpenGLES.framework */; };
+		B2FA5FDD19CAC55200FCE828 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FDC19CAC55200FCE828 /* QuartzCore.framework */; };
+		B2FA5FDF19CAC55D00FCE828 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FDE19CAC55D00FCE828 /* SystemConfiguration.framework */; };
+		B2FA5FED19CAC60800FCE828 /* MCNewCustomLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FE319CAC60800FCE828 /* MCNewCustomLayer.m */; };
+		B2FA5FEE19CAC60800FCE828 /* MCNewCustomLayeredView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FE619CAC60800FCE828 /* MCNewCustomLayeredView.m */; };
+		B2FA5FEF19CAC60800FCE828 /* MCPercentageDoughnutView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FE819CAC60800FCE828 /* MCPercentageDoughnutView.m */; };
+		B2FA5FF019CAC60800FCE828 /* MCSliceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FEA19CAC60800FCE828 /* MCSliceLayer.m */; };
+		B2FA5FF119CAC60800FCE828 /* MCUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA5FEC19CAC60800FCE828 /* MCUtil.m */; };
+		B2FA5FF619CAC86A00FCE828 /* windmill_pole.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF219CAC86A00FCE828 /* windmill_pole.png */; };
+		B2FA5FF719CAC86A00FCE828 /* windmill_fan.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF319CAC86A00FCE828 /* windmill_fan.png */; };
+		B2FA5FF819CAC86A00FCE828 /* thermometer.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF419CAC86A00FCE828 /* thermometer.png */; };
+		B2FA5FF919CAC86A00FCE828 /* tabBar_sample.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */; };
+		B2FA5FFF19CAC90700FCE828 /* allred.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFB19CAC90700FCE828 /* allred.png */; };
+		B2FA600019CAC90700FCE828 /* darkgreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */; };
+		B2FA600119CAC90700FCE828 /* lightgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFD19CAC90700FCE828 /* lightgreen.png */; };
+		B2FA600219CAC90700FCE828 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFE19CAC90700FCE828 /* red.png */; };
+		B2FA600819CAC90E00FCE828 /* cleanwater2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600419CAC90E00FCE828 /* cleanwater2@2x.png */; };
+		B2FA600919CAC90E00FCE828 /* cleanwater@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600519CAC90E00FCE828 /* cleanwater@2x.png */; };
+		B2FA600A19CAC90E00FCE828 /* dirtywater2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600619CAC90E00FCE828 /* dirtywater2@2x.png */; };
+		B2FA600B19CAC90E00FCE828 /* dirtywater@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600719CAC90E00FCE828 /* dirtywater@2x.png */; };
+		B2FA600F19CAC91500FCE828 /* techricelogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600D19CAC91500FCE828 /* techricelogo.jpg */; };
+		B2FA601019CAC91500FCE828 /* techricelogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600E19CAC91500FCE828 /* techricelogo@2x.png */; };
+		B2FA601619CAC91C00FCE828 /* antena-green1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601219CAC91C00FCE828 /* antena-green1@2x.png */; };
+		B2FA601719CAC91C00FCE828 /* antena-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601319CAC91C00FCE828 /* antena-green@2x.png */; };
+		B2FA601819CAC91C00FCE828 /* antena-red1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601419CAC91C00FCE828 /* antena-red1@2x.png */; };
+		B2FA601919CAC91C00FCE828 /* antena-red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601519CAC91C00FCE828 /* antena-red@2x.png */; };
+		B2FA601C19CAC92800FCE828 /* mud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601B19CAC92800FCE828 /* mud@2x.png */; };
+		B2FA602019CAC93500FCE828 /* happyrice.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601E19CAC93500FCE828 /* happyrice.png */; };
+		B2FA602119CAC93500FCE828 /* sadrice.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601F19CAC93500FCE828 /* sadrice.png */; };
+		EFE46F7E08E44E338D56E769 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC70EEAD21A46CB93FEC891 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +78,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		50DDD165834244C29A39E80E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		9BC70EEAD21A46CB93FEC891 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FA5F8019CABE0C00FCE828 /* Techrice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Techrice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FA5F8319CABE0C00FCE828 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B2FA5F8519CABE0C00FCE828 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -55,6 +100,57 @@
 		B2FA5FAD19CABE0C00FCE828 /* TechriceTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TechriceTests-Info.plist"; sourceTree = "<group>"; };
 		B2FA5FAF19CABE0C00FCE828 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B2FA5FB119CABE0C00FCE828 /* TechriceTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TechriceTests.m; sourceTree = "<group>"; };
+		B2FA5FBB19CAC21500FCE828 /* ConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
+		B2FA5FBC19CAC21500FCE828 /* ConditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
+		B2FA5FBD19CAC21500FCE828 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		B2FA5FBE19CAC21500FCE828 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		B2FA5FC419CAC3E100FCE828 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		B2FA5FC619CAC45B00FCE828 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		B2FA5FC819CAC4E100FCE828 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B2FA5FCA19CAC4EA00FCE828 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B2FA5FCC19CAC4F300FCE828 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B2FA5FCE19CAC4F900FCE828 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		B2FA5FD019CAC50100FCE828 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		B2FA5FD219CAC50A00FCE828 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		B2FA5FD419CAC51B00FCE828 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
+		B2FA5FD619CAC52A00FCE828 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		B2FA5FD819CAC53200FCE828 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		B2FA5FDA19CAC54700FCE828 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		B2FA5FDC19CAC55200FCE828 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B2FA5FDE19CAC55D00FCE828 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B2FA5FE119CAC60800FCE828 /* MCCore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCore.h; sourceTree = "<group>"; };
+		B2FA5FE219CAC60800FCE828 /* MCNewCustomLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNewCustomLayer.h; sourceTree = "<group>"; };
+		B2FA5FE319CAC60800FCE828 /* MCNewCustomLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNewCustomLayer.m; sourceTree = "<group>"; };
+		B2FA5FE419CAC60800FCE828 /* MCNewCustomLayeredView+MCCustomLayeredViewSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MCNewCustomLayeredView+MCCustomLayeredViewSubclass.h"; sourceTree = "<group>"; };
+		B2FA5FE519CAC60800FCE828 /* MCNewCustomLayeredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCNewCustomLayeredView.h; sourceTree = "<group>"; };
+		B2FA5FE619CAC60800FCE828 /* MCNewCustomLayeredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCNewCustomLayeredView.m; sourceTree = "<group>"; };
+		B2FA5FE719CAC60800FCE828 /* MCPercentageDoughnutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPercentageDoughnutView.h; sourceTree = "<group>"; };
+		B2FA5FE819CAC60800FCE828 /* MCPercentageDoughnutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPercentageDoughnutView.m; sourceTree = "<group>"; };
+		B2FA5FE919CAC60800FCE828 /* MCSliceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSliceLayer.h; sourceTree = "<group>"; };
+		B2FA5FEA19CAC60800FCE828 /* MCSliceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSliceLayer.m; sourceTree = "<group>"; };
+		B2FA5FEB19CAC60800FCE828 /* MCUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUtil.h; sourceTree = "<group>"; };
+		B2FA5FEC19CAC60800FCE828 /* MCUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUtil.m; sourceTree = "<group>"; };
+		B2FA5FF219CAC86A00FCE828 /* windmill_pole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = windmill_pole.png; sourceTree = "<group>"; };
+		B2FA5FF319CAC86A00FCE828 /* windmill_fan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = windmill_fan.png; sourceTree = "<group>"; };
+		B2FA5FF419CAC86A00FCE828 /* thermometer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermometer.png; sourceTree = "<group>"; };
+		B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabBar_sample.png; sourceTree = "<group>"; };
+		B2FA5FFB19CAC90700FCE828 /* allred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allred.png; sourceTree = "<group>"; };
+		B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkgreen@2x.png"; sourceTree = "<group>"; };
+		B2FA5FFD19CAC90700FCE828 /* lightgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightgreen.png; sourceTree = "<group>"; };
+		B2FA5FFE19CAC90700FCE828 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
+		B2FA600419CAC90E00FCE828 /* cleanwater2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cleanwater2@2x.png"; sourceTree = "<group>"; };
+		B2FA600519CAC90E00FCE828 /* cleanwater@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cleanwater@2x.png"; sourceTree = "<group>"; };
+		B2FA600619CAC90E00FCE828 /* dirtywater2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirtywater2@2x.png"; sourceTree = "<group>"; };
+		B2FA600719CAC90E00FCE828 /* dirtywater@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirtywater@2x.png"; sourceTree = "<group>"; };
+		B2FA600D19CAC91500FCE828 /* techricelogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = techricelogo.jpg; sourceTree = "<group>"; };
+		B2FA600E19CAC91500FCE828 /* techricelogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "techricelogo@2x.png"; sourceTree = "<group>"; };
+		B2FA601219CAC91C00FCE828 /* antena-green1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-green1@2x.png"; sourceTree = "<group>"; };
+		B2FA601319CAC91C00FCE828 /* antena-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-green@2x.png"; sourceTree = "<group>"; };
+		B2FA601419CAC91C00FCE828 /* antena-red1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-red1@2x.png"; sourceTree = "<group>"; };
+		B2FA601519CAC91C00FCE828 /* antena-red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-red@2x.png"; sourceTree = "<group>"; };
+		B2FA601B19CAC92800FCE828 /* mud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mud@2x.png"; sourceTree = "<group>"; };
+		B2FA601E19CAC93500FCE828 /* happyrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happyrice.png; sourceTree = "<group>"; };
+		B2FA601F19CAC93500FCE828 /* sadrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadrice.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +158,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FA5FDF19CAC55D00FCE828 /* SystemConfiguration.framework in Frameworks */,
+				B2FA5FDD19CAC55200FCE828 /* QuartzCore.framework in Frameworks */,
+				B2FA5FDB19CAC54700FCE828 /* OpenGLES.framework in Frameworks */,
+				B2FA5FD919CAC53200FCE828 /* libz.dylib in Frameworks */,
+				B2FA5FD719CAC52A00FCE828 /* libicucore.dylib in Frameworks */,
+				B2FA5FD519CAC51B00FCE828 /* libc++.dylib in Frameworks */,
+				B2FA5FD319CAC50A00FCE828 /* ImageIO.framework in Frameworks */,
+				B2FA5FD119CAC50100FCE828 /* GLKit.framework in Frameworks */,
+				B2FA5FCF19CAC4F900FCE828 /* CoreText.framework in Frameworks */,
+				B2FA5FCD19CAC4F300FCE828 /* CoreLocation.framework in Frameworks */,
+				B2FA5FCB19CAC4EA00FCE828 /* CoreData.framework in Frameworks */,
+				B2FA5FC919CAC4E100FCE828 /* AVFoundation.framework in Frameworks */,
 				B2FA5F8619CABE0C00FCE828 /* CoreGraphics.framework in Frameworks */,
 				B2FA5F8819CABE0C00FCE828 /* UIKit.framework in Frameworks */,
+				B2FA5FC519CAC3E100FCE828 /* GoogleMaps.framework in Frameworks */,
 				B2FA5F8419CABE0C00FCE828 /* Foundation.framework in Frameworks */,
+				EFE46F7E08E44E338D56E769 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +198,7 @@
 				B2FA5FAB19CABE0C00FCE828 /* TechriceTests */,
 				B2FA5F8219CABE0C00FCE828 /* Frameworks */,
 				B2FA5F8119CABE0C00FCE828 /* Products */,
+				50DDD165834244C29A39E80E /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,10 +214,25 @@
 		B2FA5F8219CABE0C00FCE828 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2FA5FDE19CAC55D00FCE828 /* SystemConfiguration.framework */,
+				B2FA5FDC19CAC55200FCE828 /* QuartzCore.framework */,
+				B2FA5FDA19CAC54700FCE828 /* OpenGLES.framework */,
+				B2FA5FD819CAC53200FCE828 /* libz.dylib */,
+				B2FA5FD619CAC52A00FCE828 /* libicucore.dylib */,
+				B2FA5FD419CAC51B00FCE828 /* libc++.dylib */,
+				B2FA5FD219CAC50A00FCE828 /* ImageIO.framework */,
+				B2FA5FD019CAC50100FCE828 /* GLKit.framework */,
+				B2FA5FCE19CAC4F900FCE828 /* CoreText.framework */,
+				B2FA5FCC19CAC4F300FCE828 /* CoreLocation.framework */,
+				B2FA5FCA19CAC4EA00FCE828 /* CoreData.framework */,
+				B2FA5FC819CAC4E100FCE828 /* AVFoundation.framework */,
+				B2FA5FC619CAC45B00FCE828 /* GoogleMaps.bundle */,
+				B2FA5FC419CAC3E100FCE828 /* GoogleMaps.framework */,
 				B2FA5F8319CABE0C00FCE828 /* Foundation.framework */,
 				B2FA5F8519CABE0C00FCE828 /* CoreGraphics.framework */,
 				B2FA5F8719CABE0C00FCE828 /* UIKit.framework */,
 				B2FA5FA519CABE0C00FCE828 /* XCTest.framework */,
+				9BC70EEAD21A46CB93FEC891 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -114,12 +240,17 @@
 		B2FA5F8919CABE0C00FCE828 /* Techrice */ = {
 			isa = PBXGroup;
 			children = (
+				B2FA5FE019CAC60800FCE828 /* MCPercentageDoughnutView */,
 				B2FA5F9219CABE0C00FCE828 /* AppDelegate.h */,
 				B2FA5F9319CABE0C00FCE828 /* AppDelegate.m */,
-				B2FA5F9519CABE0C00FCE828 /* Main_iPhone.storyboard */,
-				B2FA5F9819CABE0C00FCE828 /* Main_iPad.storyboard */,
 				B2FA5F9B19CABE0C00FCE828 /* ViewController.h */,
 				B2FA5F9C19CABE0C00FCE828 /* ViewController.m */,
+				B2FA5FBB19CAC21500FCE828 /* ConditionViewController.h */,
+				B2FA5FBC19CAC21500FCE828 /* ConditionViewController.m */,
+				B2FA5FBD19CAC21500FCE828 /* DetailViewController.h */,
+				B2FA5FBE19CAC21500FCE828 /* DetailViewController.m */,
+				B2FA5F9519CABE0C00FCE828 /* Main_iPhone.storyboard */,
+				B2FA5F9819CABE0C00FCE828 /* Main_iPad.storyboard */,
 				B2FA5F9E19CABE0C00FCE828 /* Images.xcassets */,
 				B2FA5F8A19CABE0C00FCE828 /* Supporting Files */,
 			);
@@ -129,6 +260,16 @@
 		B2FA5F8A19CABE0C00FCE828 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B2FA601D19CAC93500FCE828 /* rice */,
+				B2FA601A19CAC92800FCE828 /* mud */,
+				B2FA601119CAC91C00FCE828 /* antena */,
+				B2FA600C19CAC91500FCE828 /* logo */,
+				B2FA600319CAC90E00FCE828 /* water */,
+				B2FA5FFA19CAC90700FCE828 /* marker */,
+				B2FA5FF219CAC86A00FCE828 /* windmill_pole.png */,
+				B2FA5FF319CAC86A00FCE828 /* windmill_fan.png */,
+				B2FA5FF419CAC86A00FCE828 /* thermometer.png */,
+				B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */,
 				B2FA5F8B19CABE0C00FCE828 /* Techrice-Info.plist */,
 				B2FA5F8C19CABE0C00FCE828 /* InfoPlist.strings */,
 				B2FA5F8F19CABE0C00FCE828 /* main.m */,
@@ -155,6 +296,84 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		B2FA5FE019CAC60800FCE828 /* MCPercentageDoughnutView */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA5FE119CAC60800FCE828 /* MCCore.h */,
+				B2FA5FE219CAC60800FCE828 /* MCNewCustomLayer.h */,
+				B2FA5FE319CAC60800FCE828 /* MCNewCustomLayer.m */,
+				B2FA5FE419CAC60800FCE828 /* MCNewCustomLayeredView+MCCustomLayeredViewSubclass.h */,
+				B2FA5FE519CAC60800FCE828 /* MCNewCustomLayeredView.h */,
+				B2FA5FE619CAC60800FCE828 /* MCNewCustomLayeredView.m */,
+				B2FA5FE719CAC60800FCE828 /* MCPercentageDoughnutView.h */,
+				B2FA5FE819CAC60800FCE828 /* MCPercentageDoughnutView.m */,
+				B2FA5FE919CAC60800FCE828 /* MCSliceLayer.h */,
+				B2FA5FEA19CAC60800FCE828 /* MCSliceLayer.m */,
+				B2FA5FEB19CAC60800FCE828 /* MCUtil.h */,
+				B2FA5FEC19CAC60800FCE828 /* MCUtil.m */,
+			);
+			path = MCPercentageDoughnutView;
+			sourceTree = "<group>";
+		};
+		B2FA5FFA19CAC90700FCE828 /* marker */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA5FFB19CAC90700FCE828 /* allred.png */,
+				B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */,
+				B2FA5FFD19CAC90700FCE828 /* lightgreen.png */,
+				B2FA5FFE19CAC90700FCE828 /* red.png */,
+			);
+			path = marker;
+			sourceTree = "<group>";
+		};
+		B2FA600319CAC90E00FCE828 /* water */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA600419CAC90E00FCE828 /* cleanwater2@2x.png */,
+				B2FA600519CAC90E00FCE828 /* cleanwater@2x.png */,
+				B2FA600619CAC90E00FCE828 /* dirtywater2@2x.png */,
+				B2FA600719CAC90E00FCE828 /* dirtywater@2x.png */,
+			);
+			path = water;
+			sourceTree = "<group>";
+		};
+		B2FA600C19CAC91500FCE828 /* logo */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA600D19CAC91500FCE828 /* techricelogo.jpg */,
+				B2FA600E19CAC91500FCE828 /* techricelogo@2x.png */,
+			);
+			path = logo;
+			sourceTree = "<group>";
+		};
+		B2FA601119CAC91C00FCE828 /* antena */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA601219CAC91C00FCE828 /* antena-green1@2x.png */,
+				B2FA601319CAC91C00FCE828 /* antena-green@2x.png */,
+				B2FA601419CAC91C00FCE828 /* antena-red1@2x.png */,
+				B2FA601519CAC91C00FCE828 /* antena-red@2x.png */,
+			);
+			path = antena;
+			sourceTree = "<group>";
+		};
+		B2FA601A19CAC92800FCE828 /* mud */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA601B19CAC92800FCE828 /* mud@2x.png */,
+			);
+			path = mud;
+			sourceTree = "<group>";
+		};
+		B2FA601D19CAC93500FCE828 /* rice */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA601E19CAC93500FCE828 /* happyrice.png */,
+				B2FA601F19CAC93500FCE828 /* sadrice.png */,
+			);
+			path = rice;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -162,9 +381,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2FA5FB519CABE0C00FCE828 /* Build configuration list for PBXNativeTarget "Techrice" */;
 			buildPhases = (
+				ECDFF056502B4961BF5F2C35 /* Check Pods Manifest.lock */,
 				B2FA5F7C19CABE0C00FCE828 /* Sources */,
 				B2FA5F7D19CABE0C00FCE828 /* Frameworks */,
 				B2FA5F7E19CABE0C00FCE828 /* Resources */,
+				D87A0E625C414F1C8C47D4F4 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -231,10 +452,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FA600A19CAC90E00FCE828 /* dirtywater2@2x.png in Resources */,
 				B2FA5F9A19CABE0C00FCE828 /* Main_iPad.storyboard in Resources */,
+				B2FA5FF719CAC86A00FCE828 /* windmill_fan.png in Resources */,
+				B2FA600119CAC90700FCE828 /* lightgreen.png in Resources */,
 				B2FA5F9F19CABE0C00FCE828 /* Images.xcassets in Resources */,
+				B2FA601C19CAC92800FCE828 /* mud@2x.png in Resources */,
+				B2FA600B19CAC90E00FCE828 /* dirtywater@2x.png in Resources */,
+				B2FA600919CAC90E00FCE828 /* cleanwater@2x.png in Resources */,
+				B2FA601619CAC91C00FCE828 /* antena-green1@2x.png in Resources */,
+				B2FA601719CAC91C00FCE828 /* antena-green@2x.png in Resources */,
+				B2FA600219CAC90700FCE828 /* red.png in Resources */,
+				B2FA602119CAC93500FCE828 /* sadrice.png in Resources */,
 				B2FA5F9719CABE0C00FCE828 /* Main_iPhone.storyboard in Resources */,
+				B2FA601919CAC91C00FCE828 /* antena-red@2x.png in Resources */,
+				B2FA602019CAC93500FCE828 /* happyrice.png in Resources */,
+				B2FA600019CAC90700FCE828 /* darkgreen@2x.png in Resources */,
+				B2FA600819CAC90E00FCE828 /* cleanwater2@2x.png in Resources */,
 				B2FA5F8E19CABE0C00FCE828 /* InfoPlist.strings in Resources */,
+				B2FA5FC719CAC45B00FCE828 /* GoogleMaps.bundle in Resources */,
+				B2FA5FF919CAC86A00FCE828 /* tabBar_sample.png in Resources */,
+				B2FA5FF819CAC86A00FCE828 /* thermometer.png in Resources */,
+				B2FA601819CAC91C00FCE828 /* antena-red1@2x.png in Resources */,
+				B2FA600F19CAC91500FCE828 /* techricelogo.jpg in Resources */,
+				B2FA5FF619CAC86A00FCE828 /* windmill_pole.png in Resources */,
+				B2FA5FFF19CAC90700FCE828 /* allred.png in Resources */,
+				B2FA601019CAC91500FCE828 /* techricelogo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,14 +491,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D87A0E625C414F1C8C47D4F4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		ECDFF056502B4961BF5F2C35 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B2FA5F7C19CABE0C00FCE828 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FA5FC019CAC21500FCE828 /* DetailViewController.m in Sources */,
+				B2FA5FEE19CAC60800FCE828 /* MCNewCustomLayeredView.m in Sources */,
+				B2FA5FF019CAC60800FCE828 /* MCSliceLayer.m in Sources */,
 				B2FA5F9D19CABE0C00FCE828 /* ViewController.m in Sources */,
+				B2FA5FF119CAC60800FCE828 /* MCUtil.m in Sources */,
 				B2FA5F9419CABE0C00FCE828 /* AppDelegate.m in Sources */,
+				B2FA5FBF19CAC21500FCE828 /* ConditionViewController.m in Sources */,
 				B2FA5F9019CABE0C00FCE828 /* main.m in Sources */,
+				B2FA5FED19CAC60800FCE828 /* MCNewCustomLayer.m in Sources */,
+				B2FA5FEF19CAC60800FCE828 /* MCPercentageDoughnutView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,9 +670,14 @@
 		};
 		B2FA5FB619CABE0C00FCE828 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50DDD165834244C29A39E80E /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Techrice/Techrice-Prefix.pch";
 				INFOPLIST_FILE = "Techrice/Techrice-Info.plist";
@@ -400,9 +688,14 @@
 		};
 		B2FA5FB719CABE0C00FCE828 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50DDD165834244C29A39E80E /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Techrice/Techrice-Prefix.pch";
 				INFOPLIST_FILE = "Techrice/Techrice-Info.plist";
@@ -470,6 +763,7 @@
 				B2FA5FB719CABE0C00FCE828 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B2FA5FB819CABE0C00FCE828 /* Build configuration list for PBXNativeTarget "TechriceTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +772,7 @@
 				B2FA5FBA19CABE0C00FCE828 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

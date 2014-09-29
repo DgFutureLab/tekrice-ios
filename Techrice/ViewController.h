@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
+#import <GoogleMaps/GoogleMaps.h>
+#import "ConditionViewController.h"
+@interface ViewController : UIViewController<GMSMapViewDelegate>{
+    NSArray *markers;
+}
 
 @end
