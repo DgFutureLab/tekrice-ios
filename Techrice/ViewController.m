@@ -12,7 +12,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	// Do any additional setup after loading the view, typically from a nib.    
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"techricelogo.png"]];
     titleImageView.frame = CGRectMake(-72, -30, 149, 44);
     UIView *titleView = [[UIView alloc] init];
@@ -64,6 +64,7 @@
     
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
     detailViewController->nodeId = 22;
+    detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
     
     return YES;

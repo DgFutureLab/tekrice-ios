@@ -8,12 +8,30 @@
 
 #import "AppDelegate.h"
 
+#import "ViewController.h"
+#import "TableViewController.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     [GMSServices provideAPIKey:@"AIzaSyD02od1MXyqSOzrvMI-W_Je4kk_huiwC3I"];
+    
+    
+    UINavigationController *navigationController1 = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
+//    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Cat" image:[UIImage imageNamed:@"darkgreen.png"] selectedImage:[UIImage imageNamed:@"darkgreen.png"]];
+    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemBookmarks tag:1];
+    
+    UINavigationController *navigationController2 = [[UINavigationController alloc] initWithRootViewController:[[TableViewController alloc] init]];
+    navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0];
+    
+    NSArray *tabs = [NSArray arrayWithObjects:navigationController1, navigationController2, nil];
+    UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    [tabBarController setViewControllers:tabs animated:NO];
+    [self.window addSubview:tabBarController.view];
+    self.window.rootViewController = tabBarController;
+
+    
     return YES;
 }
 							

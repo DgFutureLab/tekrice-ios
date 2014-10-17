@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-
+#import "AppDelegate.h"
 @interface DetailViewController ()
 
 @end
@@ -18,6 +18,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate getNodeArray];

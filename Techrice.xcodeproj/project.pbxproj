@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B21A2D2E19F0F5E500633CEF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2D2D19F0F5E500633CEF /* TabBarController.m */; };
+		B21A2D3119F0F98300633CEF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2D3019F0F98300633CEF /* TableViewController.m */; };
 		B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE219EE73A80079BC3F /* DetailViewController.m */; };
 		B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE619EE75870079BC3F /* UIImage+ImageEffects.m */; };
 		B2AF9EEA19EE75870079BC3F /* BTGlassScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE819EE75870079BC3F /* BTGlassScrollView.m */; };
@@ -77,6 +79,10 @@
 /* Begin PBXFileReference section */
 		50DDD165834244C29A39E80E /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		9BC70EEAD21A46CB93FEC891 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B21A2D2C19F0F5E500633CEF /* TabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarController.h; sourceTree = "<group>"; };
+		B21A2D2D19F0F5E500633CEF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
+		B21A2D2F19F0F98300633CEF /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
+		B21A2D3019F0F98300633CEF /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
 		B2AF9EE119EE73A80079BC3F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		B2AF9EE219EE73A80079BC3F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		B2AF9EE519EE75870079BC3F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -250,6 +256,10 @@
 				B2FA5F8A19CABE0C00FCE828 /* Supporting Files */,
 				B2AF9EE119EE73A80079BC3F /* DetailViewController.h */,
 				B2AF9EE219EE73A80079BC3F /* DetailViewController.m */,
+				B21A2D2C19F0F5E500633CEF /* TabBarController.h */,
+				B21A2D2D19F0F5E500633CEF /* TabBarController.m */,
+				B21A2D2F19F0F98300633CEF /* TableViewController.h */,
+				B21A2D3019F0F98300633CEF /* TableViewController.m */,
 			);
 			path = Techrice;
 			sourceTree = "<group>";
@@ -509,12 +519,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B21A2D2E19F0F5E500633CEF /* TabBarController.m in Sources */,
 				B2FA5F9D19CABE0C00FCE828 /* ViewController.m in Sources */,
 				B2AF9EEA19EE75870079BC3F /* BTGlassScrollView.m in Sources */,
 				B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */,
 				B2FA5F9419CABE0C00FCE828 /* AppDelegate.m in Sources */,
 				B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */,
 				B2FA5F9019CABE0C00FCE828 /* main.m in Sources */,
+				B21A2D3119F0F98300633CEF /* TableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
