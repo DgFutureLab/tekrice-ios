@@ -21,59 +21,61 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:35.14404025
-                                                            longitude:139.988354
-                                                                 zoom:18.5];
+    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
+                                         longitude:139.988354
+                                              zoom:18.5];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.delegate = self;
     mapView_.myLocationEnabled = YES;
     mapView_.mapType = kGMSTypeSatellite;
     self.view = mapView_;
     
+    appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSArray *nodeArray =  [appDelegate getNodeArray];
+    
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
+    UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
+    for (int i=0; i<nodeArray.count; i++) {
+        GMSMarker *marker = [[GMSMarker alloc] init];
+        marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
+//        if ([nodeArray[i] valueForKey:@"distance"]) {
+//            <#statements#>
+//        }
+        marker.icon = iconImage;
+        marker.map = mapView_;
+    }
     
-    GMSMarker *marker1 = [[GMSMarker alloc] init];
-    marker1.position = CLLocationCoordinate2DMake(35.143945, 139.988236);
-    //    marker1.title = @"Node1";
-    //    marker1.snippet = @"techrice";
-    marker1.icon = iconImage;
-    marker1.map = mapView_;
+//    UIImage *img = [UIImage imageNamed:@"tabBar_sample.png"];
+//    UIButton *backToCenterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 520, 320, 50)];
+//    [backToCenterButton setBackgroundImage:img forState:UIControlStateNormal];
+//    [backToCenterButton addTarget:self action:@selector(backToCenterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:backToCenterButton];
     
-    GMSMarker *marker2 = [[GMSMarker alloc] init];
-    marker2.position = CLLocationCoordinate2DMake(35.143951, 139.988560);
-    //    marker2.title = @"Node2";
-    //    marker2.snippet = @"techrice";
-    marker2.icon = iconImage;
-    marker2.map = mapView_;
     
-    GMSMarker *marker3 = [[GMSMarker alloc] init];
-    marker3.position = CLLocationCoordinate2DMake(35.144150, 139.988486);
-    //    marker3.title = @"Node3";
-    //    marker3.snippet = @"techrice";
-    marker3.icon = iconImage;
-    marker3.map = mapView_;
-    
-    GMSMarker *marker4 = [[GMSMarker alloc] init];
-    marker4.position = CLLocationCoordinate2DMake(35.144115, 139.988134);
-    //    marker4.title = @"Node4";
-    //    marker4.snippet = @"techrice";
-    marker4.icon = iconImage;
-    marker4.map = mapView_;
-    
-    markers = @[marker1, marker2, marker3, marker4];
-    
-    UIImageView *tabBarSampleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"tabBar_sample.png"]];
-    tabBarSampleView.frame = CGRectMake(0, 520, 320, 50);
-    [self.view addSubview:tabBarSampleView];
+    UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
+    [self.view addSubview:tabBar];
 }
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");
-    ConditionViewController *conditionViewController = [[ConditionViewController alloc] init];
-    [self.navigationController pushViewController:conditionViewController animated:YES];
+//    ConditionViewController *conditionViewController = [[ConditionViewController alloc] init];
+//    [self.navigationController pushViewController:conditionViewController animated:YES];
+    
+    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    detailViewController->nodeId = 22;
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    
     return YES;
 }
+
+- (void)backToCenterButtonTapped{
+    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
+                                         longitude:139.988354
+                                              zoom:18.5];
+    [mapView_ animateToCameraPosition:camera];
+}
+
 
 - (void)didReceiveMemoryWarning
 {

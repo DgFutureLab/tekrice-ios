@@ -64,9 +64,28 @@
         //JSONをパース
         NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
         float distance =  [[[[array valueForKey:@"data"] valueForKey:@"value"] objectAtIndex:0] floatValue];
+        NSLog(@"return distance:%f", distance);
         return distance;
     }else{
+        NSLog(@"getdistance failed");
         return 0;
+    }
+}
+
+-(NSArray*)getNodeArray{
+    NSLog(@"getLocationArray");
+    NSString *url = @"http://128.199.191.249/node/all";
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    if (json != nil) {
+        //JSONをパース
+        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
+        NSArray *array = [dictionary objectForKey:@"objects"];
+        return array;
+        NSLog(@"%@", array);
+    }else{
+        NSArray *array;
+        return array;
     }
 }
 

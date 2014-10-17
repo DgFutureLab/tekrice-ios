@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
-#import "ConditionViewController.h"
+#import "DetailViewController.h"
+#import "AppDelegate.h"
 @interface ViewController : UIViewController<GMSMapViewDelegate>{
     NSArray *markers;
+    GMSCameraPosition *camera;
+    AppDelegate *appDelegate;
 }
 
 @end
