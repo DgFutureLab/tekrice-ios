@@ -22,6 +22,10 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    nodeArray = [appDelegate getNodeArray];
+    NSLog(@"%@", nodeArray);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,24 +38,41 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return nodeArray.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
+    static NSString *cellIdentifier = @"StatisticsCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell==nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
+    }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2fcm", [[[[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue]];
+
+    //UILabelでやる
+//    UILabel *sensorDataLabel =[[UILabel alloc] initWithFrame:CGRectMake(200, 0, 320, 40)];
+//    sensorDataLabel.text = [NSString stringWithFormat:@"%0.2fcm", [[[[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue]];
+//    [cell.contentView addSubview:sensorDataLabel];
     
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    detailViewController->nodeId = 22;
+    detailViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
 
 /*
 // Override to support conditional editing of the table view.

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AppDelegate.h"
+#import "DetailViewController.h"
 
-@interface TableViewController : UITableViewController
+@interface TableViewController : UITableViewController{
+    NSArray *nodeArray;
+    AppDelegate *appDelegate;
+}
 
 @end

@@ -30,8 +30,9 @@
     mapView_.mapType = kGMSTypeSatellite;
     self.view = mapView_;
     
-    appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     NSArray *nodeArray =  [appDelegate getNodeArray];
+    
     
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
@@ -55,7 +56,11 @@
     
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
     [self.view addSubview:tabBar];
+    
+    
 }
+
+
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");
