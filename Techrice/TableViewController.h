@@ -10,8 +10,10 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 
-@interface TableViewController : UITableViewController{
+@interface TableViewController : UITableViewController<UITabBarControllerDelegate>{
     NSArray *nodeArray;
+    NSArray *distanceArray;
+    NSArray *tableArray;
     AppDelegate *appDelegate;
 }
 

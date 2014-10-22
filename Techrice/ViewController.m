@@ -9,10 +9,15 @@
     GMSMapView *mapView_;
 }
 
-- (void)viewDidLoad
-{
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.delegate = self;
+}
+
+- (void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.    
+	// Do any additional setup after loading the view, typically from a nib.
+
+    self.tabBarController.delegate = self;
     UIImageView *titleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"techricelogo.png"]];
     titleImageView.frame = CGRectMake(-72, -30, 149, 44);
     UIView *titleView = [[UIView alloc] init];
@@ -32,18 +37,23 @@
     
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     NSArray *nodeArray =  [appDelegate getNodeArray];
-    
+    NSArray *distanceArray = appDelegate.distanceArray;
     
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
-    for (int i=0; i<nodeArray.count; i++) {
+    for (int i=0; i<nodeArray.count-1; i++) {
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
 //        if ([nodeArray[i] valueForKey:@"distance"]) {
 //            <#statements#>
 //        }
-        marker.icon = iconImage;
+        
+        if ([[distanceArray[i] valueForKey:@"value"] floatValue] > THRESHOLD) {
+            marker.icon = iconImage;
+        }else{
+            marker.icon = iconImageProblem;
+        }
         marker.map = mapView_;
     }
     
@@ -56,11 +66,11 @@
     
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
     [self.view addSubview:tabBar];
-    
-    
 }
 
-
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [self backToCenterButtonTapped];
+}
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");

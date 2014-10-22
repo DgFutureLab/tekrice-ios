@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#define THRESHOLD 80
+
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (nonatomic,retain) NSArray *nodeArray;
+@property (nonatomic,retain) NSArray *distanceArray;
 
 -(float)getDistance;
 -(NSArray*)getNodeArray;

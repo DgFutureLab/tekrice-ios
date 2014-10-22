@@ -17,7 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
+    self.delegate =self;
+    
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
     TableViewController *tableViewController = [[TableViewController alloc] init];
     [viewControllers addObject:tableViewController];

@@ -10,7 +10,7 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import "DetailViewController.h"
 #import "AppDelegate.h"
-@interface ViewController : UIViewController<GMSMapViewDelegate>{
+@interface ViewController : UIViewController<GMSMapViewDelegate, UITabBarControllerDelegate>{
     NSArray *markers;
     GMSCameraPosition *camera;
     AppDelegate *appDelegate;

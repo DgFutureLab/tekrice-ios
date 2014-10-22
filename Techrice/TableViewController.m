@@ -14,6 +14,10 @@
 
 @implementation TableViewController
 
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.delegate = self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -23,9 +27,48 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.tabBarController.delegate = self;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray = [appDelegate getNodeArray];
-    NSLog(@"%@", nodeArray);
+    nodeArray = appDelegate.nodeArray;
+    distanceArray = appDelegate.distanceArray;
+    
+    NSArray *arr = @[@"Ascending", @"Descending"];
+    UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:arr];
+    seg.frame = CGRectMake(0, 0, 250, 30);
+    
+
+    [seg addTarget:self action:@selector(segmentedChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.navigationItem setTitleView:seg];
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+}
+
+- (void)segmentedChanged:(UISegmentedControl*)segment{
+    switch (segment.selectedSegmentIndex) {
+        case 0:{
+            NSLog(@"Ascending");
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"value" ascending:YES];
+            NSArray *sortDescriptorArray = [NSArray arrayWithObjects:sortDescriptor, nil];
+            NSArray *sortedList = [distanceArray sortedArrayUsingDescriptors:sortDescriptorArray];
+            distanceArray = sortedList;
+            [self.tableView reloadData];
+            break;
+        }
+        case 1:{
+            NSLog(@"Descending");
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"value" ascending:NO];
+            NSArray *sortDescriptorArray = [NSArray arrayWithObjects:sortDescriptor, nil];
+            NSArray *sortedList = [distanceArray sortedArrayUsingDescriptors:sortDescriptorArray];
+            distanceArray = sortedList;
+            NSLog(@"%@", nodeArray);
+            [self.tableView reloadData];
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,15 +98,31 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2fcm", [[[[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue]];
-
+//    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
+    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[distanceArray[indexPath.row] valueForKey:@"id"]];
+    float distance = [[distanceArray[indexPath.row] valueForKey:@"value"] floatValue];
+    if (distance > THRESHOLD) {
+        cell.detailTextLabel.textColor = [UIColor redColor];
+    }else{
+        cell.detailTextLabel.textColor = [UIColor blackColor];
+    }
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2fcm", distance];
+    
     //UILabelでやる
 //    UILabel *sensorDataLabel =[[UILabel alloc] initWithFrame:CGRectMake(200, 0, 320, 40)];
 //    sensorDataLabel.text = [NSString stringWithFormat:@"%0.2fcm", [[[[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue]];
 //    [cell.contentView addSubview:sensorDataLabel];
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    float distance = [[distanceArray[indexPath.row] valueForKey:@"value"] floatValue];
+    if (distance > THRESHOLD) {
+        cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];
+    }else{
+        cell.backgroundColor = [UIColor whiteColor];
+    }
 }
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{

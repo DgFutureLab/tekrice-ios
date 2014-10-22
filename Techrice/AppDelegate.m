@@ -27,6 +27,7 @@
     
     NSArray *tabs = [NSArray arrayWithObjects:navigationController1, navigationController2, nil];
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
     [tabBarController setViewControllers:tabs animated:NO];
     [self.window addSubview:tabBarController.view];
     self.window.rootViewController = tabBarController;
@@ -99,8 +100,13 @@
         //JSONをパース
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
         NSArray *array = [dictionary objectForKey:@"objects"];
+        self.nodeArray = array;
+        NSMutableArray *mutableDistanceArray = [NSMutableArray array];
+        for (int i=0; i<array.count-1; i++) {
+            [mutableDistanceArray addObject:[[[array objectAtIndex:i] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"]];
+        }
+        self.distanceArray = [NSArray arrayWithArray:mutableDistanceArray];
         return array;
-        NSLog(@"%@", array);
     }else{
         NSArray *array;
         return array;
