@@ -15,6 +15,7 @@
     NSArray *distanceArray;
     NSArray *tableArray;
     AppDelegate *appDelegate;
+    UISegmentedControl *seg;
 }
 
 @end

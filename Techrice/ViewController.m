@@ -45,9 +45,6 @@
     for (int i=0; i<nodeArray.count-1; i++) {
         GMSMarker *marker = [[GMSMarker alloc] init];
         marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
-//        if ([nodeArray[i] valueForKey:@"distance"]) {
-//            <#statements#>
-//        }
         
         if ([[distanceArray[i] valueForKey:@"value"] floatValue] > THRESHOLD) {
             marker.icon = iconImage;
@@ -56,12 +53,6 @@
         }
         marker.map = mapView_;
     }
-    
-//    UIImage *img = [UIImage imageNamed:@"tabBar_sample.png"];
-//    UIButton *backToCenterButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 520, 320, 50)];
-//    [backToCenterButton setBackgroundImage:img forState:UIControlStateNormal];
-//    [backToCenterButton addTarget:self action:@selector(backToCenterButtonTapped) forControlEvents:UIControlEventTouchUpInside];
-//    [self.view addSubview:backToCenterButton];
     
     
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
@@ -74,9 +65,6 @@
 
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");
-//    ConditionViewController *conditionViewController = [[ConditionViewController alloc] init];
-//    [self.navigationController pushViewController:conditionViewController animated:YES];
-    
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
     detailViewController->nodeId = 22;
     detailViewController.hidesBottomBarWhenPushed = YES;

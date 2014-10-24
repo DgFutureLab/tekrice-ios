@@ -16,6 +16,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     self.tabBarController.delegate = self;
+    seg.tintColor = [UIColor colorWithRed:0.1 green:0.3 blue:0.4 alpha:255];
 }
 
 - (void)viewDidLoad {
@@ -33,9 +34,9 @@
     distanceArray = appDelegate.distanceArray;
     
     NSArray *arr = @[@"Ascending", @"Descending"];
-    UISegmentedControl *seg = [[UISegmentedControl alloc] initWithItems:arr];
-    seg.frame = CGRectMake(0, 0, 250, 30);
+    seg = [[UISegmentedControl alloc] initWithItems:arr];
     
+    seg.frame = CGRectMake(0, 0, 250, 30);
 
     [seg addTarget:self action:@selector(segmentedChanged:) forControlEvents:UIControlEventValueChanged];
     [self.navigationItem setTitleView:seg];
@@ -62,7 +63,6 @@
             NSArray *sortDescriptorArray = [NSArray arrayWithObjects:sortDescriptor, nil];
             NSArray *sortedList = [distanceArray sortedArrayUsingDescriptors:sortDescriptorArray];
             distanceArray = sortedList;
-            NSLog(@"%@", nodeArray);
             [self.tableView reloadData];
             break;
         }
@@ -99,7 +99,8 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
-    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[distanceArray[indexPath.row] valueForKey:@"id"]];
+    
+    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [distanceArray[indexPath.row] valueForKey:@"nodeid"]]];
     float distance = [[distanceArray[indexPath.row] valueForKey:@"value"] floatValue];
     if (distance > THRESHOLD) {
         cell.detailTextLabel.textColor = [UIColor redColor];
@@ -127,7 +128,7 @@
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController->nodeId = 22;
+    detailViewController->nodeId = [[distanceArray[indexPath.row] valueForKey:@"nodeid"] intValue];
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }

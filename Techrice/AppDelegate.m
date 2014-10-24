@@ -63,10 +63,11 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(float)getDistance{
+-(float)getDistance:(NSNumber*)nodeId{
     NSLog(@"getditance");
     // get data
-    NSString *url = @"http://128.199.191.249/reading/node_2/distance";
+    NSString *url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance?date_range=1week"];
+    
     //NSURLからNSURLRequestを作る
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     //サーバーとの通信を行う
@@ -82,8 +83,7 @@
         }
         //JSONをパース
         NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
-        float distance =  [[[[array valueForKey:@"data"] valueForKey:@"value"] objectAtIndex:0] floatValue];
-        NSLog(@"return distance:%f", distance);
+        float distance =  [[[[array valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue];
         return distance;
     }else{
         NSLog(@"getdistance failed");
@@ -103,7 +103,9 @@
         self.nodeArray = array;
         NSMutableArray *mutableDistanceArray = [NSMutableArray array];
         for (int i=0; i<array.count-1; i++) {
-            [mutableDistanceArray addObject:[[[array objectAtIndex:i] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"]];
+            NSMutableDictionary *mutableDictionary = [[[[array objectAtIndex:i] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] mutableCopy];
+            [mutableDictionary setObject:[[array objectAtIndex:i] valueForKey:@"id"] forKey:@"nodeid"];
+            [mutableDistanceArray addObject:mutableDictionary];
         }
         self.distanceArray = [NSArray arrayWithArray:mutableDistanceArray];
         return array;

@@ -9,20 +9,20 @@
 #import "DetailViewController.h"
 #import "AppDelegate.h"
 @interface DetailViewController ()
-
+- (void)getDistance:(NSNumber*) nodeid;
 @end
 
 @implementation DetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
 
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.title = [NSString stringWithFormat:@"Node ID:%d", nodeId];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate getNodeArray];
-    [self performSelectorInBackground:@selector(getDistance) withObject:nil];
+    NSNumber *nodeIdNumber = [NSNumber numberWithInt:nodeId];
+    [self performSelectorInBackground:@selector(getDistance:) withObject:nodeIdNumber];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *view = [self customView];
@@ -41,7 +41,7 @@
     
     // distance
     appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-    UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
+    distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
     [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
     [distanceLabel setTextColor:[UIColor whiteColor]];
     [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:120]];
@@ -110,8 +110,9 @@
     return view;
 }
 
-- (void)getDistance{
-    currentDistance = [appDelegate getDistance];
+- (void)getDistance:(NSNumber*) nodeIdNumber{
+    currentDistance =  [appDelegate getDistance:nodeIdNumber];
+    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
 }
 
 - (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;

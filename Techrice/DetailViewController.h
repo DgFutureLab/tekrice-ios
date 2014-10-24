@@ -10,13 +10,16 @@
 #import "BTGlassScrollView.h"
 #import "AppDelegate.h"
 @interface DetailViewController : UIViewController{
+
 @private
     BTGlassScrollView *glassScrollView;
     AppDelegate *appDelegate;
     float currentDistance;
     float lastDistance;
+    UILabel *distanceLabel;
 @public
     int nodeId;
+
 }
 
 @end
