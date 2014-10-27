@@ -37,7 +37,7 @@
 
 - (UIView *)customView
 {
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 705)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1500)];
     
     // distance
     appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -45,33 +45,84 @@
     [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
     [distanceLabel setTextColor:[UIColor whiteColor]];
     [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:120]];
-    [distanceLabel setShadowColor:[UIColor blackColor]];
-    [distanceLabel setShadowOffset:CGSizeMake(1, 1)];
     [view addSubview:distanceLabel];
     
+    //box: marning left: 5px, bottom 5px | size width: 310, height: 350
+    
+    UIView *box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, 310, 350)];
+    box0.layer.cornerRadius = 3;
+    box0.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
+    
+    
+    boxDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
+    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
+    [boxDistanceLabel setTextColor:[UIColor whiteColor]];
+    [boxDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
+    
+    //tile - distance
+    UILabel *boxDistanceTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 30)];
+    [boxDistanceTitleLabel setTextColor:[UIColor whiteColor]];
+    [boxDistanceTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:24]];
+    boxDistanceTitleLabel.text = @"Distance";
+    [box0 addSubview:boxDistanceTitleLabel];
+    
+    //underline - distance
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    aPath.lineWidth = 1;
+    [aPath moveToPoint:CGPointMake(5, 35)];
+    [aPath addLineToPoint:CGPointMake(305, 35)];
+    [aPath closePath];
+    [aPath stroke];
+    CAShapeLayer *sl = [[CAShapeLayer alloc] initWithLayer:box0.layer];
+    sl.fillColor = [UIColor clearColor].CGColor;
+    sl.strokeColor = [UIColor whiteColor].CGColor;
+    sl.path = aPath.CGPath;
+    [box0.layer addSublayer:sl];
+    [box0 addSubview:boxDistanceLabel];
+    
+    //chart - distance
+    PNLineChart * lineChartDistance = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
+    lineChartDistance.yLabelFormat = @"%1.1f";
+    lineChartDistance.yLabelColor = PNCleanGrey;
+    lineChartDistance.xLabelColor = PNCleanGrey;
+    lineChartDistance.axisColor = PNLightGrey;
+    lineChartDistance.backgroundColor = [UIColor clearColor];
+    [lineChartDistance setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+    lineChartDistance.showCoordinateAxis = YES;
+    NSArray * dataArrayDistance = @[@60.1, @160.1, @126.4, @262.2, @186.2, @127.2, @176.2];
+    PNLineChartData *lineChartDataDistance = [PNLineChartData new];
+    lineChartDataDistance.color = PNFreshGreen;
+    lineChartDataDistance.itemCount = lineChartDistance.xLabels.count;
+    lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCycle;
+    lineChartDataDistance.getData = ^(NSUInteger index) {
+        CGFloat yValue = [dataArrayDistance[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
+    lineChartDistance.chartData = @[lineChartDataDistance];
+    [lineChartDistance strokeChart];
+    //    lineChart.delegate = self;
+    [box0 addSubview:lineChartDistance];
+    [view addSubview:box0];
+    
     // humidity
-    UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, 310, 125)];
+    UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 495, 310, 350)];
     box1.layer.cornerRadius = 3;
     box1.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
     UILabel *humidityLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
     [humidityLabel setText:[NSString stringWithFormat:@"%.0d%%", 45]];
     [humidityLabel setTextColor:[UIColor whiteColor]];
     [humidityLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    [humidityLabel setShadowColor:[UIColor blackColor]];
-    [humidityLabel setShadowOffset:CGSizeMake(1, 1)];
     [box1 addSubview:humidityLabel];
     [view addSubview:box1];
     
     // wind speed
-    UIView *box2 = [[UIView alloc] initWithFrame:CGRectMake(5, 270, 310, 300)];
+    UIView *box2 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, 310, 350)];
     box2.layer.cornerRadius = 3;
     box2.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
     UILabel *windSpeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
     [windSpeedLabel setText:[NSString stringWithFormat:@"%.0dm/s", 2]];
     [windSpeedLabel setTextColor:[UIColor whiteColor]];
     [windSpeedLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    [windSpeedLabel setShadowColor:[UIColor blackColor]];
-    [windSpeedLabel setShadowOffset:CGSizeMake(1, 1)];
     [box2 addSubview:windSpeedLabel];
     // windmill - base
     UIImageView *windSpeedImageViewPole = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_pole.png"]];
@@ -85,15 +136,13 @@
     [view addSubview:box2];
     
     // tempereture
-    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 575, 310, 125)];
+    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 1205, 310, 350)];
     box3.layer.cornerRadius = 3;
     box3.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
     UILabel *temperetureLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
     [temperetureLabel setText:[NSString stringWithFormat:@"%.0d℃", 24]];
     [temperetureLabel setTextColor:[UIColor whiteColor]];
     [temperetureLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    [temperetureLabel setShadowColor:[UIColor blackColor]];
-    [temperetureLabel setShadowOffset:CGSizeMake(1, 1)];
     [box3 addSubview:temperetureLabel];
     // tempereture - thermometer
     UIProgressView *temperatureProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
@@ -113,6 +162,7 @@
 - (void)getDistance:(NSNumber*) nodeIdNumber{
     currentDistance =  [appDelegate getDistance:nodeIdNumber];
     [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
+    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
 }
 
 - (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;

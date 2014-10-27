@@ -1,10 +1,17 @@
 PODS:
-  - JBChartView (2.8.7)
+  - PNChart (0.6.0):
+    - UICountingLabel (~> 1.0.0)
+  - UICountingLabel (1.0.0)
 
 DEPENDENCIES:
-  - JBChartView
+  - PNChart (from `https://github.com/kevinzhow/PNChart`)
+
+EXTERNAL SOURCES:
+  PNChart:
+    :git: https://github.com/kevinzhow/PNChart
 
 SPEC CHECKSUMS:
-  JBChartView: 60dc1eb1f250c41784ae3c35495aba6f11a296d8
+  PNChart: 83e33ef86e61fa3486500ce2cf03faab9b8220a5
+  UICountingLabel: 0a0e9e34bf4690dbd127aaec552d19ed938087a9
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.34.4

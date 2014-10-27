@@ -1,2 +1,2 @@
 platform :ios, "6.0"
-pod 'JBChartView'
+pod 'PNChart', :git => "https://github.com/kevinzhow/PNChart"

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BTGlassScrollView.h"
 #import "AppDelegate.h"
+#import "PNChart.h"
 @interface DetailViewController : UIViewController{
 
 @private
@@ -16,7 +17,7 @@
     AppDelegate *appDelegate;
     float currentDistance;
     float lastDistance;
-    UILabel *distanceLabel;
+    UILabel *distanceLabel, *boxDistanceLabel;
 @public
     int nodeId;
 
