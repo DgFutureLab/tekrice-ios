@@ -15,9 +15,10 @@
 @private
     BTGlassScrollView *glassScrollView;
     AppDelegate *appDelegate;
-    float currentDistance;
+    NSArray *distanceArray;
     float lastDistance;
     UILabel *distanceLabel, *boxDistanceLabel;
+    PNLineChart * lineChartDistance;
 @public
     int nodeId;
 

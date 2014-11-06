@@ -63,11 +63,15 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
--(float)getDistance:(NSNumber*)nodeId{
+-(NSArray *)getDistance:(NSNumber*)nodeId parameter:(NSString*)parameter{
     NSLog(@"getditance");
     // get data
-    NSString *url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance?date_range=1week"];
-    
+    NSString *url;
+    if (parameter) {
+        url = [[[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance?"] stringByAppendingString: parameter];
+    }else{
+        url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance"];
+    }
     //NSURLからNSURLRequestを作る
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     //サーバーとの通信を行う
@@ -83,8 +87,8 @@
         }
         //JSONをパース
         NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
-        float distance =  [[[[array valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue];
-        return distance;
+//        float distance =  [[[[array valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue];
+        return array;
     }else{
         NSLog(@"getdistance failed");
         return 0;
@@ -92,7 +96,7 @@
 }
 
 -(NSArray*)getNodeArray{
-    NSLog(@"getLocationArray");
+    NSLog(@"getNodeArray");
     NSString *url = @"http://128.199.191.249/node/all";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
@@ -101,13 +105,6 @@
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
         NSArray *array = [dictionary objectForKey:@"objects"];
         self.nodeArray = array;
-        NSMutableArray *mutableDistanceArray = [NSMutableArray array];
-        for (int i=0; i<array.count-1; i++) {
-            NSMutableDictionary *mutableDictionary = [[[[array objectAtIndex:i] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] mutableCopy];
-            [mutableDictionary setObject:[[array objectAtIndex:i] valueForKey:@"id"] forKey:@"nodeid"];
-            [mutableDistanceArray addObject:mutableDictionary];
-        }
-        self.distanceArray = [NSArray arrayWithArray:mutableDistanceArray];
         return array;
     }else{
         NSArray *array;

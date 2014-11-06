@@ -17,6 +17,6 @@
 @property (nonatomic,retain) NSArray *nodeArray;
 @property (nonatomic,retain) NSArray *distanceArray;
 
--(float)getDistance:(NSNumber*)nodeId;
+-(NSArray*)getDistance:(NSNumber*)nodeId parameter:(NSString*)parameter;
 -(NSArray*)getNodeArray;
 @end

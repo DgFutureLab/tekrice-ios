@@ -34,29 +34,35 @@
     mapView_.myLocationEnabled = YES;
     mapView_.mapType = kGMSTypeSatellite;
     self.view = mapView_;
-    
+    [self performSelectorInBackground:@selector(setMarker) withObject:nil];
+
+    UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
+    [self.view addSubview:tabBar];
+}
+
+- (void) setMarker{
+    NSLog(@"setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     NSArray *nodeArray =  [appDelegate getNodeArray];
-    NSArray *distanceArray = appDelegate.distanceArray;
-    
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
-    for (int i=0; i<nodeArray.count-1; i++) {
-        GMSMarker *marker = [[GMSMarker alloc] init];
-        marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
-        
-        if ([[distanceArray[i] valueForKey:@"value"] floatValue] > THRESHOLD) {
-            marker.icon = iconImage;
-        }else{
-            marker.icon = iconImageProblem;
+    NSLog(@"%@", nodeArray);
+    for (int i =0; i<nodeArray.count; i++) {
+        NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
+        for (int j=0; j<sensors.count; j++) {
+            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"]) {
+                GMSMarker *marker = [[GMSMarker alloc] init];
+                marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
+                if ([[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > THRESHOLD) {
+                    marker.icon = iconImage;
+                }else{
+                    marker.icon = iconImageProblem;
+                }
+                marker.map = mapView_;
+            }
         }
-        marker.map = mapView_;
     }
-    
-    
-    UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
-    [self.view addSubview:tabBar];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

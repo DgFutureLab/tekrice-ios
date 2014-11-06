@@ -9,7 +9,7 @@
 #import "DetailViewController.h"
 #import "AppDelegate.h"
 @interface DetailViewController ()
-- (void)getDistance:(NSNumber*) nodeid;
+- (void)getDistance:(NSDictionary*) args;
 @end
 
 @implementation DetailViewController
@@ -22,7 +22,9 @@
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate getNodeArray];
     NSNumber *nodeIdNumber = [NSNumber numberWithInt:nodeId];
-    [self performSelectorInBackground:@selector(getDistance:) withObject:nodeIdNumber];
+    NSString *parameter = @"date_range=1week";
+    NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:nodeIdNumber, @"nodeIdNumber", parameter, @"parameter",nil];
+    [self performSelectorInBackground:@selector(getDistance:) withObject:args];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *view = [self customView];
@@ -35,6 +37,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+
 - (UIView *)customView
 {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1500)];
@@ -42,7 +45,7 @@
     // distance
     appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
+    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
     [distanceLabel setTextColor:[UIColor whiteColor]];
     [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:120]];
     [view addSubview:distanceLabel];
@@ -55,7 +58,7 @@
     
     
     boxDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
+    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
     [boxDistanceLabel setTextColor:[UIColor whiteColor]];
     [boxDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
     
@@ -81,7 +84,7 @@
     [box0 addSubview:boxDistanceLabel];
     
     //chart - distance
-    PNLineChart * lineChartDistance = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
+    lineChartDistance = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
     lineChartDistance.yLabelFormat = @"%1.1f";
     lineChartDistance.yLabelColor = PNCleanGrey;
     lineChartDistance.xLabelColor = PNCleanGrey;
@@ -159,10 +162,32 @@
     return view;
 }
 
-- (void)getDistance:(NSNumber*) nodeIdNumber{
-    currentDistance =  [appDelegate getDistance:nodeIdNumber];
-    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
-    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", currentDistance]];
+- (void)getDistance:(NSDictionary*) args{
+    NSNumber *nodeIdNumber = [args valueForKey:@"nodeIdNumber"];
+    NSString *parameter = [args valueForKey:@"parameter"];
+    distanceArray = [appDelegate getDistance:nodeIdNumber parameter:parameter];
+    
+    // distance Label
+    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[[[distanceArray valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue]]];
+    [boxDistanceLabel setText:distanceLabel.text];
+    
+    // distance chart
+//    [lineChartDistance setXLabels:[[distanceArray valueForKey:@"objects"] valueForKey:@"timestamp"]];
+//    NSArray * dataArrayDistance = [[distanceArray valueForKey:@"objects"] valueForKey:@"value"];
+    
+    //how to update??
+    [lineChartDistance setXLabels:@[@"foo 1",@"bar 2",@"SEaP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
+    NSArray * dataArrayDistance = @[@60.1, @160.1, @126.4, @262.2, @186.2, @127.2, @176.2];
+    
+    PNLineChartData *lineChartDataDistance = [PNLineChartData new];
+    lineChartDataDistance.color = PNFreshGreen;
+    lineChartDataDistance.itemCount = lineChartDistance.xLabels.count;
+    lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCycle;
+    lineChartDataDistance.getData = ^(NSUInteger index) {
+        CGFloat yValue = [dataArrayDistance[index] floatValue];
+        return [PNLineChartDataItem dataItemWithY:yValue];
+    };
+    lineChartDistance.chartData = @[lineChartDataDistance];
 }
 
 - (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;

@@ -11,6 +11,7 @@
 #import "DetailViewController.h"
 #import "AppDelegate.h"
 @interface ViewController : UIViewController<GMSMapViewDelegate, UITabBarControllerDelegate>{
+@private
     NSArray *markers;
     GMSCameraPosition *camera;
     AppDelegate *appDelegate;
