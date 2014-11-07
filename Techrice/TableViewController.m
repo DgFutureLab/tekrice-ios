@@ -129,21 +129,11 @@
 }
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"go to detail page about nodeid:%d", [[displayDataArray[indexPath.row] valueForKey:@"nodeId"] intValue]);
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController->nodeId = [[displayDataArray[indexPath.row] valueForKey:@"nodeid"] intValue];
-    detailViewController->nodeData = [[self nodeIdToNodeData:[[displayDataArray[indexPath.row] valueForKey:@"nodeId"] intValue]] mutableCopy];
+    detailViewController->nodeId = [[displayDataArray[indexPath.row] valueForKey:@"nodeId"] intValue];
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
-}
-
-- (NSDictionary*)nodeIdToNodeData:(int)nodeId{
-    NSDictionary *dic = [[NSDictionary alloc]init];
-    for (int i=0; i<nodeArray.count; i++) {
-        if ([[nodeArray[i] valueForKey:@"id"] intValue] == nodeId) {
-            dic = nodeArray[i];
-        }
-    }
-    return dic;
 }
 
 /*

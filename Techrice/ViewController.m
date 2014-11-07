@@ -47,6 +47,7 @@
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
+    NSLog(@"%@", nodeArray);
     for (int i =0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
@@ -58,7 +59,7 @@
                 }else{
                     marker.icon = iconImageProblem;
                 }
-                marker.userData = nodeArray[i];
+                marker.userData = [nodeArray[i] valueForKey:@"id"];
                 marker.map = mapView_;
             }
         }
@@ -72,7 +73,7 @@
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController->nodeData = marker.userData;
+    detailViewController->nodeId = marker.userData;
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
     return YES;

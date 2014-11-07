@@ -19,9 +19,9 @@
     float lastDistance;
     UILabel *distanceLabel, *boxDistanceLabel;
     PNLineChart * lineChartDistance;
+    UIView *view;
+    UIView *box0;
 @public
     int nodeId;
-    NSMutableDictionary *nodeData;
-
 }
 @end
