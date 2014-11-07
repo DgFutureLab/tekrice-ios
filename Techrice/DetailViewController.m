@@ -29,7 +29,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *view = [self customView];
-    glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"test1.png"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:view];
+    glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"ricefield.jpg"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:view];
     [self.view addSubview:glassScrollView];
 }
 
