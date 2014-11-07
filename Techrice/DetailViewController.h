@@ -21,7 +21,7 @@
     PNLineChart * lineChartDistance;
 @public
     int nodeId;
+    NSMutableDictionary *nodeData;
 
 }
-
 @end

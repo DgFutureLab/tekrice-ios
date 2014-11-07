@@ -12,8 +12,7 @@
 
 @interface TableViewController : UITableViewController<UITabBarControllerDelegate>{
     NSArray *nodeArray;
-    NSArray *distanceArray;
-    NSArray *tableArray;
+    NSMutableArray *displayDataArray;
     AppDelegate *appDelegate;
     UISegmentedControl *seg;
 }

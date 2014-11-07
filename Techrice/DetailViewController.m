@@ -24,12 +24,13 @@
     NSNumber *nodeIdNumber = [NSNumber numberWithInt:nodeId];
     NSString *parameter = @"date_range=1week";
     NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:nodeIdNumber, @"nodeIdNumber", parameter, @"parameter",nil];
-    [self performSelectorInBackground:@selector(getDistance:) withObject:args];
+//    [self performSelectorInBackground:@selector(getDistance:) withObject:args];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *view = [self customView];
     glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"test1.png"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:view];
     [self.view addSubview:glassScrollView];
+    nodeData = [[NSMutableDictionary alloc] init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,8 +39,7 @@
 }
 
 
-- (UIView *)customView
-{
+- (UIView *)customView{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1500)];
     
     // distance
@@ -90,9 +90,13 @@
     lineChartDistance.xLabelColor = PNCleanGrey;
     lineChartDistance.axisColor = PNLightGrey;
     lineChartDistance.backgroundColor = [UIColor clearColor];
+    
+    NSLog(@"cool ß%@", nodeData);
+    
     [lineChartDistance setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
     lineChartDistance.showCoordinateAxis = YES;
     NSArray * dataArrayDistance = @[@60.1, @160.1, @126.4, @262.2, @186.2, @127.2, @176.2];
+    
     PNLineChartData *lineChartDataDistance = [PNLineChartData new];
     lineChartDataDistance.color = PNFreshGreen;
     lineChartDataDistance.itemCount = lineChartDistance.xLabels.count;

@@ -31,8 +31,18 @@
     self.tabBarController.delegate = self;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     nodeArray = appDelegate.nodeArray;
-    distanceArray = appDelegate.distanceArray;
-    
+    displayDataArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<nodeArray.count; i++) {
+        NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
+        for (int j = 0; j<sensors.count; j++) {
+            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"]) {
+                NSMutableDictionary *displayDictionary = [[sensors[j] valueForKey:@"latest_reading"] mutableCopy];
+                [displayDictionary setObject:[nodeArray[i] valueForKey:@"id"] forKey:@"nodeId"];
+                [displayDataArray addObject:displayDictionary];
+            }   
+        }
+    }
+
     NSArray *arr = @[@"Ascending", @"Descending"];
     seg = [[UISegmentedControl alloc] initWithItems:arr];
     
@@ -46,14 +56,15 @@
     [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
 }
 
+//sort
 - (void)segmentedChanged:(UISegmentedControl*)segment{
     switch (segment.selectedSegmentIndex) {
         case 0:{
             NSLog(@"Ascending");
             NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"value" ascending:YES];
             NSArray *sortDescriptorArray = [NSArray arrayWithObjects:sortDescriptor, nil];
-            NSArray *sortedList = [distanceArray sortedArrayUsingDescriptors:sortDescriptorArray];
-            distanceArray = sortedList;
+            NSArray *sortedList = [displayDataArray sortedArrayUsingDescriptors:sortDescriptorArray];
+            displayDataArray = [sortedList mutableCopy];
             [self.tableView reloadData];
             break;
         }
@@ -61,8 +72,8 @@
             NSLog(@"Descending");
             NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"value" ascending:NO];
             NSArray *sortDescriptorArray = [NSArray arrayWithObjects:sortDescriptor, nil];
-            NSArray *sortedList = [distanceArray sortedArrayUsingDescriptors:sortDescriptorArray];
-            distanceArray = sortedList;
+            NSArray *sortedList = [displayDataArray sortedArrayUsingDescriptors:sortDescriptorArray];
+            displayDataArray = [sortedList mutableCopy];
             [self.tableView reloadData];
             break;
         }
@@ -79,14 +90,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
     return nodeArray.count;
 }
 
@@ -98,10 +105,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-//    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"id"]];
-    
-    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [distanceArray[indexPath.row] valueForKey:@"nodeid"]]];
-    float distance = [[distanceArray[indexPath.row] valueForKey:@"value"] floatValue];
+    cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [displayDataArray[indexPath.row] valueForKey:@"nodeId"]]];
+    float distance = [[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
     if (distance > THRESHOLD) {
         cell.detailTextLabel.textColor = [UIColor redColor];
     }else{
@@ -109,16 +114,13 @@
     }
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2fcm", distance];
     
-    //UILabelでやる
-//    UILabel *sensorDataLabel =[[UILabel alloc] initWithFrame:CGRectMake(200, 0, 320, 40)];
-//    sensorDataLabel.text = [NSString stringWithFormat:@"%0.2fcm", [[[[[nodeArray objectAtIndex:indexPath.row] valueForKey:@"sensors"][0] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue]];
-//    [cell.contentView addSubview:sensorDataLabel];
-    
     return cell;
 }
 
+//set color
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    float distance = [[distanceArray[indexPath.row] valueForKey:@"value"] floatValue];
+    float distance = [[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
+
     if (distance > THRESHOLD) {
         cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];
     }else{
@@ -128,11 +130,21 @@
 
 - (void)tableView:(UITableView *) tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController->nodeId = [[distanceArray[indexPath.row] valueForKey:@"nodeid"] intValue];
+    detailViewController->nodeId = [[displayDataArray[indexPath.row] valueForKey:@"nodeid"] intValue];
+    detailViewController->nodeData = [[self nodeIdToNodeData:[[displayDataArray[indexPath.row] valueForKey:@"nodeId"] intValue]] mutableCopy];
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
+- (NSDictionary*)nodeIdToNodeData:(int)nodeId{
+    NSDictionary *dic = [[NSDictionary alloc]init];
+    for (int i=0; i<nodeArray.count; i++) {
+        if ([[nodeArray[i] valueForKey:@"id"] intValue] == nodeId) {
+            dic = nodeArray[i];
+        }
+    }
+    return dic;
+}
 
 /*
 // Override to support conditional editing of the table view.
