@@ -9,7 +9,6 @@
 #import "DetailViewController.h"
 #import "AppDelegate.h"
 @interface DetailViewController ()
-- (void)getDistance:(NSDictionary*) args;
 @end
 
 @implementation DetailViewController
@@ -25,7 +24,6 @@
     NSNumber *nodeIdNumber = [NSNumber numberWithInt:nodeId];
     NSString *parameter = @"date_range=1week";
     NSDictionary *args = [NSDictionary dictionaryWithObjectsAndKeys:nodeIdNumber, @"nodeIdNumber", parameter, @"parameter",nil];
-//    [self performSelectorInBackground:@selector(getDistance:) withObject:args];
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *view = [self customView];
@@ -43,7 +41,7 @@
     view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1500)];
     
     // distance
-    appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
     [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
     [distanceLabel setTextColor:[UIColor whiteColor]];
@@ -53,6 +51,32 @@
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
     
     //chart - distance
+    box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, 310, 350)];
+    box0.layer.cornerRadius = 3;
+    box0.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
+    
+    //tile - distance
+    UILabel *boxDistanceTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 30)];
+    [boxDistanceTitleLabel setTextColor:[UIColor whiteColor]];
+    [boxDistanceTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:24]];
+    boxDistanceTitleLabel.text = @"Distance";
+    [box0 addSubview:boxDistanceTitleLabel];
+    
+    //underline - distance
+    UIBezierPath *aPath = [UIBezierPath bezierPath];
+    aPath.lineWidth = 1;
+    [aPath moveToPoint:CGPointMake(5, 35)];
+    [aPath addLineToPoint:CGPointMake(305, 35)];
+    [aPath closePath];
+    [aPath stroke];
+    CAShapeLayer *sl = [[CAShapeLayer alloc] initWithLayer:box0.layer];
+    sl.fillColor = [UIColor clearColor].CGColor;
+    sl.strokeColor = [UIColor whiteColor].CGColor;
+    sl.path = aPath.CGPath;
+    [box0.layer addSublayer:sl];
+
+    [view addSubview:box0];
+    
     [self performSelectorInBackground:@selector(setDistanceChart) withObject:nil];
  
     // humidity
@@ -111,37 +135,6 @@
 }
 
 - (void)setDistanceChart{
-    box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, 310, 350)];
-    box0.layer.cornerRadius = 3;
-    box0.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
-    
-    
-    boxDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
-    [boxDistanceLabel setTextColor:[UIColor whiteColor]];
-    [boxDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    
-    //tile - distance
-    UILabel *boxDistanceTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 30)];
-    [boxDistanceTitleLabel setTextColor:[UIColor whiteColor]];
-    [boxDistanceTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:24]];
-    boxDistanceTitleLabel.text = @"Distance";
-    [box0 addSubview:boxDistanceTitleLabel];
-    
-    //underline - distance
-    UIBezierPath *aPath = [UIBezierPath bezierPath];
-    aPath.lineWidth = 1;
-    [aPath moveToPoint:CGPointMake(5, 35)];
-    [aPath addLineToPoint:CGPointMake(305, 35)];
-    [aPath closePath];
-    [aPath stroke];
-    CAShapeLayer *sl = [[CAShapeLayer alloc] initWithLayer:box0.layer];
-    sl.fillColor = [UIColor clearColor].CGColor;
-    sl.strokeColor = [UIColor whiteColor].CGColor;
-    sl.path = aPath.CGPath;
-    [box0.layer addSublayer:sl];
-    [box0 addSubview:boxDistanceLabel];
-    
     //chart - distance
     lineChartDistance = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
     lineChartDistance.yLabelFormat = @"%1.1f";
@@ -149,60 +142,43 @@
     lineChartDistance.xLabelColor = PNCleanGrey;
     lineChartDistance.axisColor = PNLightGrey;
     lineChartDistance.backgroundColor = [UIColor clearColor];
-    
     lineChartDistance.showCoordinateAxis = YES;
-
-//    [lineChartDistance setXLabels:@[@"SEP 1",@"SEP 2",@"SEP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
-//    NSArray * dataArrayDistance = @[@60.1, @160.1, @126.4, @262.2, @186.2, @127.2, @176.2];
-
+    lineChartDistance.xLabelFont = [UIFont fontWithName:@"HelveticaNeue-Regular" size:8];
     NSArray *distanceData = [appDelegate getDistance:[NSNumber numberWithInt:nodeId] parameter:@"date_range=1week"];
-    NSArray *dataArrayDistance = [distanceData valueForKeyPath:@"objects.value"];
+    NSArray *distanceDataArray = [distanceData valueForKeyPath:@"objects.value"];
+    NSArray *lastTenDistanceDataArray= [distanceDataArray subarrayWithRange: NSMakeRange(distanceDataArray.count-6,6) ];
+    
     NSArray *labelArray = [distanceData valueForKeyPath:@"objects.timestamp"];
-    [lineChartDistance setXLabels:labelArray];
+    NSArray *lastTenLabelArray= [labelArray subarrayWithRange: NSMakeRange(labelArray.count-6,6) ];
+    NSMutableArray *lastTenLabelFormattedArray = [[NSMutableArray alloc] init];
+    for (int i =0; i<6; i++) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd-HH:mm:ss:SSSSSS"];
+        NSDate* date_converted = [formatter dateFromString:lastTenLabelArray[i]];
+        [formatter setDateFormat:@"HHa"];
+        [lastTenLabelFormattedArray addObject:[formatter stringFromDate:date_converted]];
+    }
+    NSLog(@"ss: %@", lastTenLabelFormattedArray);
+    [lineChartDistance setXLabels:lastTenLabelFormattedArray];
+    
     lineChartDistance.showCoordinateAxis = YES;
-    
-    
     PNLineChartData *lineChartDataDistance = [PNLineChartData new];
     lineChartDataDistance.color = PNFreshGreen;
     lineChartDataDistance.itemCount = lineChartDistance.xLabels.count;
     lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCycle;
     lineChartDataDistance.getData = ^(NSUInteger index) {
-        CGFloat yValue = [dataArrayDistance[index] floatValue];
+        CGFloat yValue = [lastTenDistanceDataArray[index] floatValue];
         return [PNLineChartDataItem dataItemWithY:yValue];
     };
     lineChartDistance.chartData = @[lineChartDataDistance];
     [lineChartDistance strokeChart];
-    //    lineChart.delegate = self;
     [box0 addSubview:lineChartDistance];
-    [view addSubview:box0];
-}
-
-- (void)getDistance:(NSDictionary*) args{
-    NSNumber *nodeIdNumber = [args valueForKey:@"nodeIdNumber"];
-    NSString *parameter = [args valueForKey:@"parameter"];
-    distanceArray = [appDelegate getDistance:nodeIdNumber parameter:parameter];
     
-    // distance Label
-    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[[[distanceArray valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue]]];
-    [boxDistanceLabel setText:distanceLabel.text];
-    
-    // distance chart
-//    [lineChartDistance setXLabels:[[distanceArray valueForKey:@"objects"] valueForKey:@"timestamp"]];
-//    NSArray * dataArrayDistance = [[distanceArray valueForKey:@"objects"] valueForKey:@"value"];
-    
-    //how to update??
-    [lineChartDistance setXLabels:@[@"foo 1",@"bar 2",@"SEaP 3",@"SEP 4",@"SEP 5",@"SEP 6",@"SEP 7"]];
-    NSArray * dataArrayDistance = @[@60.1, @160.1, @126.4, @262.2, @186.2, @127.2, @176.2];
-    
-    PNLineChartData *lineChartDataDistance = [PNLineChartData new];
-    lineChartDataDistance.color = PNFreshGreen;
-    lineChartDataDistance.itemCount = lineChartDistance.xLabels.count;
-    lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCycle;
-    lineChartDataDistance.getData = ^(NSUInteger index) {
-        CGFloat yValue = [dataArrayDistance[index] floatValue];
-        return [PNLineChartDataItem dataItemWithY:yValue];
-    };
-    lineChartDistance.chartData = @[lineChartDataDistance];
+    boxDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
+    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[lastTenDistanceDataArray lastObject] floatValue]]];
+    [boxDistanceLabel setTextColor:[UIColor whiteColor]];
+    [boxDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
+    [box0 addSubview:boxDistanceLabel];
 }
 
 - (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;
