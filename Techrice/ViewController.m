@@ -38,6 +38,15 @@
 
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
     [self.view addSubview:tabBar];
+    
+    //add setting button
+    UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:self action:@selector(settingButtonTapped)];
+    settingButton.title = @"\u2699";
+    settingButton.tintColor = [UIColor whiteColor];
+    UIFont *customFont = [UIFont fontWithName:@"Helvetica" size:24.0];
+    NSDictionary *fontDictionary = @{NSFontAttributeName : customFont};
+    [settingButton setTitleTextAttributes:fontDictionary forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = settingButton;
 }
 
 - (void) setMarker{
@@ -63,6 +72,10 @@
             }
         }
     }
+}
+
+- (void)settingButtonTapped{
+    NSLog(@"settingButtonTapped");
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
