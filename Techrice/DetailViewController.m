@@ -146,20 +146,31 @@
     lineChartDistance.xLabelFont = [UIFont fontWithName:@"HelveticaNeue-Regular" size:8];
     NSArray *distanceData = [appDelegate getDistance:[NSNumber numberWithInt:nodeId] parameter:@"date_range=1week"];
     NSArray *distanceDataArray = [distanceData valueForKeyPath:@"objects.value"];
-    NSArray *lastTenDistanceDataArray= [distanceDataArray subarrayWithRange: NSMakeRange(distanceDataArray.count-6,6) ];
+    NSArray *displayDistanceDataArray = [[NSArray alloc] init];
+    if (distanceDataArray.count > CHART_POINTS_MAX) {
+        displayDistanceDataArray= [distanceDataArray subarrayWithRange: NSMakeRange(distanceDataArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX) ];
+    }else{
+        displayDistanceDataArray= distanceDataArray;
+    }
     
     NSArray *labelArray = [distanceData valueForKeyPath:@"objects.timestamp"];
-    NSArray *lastTenLabelArray= [labelArray subarrayWithRange: NSMakeRange(labelArray.count-6,6) ];
-    NSMutableArray *lastTenLabelFormattedArray = [[NSMutableArray alloc] init];
-    for (int i =0; i<6; i++) {
+    NSArray *displayLabelArray = [[NSArray alloc] init];
+    if (labelArray.count > CHART_POINTS_MAX) {
+        displayLabelArray= [labelArray subarrayWithRange: NSMakeRange(labelArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX)];
+    }else{
+        displayLabelArray= labelArray;
+
+    }
+    NSMutableArray *displayLabelFormattedArray = [[NSMutableArray alloc] init];
+    for (int i =0; i<displayLabelArray.count; i++) {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd-HH:mm:ss:SSSSSS"];
-        NSDate* date_converted = [formatter dateFromString:lastTenLabelArray[i]];
+        NSDate* date_converted = [formatter dateFromString:displayLabelArray[i]];
         [formatter setDateFormat:@"HHa"];
-        [lastTenLabelFormattedArray addObject:[formatter stringFromDate:date_converted]];
+        [displayLabelFormattedArray addObject:[formatter stringFromDate:date_converted]];
     }
-    NSLog(@"ss: %@", lastTenLabelFormattedArray);
-    [lineChartDistance setXLabels:lastTenLabelFormattedArray];
+    NSLog(@"ss: %@", displayLabelFormattedArray);
+    [lineChartDistance setXLabels:displayLabelFormattedArray];
     
     lineChartDistance.showCoordinateAxis = YES;
     PNLineChartData *lineChartDataDistance = [PNLineChartData new];
@@ -167,7 +178,7 @@
     lineChartDataDistance.itemCount = lineChartDistance.xLabels.count;
     lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCycle;
     lineChartDataDistance.getData = ^(NSUInteger index) {
-        CGFloat yValue = [lastTenDistanceDataArray[index] floatValue];
+        CGFloat yValue = [displayDistanceDataArray[index] floatValue];
         return [PNLineChartDataItem dataItemWithY:yValue];
     };
     lineChartDistance.chartData = @[lineChartDataDistance];
@@ -175,7 +186,7 @@
     [box0 addSubview:lineChartDistance];
     
     boxDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[lastTenDistanceDataArray lastObject] floatValue]]];
+    [boxDistanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
     [boxDistanceLabel setTextColor:[UIColor whiteColor]];
     [boxDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
     [box0 addSubview:boxDistanceLabel];
