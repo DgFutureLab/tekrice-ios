@@ -27,6 +27,9 @@
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     [picker selectRow:appDelegate->distanceThreshold inComponent:0 animated:NO];
     [self.view addSubview:picker];
+    NSDictionary *attributeDictionary = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

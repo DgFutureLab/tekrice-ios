@@ -85,6 +85,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SettingValueViewController *settingValueController = [[SettingValueViewController alloc] init];
+    settingValueController.title = @"Red distance threshold";
     [self.navigationController pushViewController:settingValueController animated:YES];
 }
 
