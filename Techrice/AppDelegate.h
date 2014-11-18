@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-#define THRESHOLD 80
-
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
 @public
     int distanceThreshold;

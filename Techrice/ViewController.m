@@ -11,6 +11,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     self.tabBarController.delegate = self;
+    [self setMarker];
 }
 
 - (void)viewDidLoad{
@@ -62,7 +63,7 @@
             if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"]) {
                 GMSMarker *marker = [[GMSMarker alloc] init];
                 marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
-                if ([[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > THRESHOLD) {
+                if ([[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->distanceThreshold) {
                     marker.icon = iconImage;
                 }else{
                     marker.icon = iconImageProblem;

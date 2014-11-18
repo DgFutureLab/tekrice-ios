@@ -16,7 +16,6 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     self.tabBarController.delegate = self;
-    seg.tintColor = [UIColor colorWithRed:0.1 green:0.3 blue:0.4 alpha:255];
 }
 
 - (void)viewDidLoad {
@@ -43,11 +42,11 @@
         }
     }
     
-//    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     NSArray *arr = @[@"Ascending", @"Descending"];
     seg = [[UISegmentedControl alloc] initWithItems:arr];
     seg.frame = CGRectMake(0, 0, 250, 30);
-    seg.tintColor = [UIColor redColor];
+    seg.tintColor = [UIColor whiteColor];
     [seg addTarget:self action:@selector(segmentedChanged:) forControlEvents:UIControlEventValueChanged];
     [self.navigationItem setTitleView:seg];
 }
@@ -107,7 +106,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [displayDataArray[indexPath.row] valueForKey:@"nodeId"]]];
     float distance = [[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
-    if (distance > THRESHOLD) {
+    if (distance > appDelegate->distanceThreshold) {
         cell.detailTextLabel.textColor = [UIColor redColor];
     }else{
         cell.detailTextLabel.textColor = [UIColor blackColor];
@@ -121,7 +120,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     float distance = [[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
 
-    if (distance > THRESHOLD) {
+    if (distance > appDelegate->distanceThreshold) {
         cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];
     }else{
         cell.backgroundColor = [UIColor whiteColor];
