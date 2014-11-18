@@ -15,9 +15,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     self.title = [NSString stringWithFormat:@"Node ID:%d", nodeId];
+    NSDictionary *attributeDictionary = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
 //    [appDelegate getNodeArray];
     
@@ -29,6 +31,7 @@
     UIView *view = [self customView];
     glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"ricefield.jpg"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:view];
     [self.view addSubview:glassScrollView];
+    
 }
 
 - (void)didReceiveMemoryWarning {

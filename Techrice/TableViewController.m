@@ -42,14 +42,15 @@
             }   
         }
     }
-
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     NSArray *arr = @[@"Ascending", @"Descending"];
     seg = [[UISegmentedControl alloc] initWithItems:arr];
-    
     seg.frame = CGRectMake(0, 0, 250, 30);
-
-    [seg addTarget:self action:@selector(segmentedChanged:) forControlEvents:UIControlEventValueChanged];
+    seg.tintColor = [UIColor redColor];
     [self.navigationItem setTitleView:seg];
+    self.navigationItem.titleView.tintColor = [UIColor greenColor];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

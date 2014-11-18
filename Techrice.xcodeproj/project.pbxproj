@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B21A2D2E19F0F5E500633CEF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2D2D19F0F5E500633CEF /* TabBarController.m */; };
 		B21A2D3119F0F98300633CEF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2D3019F0F98300633CEF /* TableViewController.m */; };
+		B24487AB1A1B21150039F030 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487AA1A1B21150039F030 /* SettingTableViewController.m */; };
+		B24487B11A1B24A30039F030 /* SettingValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487B01A1B24A30039F030 /* SettingValueViewController.m */; };
 		B27AE3261A0CDF4F00A84929 /* ricefield.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B27AE3251A0CDF4F00A84929 /* ricefield.jpg */; };
 		B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE219EE73A80079BC3F /* DetailViewController.m */; };
 		B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE619EE75870079BC3F /* UIImage+ImageEffects.m */; };
@@ -84,6 +86,10 @@
 		B21A2D2D19F0F5E500633CEF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		B21A2D2F19F0F98300633CEF /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		B21A2D3019F0F98300633CEF /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		B24487A91A1B21150039F030 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
+		B24487AA1A1B21150039F030 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
+		B24487AF1A1B24A30039F030 /* SettingValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingValueViewController.h; sourceTree = "<group>"; };
+		B24487B01A1B24A30039F030 /* SettingValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingValueViewController.m; sourceTree = "<group>"; };
 		B27AE3251A0CDF4F00A84929 /* ricefield.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ricefield.jpg; sourceTree = "<group>"; };
 		B2AF9EE119EE73A80079BC3F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		B2AF9EE219EE73A80079BC3F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
@@ -270,6 +276,10 @@
 				B21A2D2D19F0F5E500633CEF /* TabBarController.m */,
 				B21A2D2F19F0F98300633CEF /* TableViewController.h */,
 				B21A2D3019F0F98300633CEF /* TableViewController.m */,
+				B24487A91A1B21150039F030 /* SettingTableViewController.h */,
+				B24487AA1A1B21150039F030 /* SettingTableViewController.m */,
+				B24487AF1A1B24A30039F030 /* SettingValueViewController.h */,
+				B24487B01A1B24A30039F030 /* SettingValueViewController.m */,
 			);
 			path = Techrice;
 			sourceTree = "<group>";
@@ -533,8 +543,10 @@
 				B2FA5F9D19CABE0C00FCE828 /* ViewController.m in Sources */,
 				B2AF9EEA19EE75870079BC3F /* BTGlassScrollView.m in Sources */,
 				B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */,
+				B24487AB1A1B21150039F030 /* SettingTableViewController.m in Sources */,
 				B2FA5F9419CABE0C00FCE828 /* AppDelegate.m in Sources */,
 				B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */,
+				B24487B11A1B24A30039F030 /* SettingValueViewController.m in Sources */,
 				B2FA5F9019CABE0C00FCE828 /* main.m in Sources */,
 				B21A2D3119F0F98300633CEF /* TableViewController.m in Sources */,
 			);

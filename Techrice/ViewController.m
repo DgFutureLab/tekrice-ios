@@ -1,6 +1,6 @@
 #import "ViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
-
+#import "SettingTableViewController.h"
 @interface ViewController ()
 
 @end
@@ -76,6 +76,9 @@
 
 - (void)settingButtonTapped{
     NSLog(@"settingButtonTapped");
+    SettingTableViewController *settingTableViewController = [[SettingTableViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingTableViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

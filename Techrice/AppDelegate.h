@@ -11,7 +11,10 @@
 
 #define THRESHOLD 80
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
+@public
+    int distanceThreshold;
+}
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,retain) NSArray *nodeArray;
