@@ -24,6 +24,8 @@
     UINavigationController *navigationController2 = [[UINavigationController alloc] initWithRootViewController:[[TableViewController alloc] init]];
     navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTitle:@"List" image:[UIImage imageNamed:@"list.png"] tag:0];
     
+    [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.0 green:0.7 blue:0.7 alpha:1.0]];;
+    
     NSArray *tabs = [NSArray arrayWithObjects:navigationController1, navigationController2, nil];
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
