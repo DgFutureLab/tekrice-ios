@@ -19,11 +19,10 @@
     
     
     UINavigationController *navigationController1 = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
-//    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Cat" image:[UIImage imageNamed:@"darkgreen.png"] selectedImage:[UIImage imageNamed:@"darkgreen.png"]];
-    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemBookmarks tag:1];
+    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Map" image:[UIImage imageNamed:@"pin.png"] tag:1];
     
     UINavigationController *navigationController2 = [[UINavigationController alloc] initWithRootViewController:[[TableViewController alloc] init]];
-    navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemFavorites tag:0];
+    navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTitle:@"List" image:[UIImage imageNamed:@"list.png"] tag:0];
     
     NSArray *tabs = [NSArray arrayWithObjects:navigationController1, navigationController2, nil];
     UITabBarController *tabBarController = [[UITabBarController alloc] init];

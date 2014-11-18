@@ -15,6 +15,7 @@
     NSArray *markers;
     GMSCameraPosition *camera;
     AppDelegate *appDelegate;
+    NSArray *nodeArray;
 }
 
 @end

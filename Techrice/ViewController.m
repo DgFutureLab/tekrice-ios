@@ -9,11 +9,6 @@
     GMSMapView *mapView_;
 }
 
-- (void)viewWillAppear:(BOOL)animated{
-    self.tabBarController.delegate = self;
-    [self setMarker];
-}
-
 - (void)viewDidLoad{
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
@@ -50,10 +45,19 @@
     self.navigationItem.rightBarButtonItem = settingButton;
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    self.tabBarController.delegate = self;
+    [self setMarkerColor];
+}
+
 - (void) setMarker{
     NSLog(@"setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    NSArray *nodeArray =  [appDelegate getNodeArray];
+    nodeArray =  [appDelegate getNodeArray];
+    [self setMarkerColor];
+}
+
+- (void)setMarkerColor{
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
