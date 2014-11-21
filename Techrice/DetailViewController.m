@@ -38,7 +38,7 @@
 
 
 - (UIView *)customView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1500)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1550)];
     // distance
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
@@ -49,7 +49,7 @@
     
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
     
-    //chart - distance
+    // chart - distance
     UIView *box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, 310, 350)];
     NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box0, @"view",
@@ -58,16 +58,15 @@
                                     nil];
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
     [view addSubview:box0];
- 
-    // humidity
+    
+    // chart - humidity
     UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 495, 310, 350)];
-    box1.layer.cornerRadius = 3;
-    box1.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
-    UILabel *humidityLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [humidityLabel setText:[NSString stringWithFormat:@"%.0d%%", 45]];
-    [humidityLabel setTextColor:[UIColor whiteColor]];
-    [humidityLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    [box1 addSubview:humidityLabel];
+    NSDictionary *arguments2 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    box1, @"view",
+                                    @"Humidity", @"title",
+                                    @"/humidity?date_range=1week", @"parameter",
+                                    nil];
+    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments2];
     [view addSubview:box1];
     
     // wind speed
@@ -92,13 +91,13 @@
     
     // tempereture
     UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 1205, 310, 350)];
-    box3.layer.cornerRadius = 3;
-    box3.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
-    UILabel *temperetureLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [temperetureLabel setText:[NSString stringWithFormat:@"%.0d℃", 24]];
-    [temperetureLabel setTextColor:[UIColor whiteColor]];
-    [temperetureLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    [box3 addSubview:temperetureLabel];
+    NSDictionary *arguments3 = [NSDictionary dictionaryWithObjectsAndKeys:
+                                box3, @"view",
+                                @"Temperature", @"title",
+                                @"/temperature?date_range=1week", @"parameter",
+                                nil];
+    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments3];
+    
     // tempereture - thermometer
     UIProgressView *temperatureProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     temperatureProgressView.frame = CGRectMake(20, 25, 30, 10);
@@ -115,9 +114,11 @@
 }
 
 - (void)setChartView:(NSDictionary *)arguments{
+    NSLog(@"setChartView");
     UIView *view = [arguments objectForKey:@"view"];
     NSString *title = [arguments objectForKey:@"title"];
     NSString *parameter = [arguments objectForKey:@"parameter"];
+    
     
     view.layer.cornerRadius = 3;
     view.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
@@ -142,9 +143,15 @@
     sl.path = aPath.CGPath;
     [view.layer addSublayer:sl];
     
-    //make chart
     //chart
+    // API call should be once per second
+    if ([title isEqualToString:@"Humidity"]) {
+        [NSThread sleepForTimeInterval:1.0];
+    } else if ([title isEqualToString:@"Temperature"]){
+        [NSThread sleepForTimeInterval:2.0];
+    }
     NSArray *data = [appDelegate getDistance:[NSNumber numberWithInt:nodeId] parameter:parameter];
+
     NSArray *dataArray = [data valueForKeyPath:@"objects.value"];
     if (dataArray.count > 0) {
         PNLineChart *lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
@@ -196,7 +203,13 @@
         [view addSubview:lineChart];
         
         UILabel *boxLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-        [boxLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
+        if ([title isEqualToString:@"Distance"]) {
+            [boxLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
+        }else if ([title isEqualToString:@"Humidity"]){
+            [boxLabel setText:[NSString stringWithFormat:@"%.0f%%", [[displayDistanceDataArray lastObject] floatValue]]];
+        }else if ([title isEqualToString:@"Temperature"]){
+            [boxLabel setText:[NSString stringWithFormat:@"%.0f℃", [[displayDistanceDataArray lastObject] floatValue]]];
+        }
         [boxLabel setTextColor:[UIColor whiteColor]];
         [boxLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
         [view addSubview:boxLabel];
