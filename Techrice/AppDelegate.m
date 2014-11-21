@@ -69,7 +69,7 @@
     // get data
     NSString *url;
     if (parameter) {
-        url = [[[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance?"] stringByAppendingString: parameter];
+        url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString: parameter];
     }else{
         url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance"];
     }

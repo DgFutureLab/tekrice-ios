@@ -18,10 +18,7 @@
     AppDelegate *appDelegate;
     NSArray *distanceArray;
     float lastDistance;
-    UILabel *distanceLabel, *boxDistanceLabel;
-    PNLineChart * lineChartDistance;
-    UIView *view;
-    UIView *box0;
+    UILabel *distanceLabel;
 @public
     int nodeId;
 }
