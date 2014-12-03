@@ -38,11 +38,12 @@
 
 
 - (UIView *)customView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1550)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1200)];
     // distance
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
+//    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
+    [distanceLabel setText:@"--cm"];
     [distanceLabel setTextColor:[UIColor whiteColor]];
     [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:120]];
     [view addSubview:distanceLabel];
@@ -70,27 +71,27 @@
     [view addSubview:box1];
     
     // wind speed
-    UIView *box2 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, 310, 350)];
-    box2.layer.cornerRadius = 3;
-    box2.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
-    UILabel *windSpeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    [windSpeedLabel setText:[NSString stringWithFormat:@"%.0dm/s", 2]];
-    [windSpeedLabel setTextColor:[UIColor whiteColor]];
-    [windSpeedLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-    [box2 addSubview:windSpeedLabel];
-    // windmill - base
-    UIImageView *windSpeedImageViewPole = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_pole.png"]];
-    windSpeedImageViewPole.frame = CGRectMake(35, 20, 5, 30);
-    [box2 addSubview:windSpeedImageViewPole];
-    // windminll - fan
-    UIImageView *windSpeedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_fan.png"]];
-    windSpeedImageView.frame = CGRectMake(17, 0, 40, 40);
-    [self runSpinAnimationOnView:windSpeedImageView duration:0.05 rotations:1 repeat:MAXFLOAT];
-    [box2 addSubview:windSpeedImageView];
-    [view addSubview:box2];
+//    UIView *box2 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, 310, 350)];
+//    box2.layer.cornerRadius = 3;
+//    box2.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
+//    UILabel *windSpeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
+//    [windSpeedLabel setText:[NSString stringWithFormat:@"%.0dm/s", 2]];
+//    [windSpeedLabel setTextColor:[UIColor whiteColor]];
+//    [windSpeedLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
+//    [box2 addSubview:windSpeedLabel];
+//    // windmill - base
+//    UIImageView *windSpeedImageViewPole = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_pole.png"]];
+//    windSpeedImageViewPole.frame = CGRectMake(35, 20, 5, 30);
+//    [box2 addSubview:windSpeedImageViewPole];
+//    // windminll - fan
+//    UIImageView *windSpeedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_fan.png"]];
+//    windSpeedImageView.frame = CGRectMake(17, 0, 40, 40);
+//    [self runSpinAnimationOnView:windSpeedImageView duration:0.05 rotations:1 repeat:MAXFLOAT];
+//    [box2 addSubview:windSpeedImageView];
+//    [view addSubview:box2];
     
     // tempereture
-    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 1205, 310, 350)];
+    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, 310, 350)];
     NSDictionary *arguments3 = [NSDictionary dictionaryWithObjectsAndKeys:
                                 box3, @"view",
                                 @"Temperature", @"title",
@@ -99,15 +100,15 @@
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments3];
     
     // tempereture - thermometer
-    UIProgressView *temperatureProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-    temperatureProgressView.frame = CGRectMake(20, 25, 30, 10);
-    temperatureProgressView.progressTintColor = [UIColor redColor];
-    temperatureProgressView.transform = CGAffineTransformMakeRotation( -90.0f * M_PI / 180.0f );
-    [temperatureProgressView setProgress:1.0 animated:YES];
-    [box3 addSubview:temperatureProgressView];
-    UIImageView *thermometerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thermometer.png"]];
-    thermometerImageView.frame = CGRectMake(10, 0, 50, 50);
-    [box3 addSubview:thermometerImageView];
+//    UIProgressView *temperatureProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+//    temperatureProgressView.frame = CGRectMake(20, 25, 30, 10);
+//    temperatureProgressView.progressTintColor = [UIColor redColor];
+//    temperatureProgressView.transform = CGAffineTransformMakeRotation( -90.0f * M_PI / 180.0f );
+//    [temperatureProgressView setProgress:1.0 animated:YES];
+//    [box3 addSubview:temperatureProgressView];
+//    UIImageView *thermometerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thermometer.png"]];
+//    thermometerImageView.frame = CGRectMake(10, 0, 50, 50);
+//    [box3 addSubview:thermometerImageView];
     [view addSubview:box3];
     
     return view;
@@ -145,10 +146,23 @@
     
     //chart
     // API call should be once per second
-    if ([title isEqualToString:@"Humidity"]) {
-        [NSThread sleepForTimeInterval:1.0];
+    if ([title isEqualToString:@"Distance"]){
+//        requestDate = [NSDate date];
+//        NSLog(@"gaga distance %@", requestDate);
+        [NSThread sleepForTimeInterval:0.0];
+    }
+    else if ([title isEqualToString:@"Humidity"]) {
+//        requestDate = [requestDate dateByAddingTimeInterval:1.0];
+//        NSLog(@"gaga huimidity %@", requestDate);
+//        [NSThread sleepUntilDate:requestDate];
+        [NSThread sleepForTimeInterval:1.5];
     } else if ([title isEqualToString:@"Temperature"]){
-        [NSThread sleepForTimeInterval:2.0];
+//        requestDate = [requestDate dateByAddingTimeInterval:1.0];
+//        NSLog(@"gaga temperature %@", requestDate);
+//        [NSThread sleepUntilDate:[requestDate dateByAddingTimeInterval:1.0]];
+        [NSThread sleepForTimeInterval:3.0];
+    }else{
+        NSLog(@"something wrong");
     }
     NSArray *data = [appDelegate getDistance:[NSNumber numberWithInt:nodeId] parameter:parameter];
 
@@ -174,6 +188,7 @@
         NSArray *displayLabelArray = [[NSArray alloc] init];
         if (labelArray.count > CHART_POINTS_MAX) {
             displayLabelArray= [labelArray subarrayWithRange: NSMakeRange(labelArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX)];
+            
         }else{
             displayLabelArray= labelArray;
             
@@ -205,6 +220,7 @@
         UILabel *boxLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
         if ([title isEqualToString:@"Distance"]) {
             [boxLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
+            [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
         }else if ([title isEqualToString:@"Humidity"]){
             [boxLabel setText:[NSString stringWithFormat:@"%.0f%%", [[displayDistanceDataArray lastObject] floatValue]]];
         }else if ([title isEqualToString:@"Temperature"]){

@@ -19,6 +19,7 @@
     NSArray *distanceArray;
     float lastDistance;
     UILabel *distanceLabel;
+    NSDate *requestDate;
 @public
     int nodeId;
 }
