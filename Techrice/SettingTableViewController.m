@@ -76,7 +76,7 @@
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = @"Red distance threshold";
+    cell.textLabel.text = @"Minimum water level";
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", appDelegate->distanceThreshold];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -85,7 +85,7 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     SettingValueViewController *settingValueController = [[SettingValueViewController alloc] init];
-    settingValueController.title = @"Red distance threshold";
+    settingValueController.title = @"Minimum water level";
     [self.navigationController pushViewController:settingValueController animated:YES];
 }
 

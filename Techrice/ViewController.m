@@ -69,7 +69,7 @@
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     GMSMarker *marker = [[GMSMarker alloc] init];
                     marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
-                    if ([[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->distanceThreshold) {
+                    if (DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->distanceThreshold) {
                         marker.icon = iconImage;
                     }else{
                         marker.icon = iconImageProblem;

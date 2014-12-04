@@ -105,7 +105,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [displayDataArray[indexPath.row] valueForKey:@"nodeId"]]];
-    float distance = [[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
+    float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
     if (distance > appDelegate->distanceThreshold) {
         cell.detailTextLabel.textColor = [UIColor redColor];
     }else{
@@ -118,7 +118,7 @@
 
 //set color
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    float distance = [[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
+    float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
 
     if (distance > appDelegate->distanceThreshold) {
         cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];

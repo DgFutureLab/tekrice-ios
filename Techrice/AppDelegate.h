@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Future Lab. All rights reserved.
 //
 
+#define DISTANCE_TO_GROUND 100
+
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 

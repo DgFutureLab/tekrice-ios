@@ -54,7 +54,7 @@
     UIView *box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
     NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box0, @"view",
-                                    @"Distance", @"title",
+                                    @"Water Level", @"title",
                                     @"/distance?date_range=1week", @"parameter",
                                     nil];
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
@@ -146,7 +146,7 @@
     
     //chart
     // API call should be once per second
-    if ([title isEqualToString:@"Distance"]){
+    if ([title isEqualToString:@"Water Level"]){
 //        requestDate = [NSDate date];
 //        NSLog(@"gaga distance %@", requestDate);
         [NSThread sleepForTimeInterval:0.0];
@@ -177,12 +177,29 @@
         lineChart.showCoordinateAxis = YES;
         lineChart.xLabelFont = [UIFont fontWithName:@"HelveticaNeue-Regular" size:8];
         
-        NSArray *displayDistanceDataArray = [[NSArray alloc] init];
+        NSMutableArray *displayDistanceDataArray = [[NSMutableArray alloc] init];
         if (dataArray.count > CHART_POINTS_MAX) {
-            displayDistanceDataArray= [dataArray subarrayWithRange: NSMakeRange(dataArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX) ];
+            displayDistanceDataArray= [[dataArray subarrayWithRange: NSMakeRange(dataArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX) ] mutableCopy];
         }else{
-            displayDistanceDataArray= dataArray;
+            displayDistanceDataArray= [dataArray mutableCopy];
         }
+        
+        UILabel *boxLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
+        if ([title isEqualToString:@"Water Level"]) {
+            for (int i = 0; i<displayDistanceDataArray.count; i++) {
+                float displayDistance = [displayDistanceDataArray[i] floatValue];
+                displayDistanceDataArray[i] = [NSNumber numberWithFloat:DISTANCE_TO_GROUND-displayDistance];
+            }
+            [boxLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
+            [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
+        }else if ([title isEqualToString:@"Humidity"]){
+            [boxLabel setText:[NSString stringWithFormat:@"%.0f%%", [[displayDistanceDataArray lastObject] floatValue]]];
+        }else if ([title isEqualToString:@"Temperature"]){
+            [boxLabel setText:[NSString stringWithFormat:@"%.0f℃", [[displayDistanceDataArray lastObject] floatValue]]];
+        }
+        [boxLabel setTextColor:[UIColor whiteColor]];
+        [boxLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
+        [view addSubview:boxLabel];
         
         NSArray *labelArray = [data valueForKeyPath:@"objects.timestamp"];
         NSArray *displayLabelArray = [[NSArray alloc] init];
@@ -216,19 +233,6 @@
         lineChart.chartData = @[lineChartDataDistance];
         [lineChart strokeChart];
         [view addSubview:lineChart];
-        
-        UILabel *boxLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-        if ([title isEqualToString:@"Distance"]) {
-            [boxLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
-            [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", [[displayDistanceDataArray lastObject] floatValue]]];
-        }else if ([title isEqualToString:@"Humidity"]){
-            [boxLabel setText:[NSString stringWithFormat:@"%.0f%%", [[displayDistanceDataArray lastObject] floatValue]]];
-        }else if ([title isEqualToString:@"Temperature"]){
-            [boxLabel setText:[NSString stringWithFormat:@"%.0f℃", [[displayDistanceDataArray lastObject] floatValue]]];
-        }
-        [boxLabel setTextColor:[UIColor whiteColor]];
-        [boxLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-        [view addSubview:boxLabel];
     }
 }
 
