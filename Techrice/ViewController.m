@@ -65,15 +65,18 @@
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
             if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"]) {
-                GMSMarker *marker = [[GMSMarker alloc] init];
-                marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
-                if ([[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->distanceThreshold) {
-                    marker.icon = iconImage;
-                }else{
-                    marker.icon = iconImageProblem;
-                }
-                marker.userData = [nodeArray[i] valueForKey:@"id"];
-                marker.map = mapView_;
+                // Google Maps SDK must happend on the main thread
+                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                    GMSMarker *marker = [[GMSMarker alloc] init];
+                    marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
+                    if ([[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->distanceThreshold) {
+                        marker.icon = iconImage;
+                    }else{
+                        marker.icon = iconImageProblem;
+                    }
+                    marker.userData = [nodeArray[i] valueForKey:@"id"];
+                    marker.map = mapView_;
+                }];
             }
         }
     }

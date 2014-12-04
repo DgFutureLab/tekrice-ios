@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B21A2D2E19F0F5E500633CEF /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2D2D19F0F5E500633CEF /* TabBarController.m */; };
 		B21A2D3119F0F98300633CEF /* TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B21A2D3019F0F98300633CEF /* TableViewController.m */; };
+		B23D75C01A302FA100C4B29D /* allred.png in Resources */ = {isa = PBXBuildFile; fileRef = B23D75BF1A302FA100C4B29D /* allred.png */; };
+		B23D75C21A30310400C4B29D /* darkgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B23D75C11A30310400C4B29D /* darkgreen.png */; };
 		B24487AB1A1B21150039F030 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487AA1A1B21150039F030 /* SettingTableViewController.m */; };
 		B24487B11A1B24A30039F030 /* SettingValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487B01A1B24A30039F030 /* SettingValueViewController.m */; };
 		B24487B31A1B43BC0039F030 /* pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B24487B21A1B43BC0039F030 /* pin@2x.png */; };
@@ -88,6 +90,8 @@
 		B21A2D2D19F0F5E500633CEF /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		B21A2D2F19F0F98300633CEF /* TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewController.h; sourceTree = "<group>"; };
 		B21A2D3019F0F98300633CEF /* TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewController.m; sourceTree = "<group>"; };
+		B23D75BF1A302FA100C4B29D /* allred.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = allred.png; sourceTree = "<group>"; };
+		B23D75C11A30310400C4B29D /* darkgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = darkgreen.png; sourceTree = "<group>"; };
 		B24487A91A1B21150039F030 /* SettingTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingTableViewController.h; sourceTree = "<group>"; };
 		B24487AA1A1B21150039F030 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		B24487AF1A1B24A30039F030 /* SettingValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingValueViewController.h; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 		B2FA5FFA19CAC90700FCE828 /* marker */ = {
 			isa = PBXGroup;
 			children = (
+				B23D75C11A30310400C4B29D /* darkgreen.png */,
+				B23D75BF1A302FA100C4B29D /* allred.png */,
 				B2AF9EED19EFC7C80079BC3F /* allred@2x.png */,
 				B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */,
 				B2FA5FFD19CAC90700FCE828 /* lightgreen.png */,
@@ -488,7 +494,9 @@
 				B24487B31A1B43BC0039F030 /* pin@2x.png in Resources */,
 				B2FA601919CAC91C00FCE828 /* antena-red@2x.png in Resources */,
 				B2FA602019CAC93500FCE828 /* happyrice.png in Resources */,
+				B23D75C21A30310400C4B29D /* darkgreen.png in Resources */,
 				B2FA600019CAC90700FCE828 /* darkgreen@2x.png in Resources */,
+				B23D75C01A302FA100C4B29D /* allred.png in Resources */,
 				B2FA600819CAC90E00FCE828 /* cleanwater2@2x.png in Resources */,
 				B2FA5F8E19CABE0C00FCE828 /* InfoPlist.strings in Resources */,
 				B2FA5FC719CAC45B00FCE828 /* GoogleMaps.bundle in Resources */,

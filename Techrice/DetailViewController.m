@@ -38,7 +38,7 @@
 
 
 - (UIView *)customView{
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 1200)];
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1200)];
     // distance
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
@@ -51,7 +51,7 @@
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
     
     // chart - distance
-    UIView *box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, 310, 350)];
+    UIView *box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
     NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box0, @"view",
                                     @"Distance", @"title",
@@ -61,7 +61,7 @@
     [view addSubview:box0];
     
     // chart - humidity
-    UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 495, 310, 350)];
+    UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 495, self.view.frame.size.width-10, 350)];
     NSDictionary *arguments2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box1, @"view",
                                     @"Humidity", @"title",
@@ -91,7 +91,7 @@
 //    [view addSubview:box2];
     
     // tempereture
-    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, 310, 350)];
+    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, self.view.frame.size.width-10, 350)];
     NSDictionary *arguments3 = [NSDictionary dictionaryWithObjectsAndKeys:
                                 box3, @"view",
                                 @"Temperature", @"title",
@@ -125,7 +125,7 @@
     view.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
     
     //tile
-    UILabel *boxTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 30)];
+    UILabel *boxTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 30)];
     [boxTitleLabel setTextColor:[UIColor whiteColor]];
     [boxTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:24]];
     boxTitleLabel.text = title;
@@ -135,7 +135,7 @@
     UIBezierPath *aPath = [UIBezierPath bezierPath];
     aPath.lineWidth = 1;
     [aPath moveToPoint:CGPointMake(5, 35)];
-    [aPath addLineToPoint:CGPointMake(305, 35)];
+    [aPath addLineToPoint:CGPointMake(self.view.frame.size.width-15, 35)];
     [aPath closePath];
     [aPath stroke];
     CAShapeLayer *sl = [[CAShapeLayer alloc] initWithLayer:view.layer];
