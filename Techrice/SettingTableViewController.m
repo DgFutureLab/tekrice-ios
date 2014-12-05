@@ -10,6 +10,7 @@
 #import "SettingValueViewController.h"
 #import "AboutViewController.h"
 #import "AppDelegate.h"
+#import <sys/utsname.h>
 @interface SettingTableViewController ()
 
 @end
@@ -23,7 +24,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    NSLog(@"foo");
     [self.tableView reloadData];
 }
 
@@ -65,26 +65,45 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    switch (section) {
+        case 0:
+            return 1;
+            break;
+        case 1:
+            return 2;
+            break;
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView
-                             dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     switch (indexPath.section) {
         case 0:{
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = @"Minimum water level";
             AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", appDelegate->distanceThreshold];
         }
             break;
         case 1:{
-            cell.textLabel.text = @"About Techrice";
+            switch (indexPath.row) {
+                case 0:
+                    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                    cell.textLabel.text = @"About Techrice";
+                    break;
+                case 1:
+                    cell.textLabel.text = @"Contact (Feedback | Bug report)";
+                    break;
+                default:
+                    break;
+            }
         }
             break;
         default:
@@ -102,9 +121,20 @@
         }
             break;
         case 1:{
-            AboutViewController *aboutViewController = [[AboutViewController alloc] init];
-            aboutViewController.title = @"About Techrice";
-            [self.navigationController pushViewController:aboutViewController animated:YES];
+            switch (indexPath.row) {
+                case 0:{
+                    AboutViewController *aboutViewController = [[AboutViewController alloc] init];
+                    aboutViewController.title = @"About Techrice";
+                    [self.navigationController pushViewController:aboutViewController animated:YES];
+                }
+                    break;
+                case 1:{
+                    [self mailStartUp];
+                }
+                    break;
+                default:
+                    break;
+            }
         }
             break;
         default:
@@ -124,6 +154,63 @@
         case 0: return @"";
         default: return @"";
     }
+}
+
+- (void)mailStartUp{
+    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+    if (mailClass != nil){
+        MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
+        mailPicker.mailComposeDelegate = self;
+        [mailPicker setSubject:NSLocalizedString(@"about Techrice", @"")];
+        [mailPicker setMessageBody:[NSString stringWithFormat:@"\n\n\n-----\nPlease do not delete below.\nSystem Info : %@\nOS : %@\nApp Version : %@",
+                                    [self platformString],
+                                    [self iOSVersion],
+                                    [self appVersion]] isHTML:NO];
+         NSArray *toRecipients = [NSArray arrayWithObject:@"yuta-toga@garage.co.jp"];
+        [mailPicker setToRecipients:toRecipients];
+        if ([mailClass canSendMail]){
+            [self presentViewController:mailPicker animated:TRUE completion:nil];
+        }
+    }
+}
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result){
+            // キャンセル
+        case MFMailComposeResultCancelled:
+            break;
+            // 保存
+        case MFMailComposeResultSaved:
+            break;
+            // 送信
+        case MFMailComposeResultSent:{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Your message has been successfully sent." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+            break;
+        }
+        // 送信失敗
+        case MFMailComposeResultFailed:{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"Delivery has failed." delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+            [alert show];
+            break;
+        }
+        default:
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (NSString *)platformString{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
+
+- (NSString *)iOSVersion{
+    return [[UIDevice currentDevice] systemVersion];
+}
+
+- (NSString *)appVersion{
+    return [[NSBundle mainBundle] infoDictionary][@"CFBundleVersion"];
 }
 
 @end

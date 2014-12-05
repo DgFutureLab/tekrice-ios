@@ -7,6 +7,7 @@
 //
 
 #import "TableViewController.h"
+#import "SettingTableViewController.h"
 
 @interface TableViewController ()
 
@@ -49,6 +50,15 @@
     seg.tintColor = [UIColor whiteColor];
     [seg addTarget:self action:@selector(segmentedChanged:) forControlEvents:UIControlEventValueChanged];
     [self.navigationItem setTitleView:seg];
+    
+    //add setting button
+    UIBarButtonItem *settingButton = [[UIBarButtonItem alloc] initWithTitle:@"Show" style:UIBarButtonItemStylePlain target:self action:@selector(settingButtonTapped)];
+    settingButton.title = @"\u2699";
+    settingButton.tintColor = [UIColor whiteColor];
+    UIFont *customFont = [UIFont fontWithName:@"Helvetica" size:24.0];
+    NSDictionary *fontDictionary = @{NSFontAttributeName : customFont};
+    [settingButton setTitleTextAttributes:fontDictionary forState:UIControlStateNormal];
+    self.navigationItem.rightBarButtonItem = settingButton;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
@@ -133,6 +143,13 @@
     detailViewController->nodeId = [[displayDataArray[indexPath.row] valueForKey:@"nodeId"] intValue];
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
+}
+
+- (void)settingButtonTapped{
+    NSLog(@"settingButtonTapped");
+    SettingTableViewController *settingTableViewController = [[SettingTableViewController alloc] init];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:settingTableViewController];
+    [self presentViewController:navigationController animated:YES completion:nil];
 }
 
 /*
