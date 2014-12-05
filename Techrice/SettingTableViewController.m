@@ -8,6 +8,7 @@
 
 #import "SettingTableViewController.h"
 #import "SettingValueViewController.h"
+#import "AboutViewController.h"
 #import "AppDelegate.h"
 @interface SettingTableViewController ()
 
@@ -43,7 +44,6 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonTapped)];
     doneButton.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = doneButton;
-    
 }
 
 - (void)doneButtonTapped{
@@ -61,7 +61,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -72,21 +72,58 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView
                              dequeueReusableCellWithIdentifier:CellIdentifier];
-    
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
-    cell.textLabel.text = @"Minimum water level";
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", appDelegate->distanceThreshold];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    switch (indexPath.section) {
+        case 0:{
+            cell.textLabel.text = @"Minimum water level";
+            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", appDelegate->distanceThreshold];
+        }
+            break;
+        case 1:{
+            cell.textLabel.text = @"About Techrice";
+        }
+            break;
+        default:
+            break;
+    }
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    SettingValueViewController *settingValueController = [[SettingValueViewController alloc] init];
-    settingValueController.title = @"Minimum water level";
-    [self.navigationController pushViewController:settingValueController animated:YES];
+    switch (indexPath.section) {
+        case 0:{
+            SettingValueViewController *settingValueController = [[SettingValueViewController alloc] init];
+            settingValueController.title = @"Minimum water level";
+            [self.navigationController pushViewController:settingValueController animated:YES];
+        }
+            break;
+        case 1:{
+            AboutViewController *aboutViewController = [[AboutViewController alloc] init];
+            aboutViewController.title = @"About Techrice";
+            [self.navigationController pushViewController:aboutViewController animated:YES];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    switch (section) {
+        case 0: return @"Sensors";
+        case 1: return @"More";
+        default: return @"";
+    }
+}
+- (NSString*)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section{
+    switch (section) {
+        case 0: return @"";
+        default: return @"";
+    }
 }
 
 @end

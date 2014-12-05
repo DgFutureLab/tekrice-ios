@@ -30,6 +30,8 @@
     NSDictionary *attributeDictionary = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
