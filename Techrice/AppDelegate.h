@@ -1,11 +1,3 @@
-//
-//  AppDelegate.h
-//  Techrice
-//
-//  Created by 藤賀 雄太 on 9/18/14.
-//  Copyright (c) 2014 Future Lab. All rights reserved.
-//
-
 #define DISTANCE_TO_GROUND 100
 
 #import <UIKit/UIKit.h>

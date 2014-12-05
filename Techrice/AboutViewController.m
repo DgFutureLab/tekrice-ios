@@ -1,11 +1,3 @@
-//
-//  AboutViewController.m
-//  Techrice
-//
-//  Created by 藤賀 雄太 on 12/5/14.
-//  Copyright (c) 2014 Future Lab. All rights reserved.
-//
-
 #import "AboutViewController.h"
 
 @interface AboutViewController ()

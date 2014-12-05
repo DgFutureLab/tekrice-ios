@@ -1,11 +1,3 @@
-//
-//  DetailViewController.m
-//  Techrice
-//
-//  Created by 藤賀 雄太 on 10/15/14.
-//  Copyright (c) 2014 Future Lab. All rights reserved.
-//
-
 #import "DetailViewController.h"
 #import "AppDelegate.h"
 @interface DetailViewController ()

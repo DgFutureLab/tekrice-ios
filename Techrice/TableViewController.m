@@ -1,11 +1,3 @@
-//
-//  TableViewController.m
-//  Techrice
-//
-//  Created by 藤賀 雄太 on 10/17/14.
-//  Copyright (c) 2014 Future Lab. All rights reserved.
-//
-
 #import "TableViewController.h"
 #import "SettingTableViewController.h"
 
