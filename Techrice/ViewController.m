@@ -43,6 +43,20 @@
     NSDictionary *fontDictionary = @{NSFontAttributeName : customFont};
     [settingButton setTitleTextAttributes:fontDictionary forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = settingButton;
+    
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    settingData = [defaults objectForKey:@"cache/setting"];
+    if (!settingData) {
+        NSLog(@"%@", @"データが存在しません。");
+    }else{
+        NSLog(@"%@", settingData);
+    }
+    _currentSite = [[settingData objectForKey:@"sites"] intValue];
+    _minimumWaterLevel = [[settingData objectForKey:@"minimumWaterLevel"] intValue];
+    
+    appDelegate->currentSite = _currentSite;
+    appDelegate->minimumWaterLevel = _minimumWaterLevel;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -69,7 +83,7 @@
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     GMSMarker *marker = [[GMSMarker alloc] init];
                     marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
-                    if (DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->distanceThreshold) {
+                    if (DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->minimumWaterLevel) {
                         marker.icon = iconImage;
                     }else{
                         marker.icon = iconImageProblem;

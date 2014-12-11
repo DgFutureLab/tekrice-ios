@@ -16,7 +16,7 @@
     picker.dataSource = self;
     picker.showsSelectionIndicator = YES;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    [picker selectRow:appDelegate->distanceThreshold inComponent:0 animated:NO];
+    [picker selectRow:appDelegate->minimumWaterLevel inComponent:0 animated:NO];
     [self.view addSubview:picker];
     NSDictionary *attributeDictionary = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
@@ -60,7 +60,7 @@ numberOfRowsInComponent:(NSInteger)component{
 
 - (void)pickerView:(UIPickerView *)pickerView
       didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    appDelegate->distanceThreshold = (int)[pickerView selectedRowInComponent:component];
+    appDelegate->minimumWaterLevel = (int)[pickerView selectedRowInComponent:component];
     
 }
 

@@ -5,7 +5,8 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>{
 @public
-    int distanceThreshold;
+    int minimumWaterLevel;
+    int currentSite;
 }
 
 @property (strong, nonatomic) UIWindow *window;

@@ -8,6 +8,10 @@
     GMSCameraPosition *camera;
     AppDelegate *appDelegate;
     NSArray *nodeArray;
+    NSDictionary *settingData;
+    
+    int _minimumWaterLevel;
+    int _currentSite;
 }
 
 @end

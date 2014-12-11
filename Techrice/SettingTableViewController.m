@@ -1,7 +1,6 @@
 #import "SettingTableViewController.h"
 #import "SettingValueViewController.h"
 #import "AboutViewController.h"
-#import "AppDelegate.h"
 #import <sys/utsname.h>
 @interface SettingTableViewController ()
 
@@ -16,10 +15,14 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"viewWillAppear");
+    mininumWaterLevel = appDelegate->minimumWaterLevel;
+    selectedSite = appDelegate->currentSite;
     [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
+    NSLog(@"viewDidLoad");
     [super viewDidLoad];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -36,10 +39,26 @@
     UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonTapped)];
     doneButton.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = doneButton;
+    self.tableView.allowsMultipleSelection = NO;
+    appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
 }
 
 - (void)doneButtonTapped{
     NSLog(@"doneButtonTapped");
+    // save in user defaults
+    //ローカルに保存
+    NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSDictionary *setting = @{@"sites":[NSNumber numberWithInteger:selectedSite],
+                              @"minimumWaterLevel":[numberFormatter numberFromString:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].detailTextLabel.text]
+                              };
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:setting forKey:@"cache/setting"];
+    BOOL successful = [defaults synchronize];
+    if (successful) {
+        NSLog(@"%@", @"データの保存に成功しました。");
+    }
+    appDelegate->currentSite = selectedSite;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -81,7 +100,11 @@
     }
     switch (indexPath.section) {
         case 0:{
-            cell.accessoryType = UITableViewCellAccessoryNone;
+            if (indexPath.row == selectedSite) {
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            }else{
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
             switch (indexPath.row) {
                 case 0:
                     cell.textLabel.text = @"Kamogawa";
@@ -100,8 +123,7 @@
         case 1:{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = @"Minimum water level";
-            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", appDelegate->distanceThreshold];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", mininumWaterLevel];
             break;
         }
         case 2:{
@@ -127,8 +149,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0:{
-            NSLog(@"selected sites");
-            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            selectedSite = (int)indexPath.row;
+            [self.tableView reloadData];
             break;
         }
         case 1:{
@@ -157,10 +179,7 @@
         default:
             break;
     }
-}
-
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
-    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{

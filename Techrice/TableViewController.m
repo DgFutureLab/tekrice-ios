@@ -108,7 +108,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [displayDataArray[indexPath.row] valueForKey:@"nodeId"]]];
     float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
-    if (distance > appDelegate->distanceThreshold) {
+    if (distance > appDelegate->minimumWaterLevel) {
         cell.detailTextLabel.textColor = [UIColor redColor];
     }else{
         cell.detailTextLabel.textColor = [UIColor blackColor];
@@ -122,7 +122,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
 
-    if (distance > appDelegate->distanceThreshold) {
+    if (distance > appDelegate->minimumWaterLevel) {
         cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];
     }else{
         cell.backgroundColor = [UIColor whiteColor];
@@ -134,6 +134,7 @@
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
     detailViewController->nodeId = [[displayDataArray[indexPath.row] valueForKey:@"nodeId"] intValue];
     detailViewController.hidesBottomBarWhenPushed = YES;
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
