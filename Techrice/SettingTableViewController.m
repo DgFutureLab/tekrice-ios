@@ -150,7 +150,7 @@
     switch (indexPath.section) {
         case 0:{
             selectedSite = (int)indexPath.row;
-            [self.tableView reloadData];
+            [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }
         case 1:{
