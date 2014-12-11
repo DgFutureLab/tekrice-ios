@@ -167,7 +167,8 @@
         lineChart.axisColor = PNLightGrey;
         lineChart.backgroundColor = [UIColor clearColor];
         lineChart.showCoordinateAxis = YES;
-        lineChart.xLabelFont = [UIFont fontWithName:@"HelveticaNeue" size:8];
+        lineChart.xLabelFont = [UIFont fontWithName:@"HelveticaNeue" size:10];
+        lineChart.yLabelFont = [UIFont fontWithName:@"HelveticaNeue" size:10];
         
         NSMutableArray *displayDistanceDataArray = [[NSMutableArray alloc] init];
         if (dataArray.count > CHART_POINTS_MAX) {

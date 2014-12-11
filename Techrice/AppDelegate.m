@@ -73,10 +73,10 @@
         //ローカルに保存
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:result forKey:@"test"];
+        [defaults setObject:result forKey:[@"cache/" stringByAppendingString:parameter]];
         BOOL successful = [defaults synchronize];
         if (successful) {
-//            NSLog(@"%@", @"データの保存に成功しました。");
+            NSLog(@"%@", @"データの保存に成功しました。");
         }
         //JSONをパース
         NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
@@ -84,7 +84,14 @@
         return array;
     }else{
         NSLog(@"getdistance failed");
-        return 0;
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSArray *array = [defaults arrayForKey:@"cache"];
+        if (array) {
+            return array;
+        } else {
+            NSLog(@"%@", @"データが存在しません。");
+            return 0;
+        }
     }
 }
 
@@ -94,14 +101,31 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     if (json != nil) {
+        //ローカルに保存
+        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:result forKey:@"cache/node/all"];
+        BOOL successful = [defaults synchronize];
+        if (successful) {
+            NSLog(@"%@", @"データの保存に成功しました。");
+        }
         //JSONをパース
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
         NSArray *array = [dictionary objectForKey:@"objects"];
         self.nodeArray = array;
         return array;
     }else{
-        NSArray *array;
-        return array;
+        NSLog(@"failed to get node all");
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSDictionary *dictionary = [defaults objectForKey:@"cache/node/all"];
+        NSArray *array = [dictionary objectForKey:@"objects"];
+        self.nodeArray = array;
+        if (array) {
+            return array;
+        } else {
+            NSLog(@"%@", @"データが存在しません。");
+            return array;
+        }
     }
 }
 
