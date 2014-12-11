@@ -53,15 +53,18 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 1;
+            return 3;
             break;
         case 1:
+            return 1;
+            break;
+        case 2:
             return 2;
             break;
         default:
@@ -78,13 +81,30 @@
     }
     switch (indexPath.section) {
         case 0:{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            switch (indexPath.row) {
+                case 0:
+                    cell.textLabel.text = @"Kamogawa";
+                    break;
+                case 1:
+                    cell.textLabel.text = @"Hacker Farm";
+                    break;
+                case 2:
+                    cell.textLabel.text = @"Digital Garage";
+                    break;
+                default:
+                    break;
+            }
+            break;
+        }
+        case 1:{
             cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.textLabel.text = @"Minimum water level";
             AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
             cell.detailTextLabel.text = [NSString stringWithFormat:@"%d", appDelegate->distanceThreshold];
-        }
             break;
-        case 1:{
+        }
+        case 2:{
             switch (indexPath.row) {
                 case 0:
                     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -96,8 +116,8 @@
                 default:
                     break;
             }
-        }
             break;
+        }
         default:
             break;
     }
@@ -107,37 +127,47 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0:{
+            NSLog(@"selected sites");
+            [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+            break;
+        }
+        case 1:{
             SettingValueViewController *settingValueController = [[SettingValueViewController alloc] init];
             settingValueController.title = @"Minimum water level";
             [self.navigationController pushViewController:settingValueController animated:YES];
-        }
             break;
-        case 1:{
+        }
+        case 2:{
             switch (indexPath.row) {
                 case 0:{
                     AboutViewController *aboutViewController = [[AboutViewController alloc] init];
                     aboutViewController.title = @"About Techrice";
                     [self.navigationController pushViewController:aboutViewController animated:YES];
-                }
                     break;
+                }
                 case 1:{
                     [self mailStartUp];
-                }
                     break;
+                }
                 default:
                     break;
             }
-        }
             break;
+        }
         default:
             break;
     }
 }
 
+-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+}
+
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
     switch (section) {
-        case 0: return @"Sensors";
-        case 1: return @"More";
+        case 0: return @"SITES";
+        case 1: return @"SENSORS";
+        case 2: return @"MORE";
         default: return @"";
     }
 }
