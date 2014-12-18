@@ -49,14 +49,14 @@
     //ローカルに保存
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSDictionary *setting = @{@"sites":[NSNumber numberWithInteger:selectedSite],
+    NSDictionary *setting = @{@"site":[NSNumber numberWithInteger:selectedSite],
                               @"minimumWaterLevel":[numberFormatter numberFromString:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].detailTextLabel.text]
                               };
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:setting forKey:@"cache/setting"];
     BOOL successful = [defaults synchronize];
     if (successful) {
-        NSLog(@"%@", @"データの保存に成功しました。");
+        NSLog(@"%@", @"SettingTableViewController-doneButtonTapped: saved data successfully");
     }
     appDelegate->currentSite = selectedSite;
     [self dismissViewControllerAnimated:YES completion:nil];

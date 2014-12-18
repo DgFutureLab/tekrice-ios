@@ -57,7 +57,7 @@
 }
 
 -(NSArray *)getDistance:(NSNumber*)nodeId parameter:(NSString*)parameter{
-    NSLog(@"getditance");
+    NSLog(@"AppDelegate-getDistance");
     // get data
     NSString *url;
     if (parameter) {
@@ -76,27 +76,27 @@
         [defaults setObject:result forKey:[@"cache/" stringByAppendingString:parameter]];
         BOOL successful = [defaults synchronize];
         if (successful) {
-            NSLog(@"%@", @"データの保存に成功しました。");
+            NSLog(@"AppDelegate-getDistance: saved data successfully.");
         }
         //JSONをパース
         NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
 //        float distance =  [[[[array valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue];
         return array;
     }else{
-        NSLog(@"getdistance failed");
+        NSLog(@"AppDelegate-getDistance: getdistance failed");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSArray *array = [defaults arrayForKey:@"cache"];
         if (array) {
             return array;
         } else {
-            NSLog(@"%@", @"データが存在しません。");
+            NSLog(@"AppDelegate-getDistance: %@", @"no data in cache.");
             return 0;
         }
     }
 }
 
 -(NSArray*)getNodeArray{
-    NSLog(@"getNodeArray");
+    NSLog(@"AppDelegate-getNodeArray");
     NSString *url = @"http://128.199.191.249/node/all";
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
     NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
@@ -108,7 +108,7 @@
         [defaults setObject:dataSave forKey:@"cache/node/all"];
         BOOL successful = [defaults synchronize];
         if (successful) {
-            NSLog(@"%@", @"データの保存に成功しました。");
+            NSLog(@"AppDelegate-getNodeArray: %@", @"saved data successfully.");
         }
         //JSONをパース
         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
@@ -116,7 +116,7 @@
         self.nodeArray = array;
         return array;
     }else{
-        NSLog(@"failed to get node all");
+        NSLog(@"AppDelegate-getNodeArray: failed to get node all");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSDictionary *dictionary = [defaults objectForKey:@"cache/node/all"];
         NSArray *array = [dictionary objectForKey:@"objects"];
@@ -124,7 +124,7 @@
         if (array) {
             return array;
         } else {
-            NSLog(@"%@", @"データが存在しません。");
+            NSLog(@"AppDelegate-getNodeArray:no data in cache");
             return array;
         }
     }

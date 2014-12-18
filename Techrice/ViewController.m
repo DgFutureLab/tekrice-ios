@@ -48,11 +48,11 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     settingData = [defaults objectForKey:@"cache/setting"];
     if (!settingData) {
-        NSLog(@"%@", @"データが存在しません。");
+        NSLog(@"%@", @"ViewController_viewDidLoad: no setting data in cache");
     }else{
         NSLog(@"%@", settingData);
     }
-    _currentSite = [[settingData objectForKey:@"sites"] intValue];
+    _currentSite = [[settingData objectForKey:@"site"] intValue];
     _minimumWaterLevel = [[settingData objectForKey:@"minimumWaterLevel"] intValue];
     
     appDelegate->currentSite = _currentSite;
@@ -65,7 +65,7 @@
 }
 
 - (void) setMarker{
-    NSLog(@"setMarker");
+    NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     nodeArray =  [appDelegate getNodeArray];
     [self setMarkerColor];
