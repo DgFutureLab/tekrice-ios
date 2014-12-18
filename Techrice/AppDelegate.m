@@ -104,7 +104,8 @@
         //ローカルに保存
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:result forKey:@"cache/node/all"];
+        NSData *dataSave = [NSKeyedArchiver archivedDataWithRootObject:result];
+        [defaults setObject:dataSave forKey:@"cache/node/all"];
         BOOL successful = [defaults synchronize];
         if (successful) {
             NSLog(@"%@", @"データの保存に成功しました。");
