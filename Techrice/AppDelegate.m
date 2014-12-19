@@ -95,37 +95,39 @@
     }
 }
 
--(NSArray*)getNodeArray{
-    NSLog(@"AppDelegate-getNodeArray");
-    NSString *url = @"http://128.199.191.249/node/all";
+-(NSDictionary *)getData:(NSString*)parameter{
+    NSLog(@"AppDelegate-getData");
+    // get data
+    NSString *url;
+    if (parameter) {
+        url = [@"http://128.199.191.249/" stringByAppendingString: parameter];
+    }else{
+        url = @"http://128.199.191.249/nodes";
+    }
+    //NSURLからNSURLRequestを作る
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    //サーバーとの通信を行う
     NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
     if (json != nil) {
         //ローカルに保存
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *dataSave = [NSKeyedArchiver archivedDataWithRootObject:result];
-        [defaults setObject:dataSave forKey:@"cache/node/all"];
+        [defaults setObject:dataSave forKey:[@"cache/node/" stringByAppendingString:parameter]];
         BOOL successful = [defaults synchronize];
         if (successful) {
-            NSLog(@"AppDelegate-getNodeArray: %@", @"saved data successfully.");
+            NSLog(@"AppDelegate-getDistance: saved data successfully.");
         }
-        //JSONをパース
-        NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
-        NSArray *array = [dictionary objectForKey:@"objects"];
-        self.nodeArray = array;
-        return array;
+        return result;
     }else{
-        NSLog(@"AppDelegate-getNodeArray: failed to get node all");
+        NSLog(@"AppDelegate-getDistance: getdistance failed");
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSDictionary *dictionary = [defaults objectForKey:@"cache/node/all"];
-        NSArray *array = [dictionary objectForKey:@"objects"];
-        self.nodeArray = array;
+        NSArray *array = [defaults arrayForKey:@"cache"];
         if (array) {
             return array;
         } else {
-            NSLog(@"AppDelegate-getNodeArray:no data in cache");
-            return array;
+            NSLog(@"AppDelegate-getDistance: %@", @"no data in cache.");
+            return 0;
         }
     }
 }

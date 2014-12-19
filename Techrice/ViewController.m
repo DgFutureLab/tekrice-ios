@@ -67,7 +67,7 @@
 - (void) setMarker{
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray =  [appDelegate getNodeArray];
+    nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
     [self setMarkerColor];
 }
 
@@ -78,7 +78,7 @@
     for (int i =0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
-            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"]) {
+            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
                 // Google Maps SDK must happend on the main thread
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     GMSMarker *marker = [[GMSMarker alloc] init];
