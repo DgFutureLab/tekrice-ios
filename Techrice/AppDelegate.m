@@ -121,10 +121,10 @@
         return result;
     }else{
         NSLog(@"AppDelegate-getDistance: getdistance failed");
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSArray *array = [defaults arrayForKey:@"cache"];
-        if (array) {
-            return array;
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[@"cache/node/" stringByAppendingString:parameter]];
+        NSDictionary *savedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        if (savedDictionary) {
+            return savedDictionary;
         } else {
             NSLog(@"AppDelegate-getDistance: %@", @"no data in cache.");
             return 0;
