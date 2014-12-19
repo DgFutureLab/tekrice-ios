@@ -7,6 +7,7 @@
     NSMutableArray *displayDataArray;
     AppDelegate *appDelegate;
     UISegmentedControl *seg;
+    int numberOfRows;
 }
 
 @end

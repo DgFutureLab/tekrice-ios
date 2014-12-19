@@ -68,6 +68,7 @@
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+    appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
 }
 

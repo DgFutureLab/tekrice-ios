@@ -24,10 +24,12 @@
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     nodeArray = appDelegate.nodeArray;
     displayDataArray = [[NSMutableArray alloc] init];
+    numberOfRows = 0;
     for (int i=0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j = 0; j<sensors.count; j++) {
-            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"]) {
+            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
+                numberOfRows++;
                 NSMutableDictionary *displayDictionary = [[sensors[j] valueForKey:@"latest_reading"] mutableCopy];
                 [displayDictionary setObject:[nodeArray[i] valueForKey:@"id"] forKey:@"nodeId"];
                 [displayDataArray addObject:displayDictionary];
@@ -95,7 +97,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return nodeArray.count;
+    return numberOfRows;
 }
 
 
