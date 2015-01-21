@@ -28,7 +28,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (UIView *)customView{
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1200)];
     // distance
@@ -108,22 +107,23 @@
 
 - (void)setChartView:(NSDictionary *)arguments{
     NSLog(@"setChartView");
+    // get each data from arguments(NSDictionary)
     UIView *view = [arguments objectForKey:@"view"];
     NSString *title = [arguments objectForKey:@"title"];
     NSString *parameter = [arguments objectForKey:@"parameter"];
     
-    
+    // view design - background
     view.layer.cornerRadius = 3;
     view.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
     
-    //tile
+    // view design - tile
     UILabel *boxTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 30)];
     [boxTitleLabel setTextColor:[UIColor whiteColor]];
     [boxTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:24]];
     boxTitleLabel.text = title;
     [view addSubview:boxTitleLabel];
     
-    //underline
+    //view design - underline for title
     UIBezierPath *aPath = [UIBezierPath bezierPath];
     aPath.lineWidth = 1;
     [aPath moveToPoint:CGPointMake(5, 35)];
@@ -136,7 +136,7 @@
     sl.path = aPath.CGPath;
     [view.layer addSublayer:sl];
     
-    //chart
+    // chart
     // API call should be once per second
     if ([title isEqualToString:@"Water Level"]){
 //        requestDate = [NSDate date];
@@ -156,10 +156,11 @@
     }else{
         NSLog(@"something wrong");
     }
+    //should be replaced below to NSArray *data = [appDelegate getData:<#(NSString *)#>]
     NSArray *data = [appDelegate getDistance:[NSNumber numberWithInt:nodeId] parameter:parameter];
-
     NSArray *dataArray = [data valueForKeyPath:@"objects.value"];
     if (dataArray.count > 0) {
+        // chart - design
         PNLineChart *lineChart = [[PNLineChart alloc] initWithFrame:CGRectMake(0, 135.0, SCREEN_WIDTH, 200.0)];
         lineChart.yLabelFormat = @"%1.1f";
         lineChart.yLabelColor = PNCleanGrey;
@@ -170,6 +171,7 @@
         lineChart.xLabelFont = [UIFont fontWithName:@"HelveticaNeue" size:10];
         lineChart.yLabelFont = [UIFont fontWithName:@"HelveticaNeue" size:10];
         
+        // chart - data
         NSMutableArray *displayDistanceDataArray = [[NSMutableArray alloc] init];
         if (dataArray.count > CHART_POINTS_MAX) {
             displayDistanceDataArray= [[dataArray subarrayWithRange: NSMakeRange(dataArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX) ] mutableCopy];
@@ -177,6 +179,7 @@
             displayDistanceDataArray= [dataArray mutableCopy];
         }
         
+        // chart - title
         UILabel *boxLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
         if ([title isEqualToString:@"Water Level"]) {
             for (int i = 0; i<displayDistanceDataArray.count; i++) {
@@ -194,14 +197,13 @@
         [boxLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
         [view addSubview:boxLabel];
         
+        // chart -  x-coordinate axis label
         NSArray *labelArray = [data valueForKeyPath:@"objects.timestamp"];
         NSArray *displayLabelArray = [[NSArray alloc] init];
         if (labelArray.count > CHART_POINTS_MAX) {
             displayLabelArray= [labelArray subarrayWithRange: NSMakeRange(labelArray.count-CHART_POINTS_MAX, CHART_POINTS_MAX)];
-            
         }else{
             displayLabelArray= labelArray;
-            
         }
         NSMutableArray *displayLabelFormattedArray = [[NSMutableArray alloc] init];
         for (int i =0; i<displayLabelArray.count; i++) {
@@ -214,6 +216,7 @@
         NSLog(@"ss: %@", displayLabelFormattedArray);
         [lineChart setXLabels:displayLabelFormattedArray];
         
+        // chart - chart data setting
         lineChart.showCoordinateAxis = YES;
         PNLineChartData *lineChartDataDistance = [PNLineChartData new];
         lineChartDataDistance.color = PNFreshGreen;
@@ -229,15 +232,14 @@
     }
 }
 
-- (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;
-{
+// animation function for windmill
+- (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;{
     CABasicAnimation* rotationAnimation;
     rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
     rotationAnimation.toValue = [NSNumber numberWithFloat: M_PI * 2.0 /* full rotation*/ * rotations * duration ];
     rotationAnimation.duration = duration;
     rotationAnimation.cumulative = YES;
     rotationAnimation.repeatCount = repeat;
-    
     [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
