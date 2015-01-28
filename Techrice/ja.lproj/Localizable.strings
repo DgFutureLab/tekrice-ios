@@ -1,0 +1,22 @@
+"About Techrice" = "Techriceについて";
+"Contact (Feedback | Bug report)" = "コンタクト (感想 | 問題の報告)";
+"Kamogawa" = "鴨川";
+"Hacker Farm" = "ハッカーファーム";
+"Digital Garage" = "デジタルガレージ";
+"Minimum water level" = "最小の水面の高さ";
+"SITES" = "場所";
+"SENSORS" = "センサー";
+"MORE" = "その他";
+"Setting" = "設定";
+"Done" = "決定";
+"Techrice is an open data sensor network based in Kamogawa, Japan. Techrice wants to help local farmers monitoring rice fields water levels.\n\nStar topology sensor network designed using Freaklabs open hardware. Hatake (畑) is the Japanese name for \"rice field\".\n\nThis is an open source / open hardware collaboration by Freaklabs( http://www.freaklabs.org/ ), Hacker Farm and Future Lab( http://www.fljapan.com/about )." =
+"Techriceはオープンデータのセンサーネットワークです。Techriceは田んぼの水の高さを計測するなどして、田んぼの状態をモニタリングすることで、農作業を支援します。\n\n Techriceは、オープンソース、そしてオープンハードウェアのプロジェクトです。また、Techriceの開発は、Freaklab( http://www.freaklabs.org/ ), Hacker Farm, Future Lab( http://www.fljapan.com/about )とのコラボレーションによるものです。";
+"Map" = "地図";
+"List" = "リスト";
+"Ascending" = "昇順";
+"Descending" = "降順";
+"Your message has been successfully sent." = "送信完了しました";
+"Delivery has failed." = "送信失敗しました";
+"Water Level" = "水面の高さ";
+"Humidity" = "湿度";
+"Temperature" = "気温";

@@ -38,7 +38,7 @@
     }
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
-    NSArray *arr = @[@"Ascending", @"Descending"];
+    NSArray *arr = @[NSLocalizedString(@"Ascending", nil), NSLocalizedString(@"Descending", nil)];
     seg = [[UISegmentedControl alloc] initWithItems:arr];
     seg.frame = CGRectMake(0, 0, 250, 30);
     seg.tintColor = [UIColor whiteColor];

@@ -13,7 +13,7 @@
     textView.editable = NO;
     [textView setFont:[UIFont fontWithName:@"HelveticaNeue" size:18]];
     textView.dataDetectorTypes = UIDataDetectorTypeLink;
-    textView.text = @"Techrice is an open data sensor network based in Kamogawa, Japan. Techrice wants to help local farmers monitoring rice fields water levels.\n\nStar topology sensor network designed using Freaklabs open hardware. Hatake (畑) is the Japanese name for \"rice field\".\n\nThis is an open source / open hardware collaboration by Freaklabs( http://www.freaklabs.org/ ), Hacker Farm and Future Lab( http://www.fljapan.com/about ).";
+    textView.text = NSLocalizedString(@"Techrice is an open data sensor network based in Kamogawa, Japan. Techrice wants to help local farmers monitoring rice fields water levels.\n\nStar topology sensor network designed using Freaklabs open hardware. Hatake (畑) is the Japanese name for \"rice field\".\n\nThis is an open source / open hardware collaboration by Freaklabs( http://www.freaklabs.org/ ), Hacker Farm and Future Lab( http://www.fljapan.com/about ).", nil);;
     [self.view addSubview:textView];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 }

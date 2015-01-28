@@ -11,10 +11,10 @@
     
     
     UINavigationController *navigationController1 = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
-    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Map" image:[UIImage imageNamed:@"pin.png"] tag:1];
+    navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Map", nil)  image:[UIImage imageNamed:@"pin.png"] tag:1];
     
     UINavigationController *navigationController2 = [[UINavigationController alloc] initWithRootViewController:[[TableViewController alloc] init]];
-    navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTitle:@"List" image:[UIImage imageNamed:@"list.png"] tag:0];
+    navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"List", nil) image:[UIImage imageNamed:@"list.png"] tag:0];
     
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.0 green:0.7 blue:0.7 alpha:1.0]];;
     

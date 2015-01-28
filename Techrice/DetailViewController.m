@@ -120,7 +120,7 @@
     UILabel *boxTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, self.view.frame.size.width-10, 30)];
     [boxTitleLabel setTextColor:[UIColor whiteColor]];
     [boxTitleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Thin" size:24]];
-    boxTitleLabel.text = title;
+    boxTitleLabel.text = NSLocalizedString(title, nil);
     [view addSubview:boxTitleLabel];
     
     //view design - underline for title
