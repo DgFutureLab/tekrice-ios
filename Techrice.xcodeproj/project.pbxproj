@@ -15,6 +15,7 @@
 		B24487B11A1B24A30039F030 /* SettingValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487B01A1B24A30039F030 /* SettingValueViewController.m */; };
 		B24487B31A1B43BC0039F030 /* pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B24487B21A1B43BC0039F030 /* pin@2x.png */; };
 		B24487B71A1B45B10039F030 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B24487B61A1B45B10039F030 /* list@2x.png */; };
+		B25CC17D1A78D37900F3BD3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B25CC17F1A78D37900F3BD3C /* Localizable.strings */; };
 		B26CE96B1A318DA900414E87 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26CE96A1A318DA900414E87 /* AboutViewController.m */; };
 		B27AE3261A0CDF4F00A84929 /* ricefield.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B27AE3251A0CDF4F00A84929 /* ricefield.jpg */; };
 		B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE219EE73A80079BC3F /* DetailViewController.m */; };
@@ -99,6 +100,12 @@
 		B24487B01A1B24A30039F030 /* SettingValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingValueViewController.m; sourceTree = "<group>"; };
 		B24487B21A1B43BC0039F030 /* pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin@2x.png"; sourceTree = "<group>"; };
 		B24487B61A1B45B10039F030 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
+		B25CC1771A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
+		B25CC1781A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPad.strings; sourceTree = "<group>"; };
+		B25CC1791A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B25CC17A1A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B25CC17E1A78D37900F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B25CC1801A78D3A100F3BD3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B26CE9691A318DA900414E87 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		B26CE96A1A318DA900414E87 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		B27AE3251A0CDF4F00A84929 /* ricefield.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ricefield.jpg; sourceTree = "<group>"; };
@@ -315,6 +322,7 @@
 				B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */,
 				B2FA5F8B19CABE0C00FCE828 /* Techrice-Info.plist */,
 				B2FA5F8C19CABE0C00FCE828 /* InfoPlist.strings */,
+				B25CC17F1A78D37900F3BD3C /* Localizable.strings */,
 				B2FA5F8F19CABE0C00FCE828 /* main.m */,
 				B2FA5F9119CABE0C00FCE828 /* Techrice-Prefix.pch */,
 			);
@@ -464,6 +472,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = B2FA5F7719CABE0C00FCE828;
 			productRefGroup = B2FA5F8119CABE0C00FCE828 /* Products */;
@@ -494,6 +503,7 @@
 				B2AF9EEE19EFC7C80079BC3F /* allred@2x.png in Resources */,
 				B2FA601719CAC91C00FCE828 /* antena-green@2x.png in Resources */,
 				B2FA600219CAC90700FCE828 /* red.png in Resources */,
+				B25CC17D1A78D37900F3BD3C /* Localizable.strings in Resources */,
 				B2FA602119CAC93500FCE828 /* sadrice.png in Resources */,
 				B2FA5F9719CABE0C00FCE828 /* Main_iPhone.storyboard in Resources */,
 				B24487B31A1B43BC0039F030 /* pin@2x.png in Resources */,
@@ -596,10 +606,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		B25CC17F1A78D37900F3BD3C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B25CC17E1A78D37900F3BD3C /* ja */,
+				B25CC1801A78D3A100F3BD3C /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		B2FA5F8C19CABE0C00FCE828 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				B2FA5F8D19CABE0C00FCE828 /* en */,
+				B25CC1791A78D23C00F3BD3C /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -608,6 +628,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B2FA5F9619CABE0C00FCE828 /* Base */,
+				B25CC1771A78D23C00F3BD3C /* ja */,
 			);
 			name = Main_iPhone.storyboard;
 			sourceTree = "<group>";
@@ -616,6 +637,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B2FA5F9919CABE0C00FCE828 /* Base */,
+				B25CC1781A78D23C00F3BD3C /* ja */,
 			);
 			name = Main_iPad.storyboard;
 			sourceTree = "<group>";
@@ -624,6 +646,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B2FA5FAF19CABE0C00FCE828 /* en */,
+				B25CC17A1A78D23C00F3BD3C /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
