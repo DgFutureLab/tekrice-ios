@@ -22,6 +22,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    // Hard code
     camera = [GMSCameraPosition cameraWithLatitude:35.14404025
                                          longitude:139.988354
                                               zoom:18.5];
@@ -29,6 +30,7 @@
     mapView_.delegate = self;
     mapView_.myLocationEnabled = YES;
     mapView_.mapType = kGMSTypeSatellite;
+    path = [GMSMutablePath path];
     self.view = mapView_;
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
 
@@ -60,6 +62,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"viewWillAppear");
     self.tabBarController.delegate = self;
     [self setMarkerColor];
 }
@@ -70,9 +73,16 @@
     nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
+
+    // update camera
+    NSLog(@"update camera to fit markers %lu", path.count);
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
+    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
+    [mapView_ moveCamera:update];
 }
 
 - (void)setMarkerColor{
+    NSLog(@"setMarkerColor");
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
@@ -84,6 +94,7 @@
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     GMSMarker *marker = [[GMSMarker alloc] init];
                     marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
+                    [path addCoordinate:marker.position];
                     if (DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->minimumWaterLevel) {
                         marker.icon = iconImage;
                     }else{
@@ -123,7 +134,6 @@
                                               zoom:18.5];
     [mapView_ animateToCameraPosition:camera];
 }
-
 
 - (void)didReceiveMemoryWarning
 {

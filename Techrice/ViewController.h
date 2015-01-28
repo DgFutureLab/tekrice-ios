@@ -6,6 +6,7 @@
 @private
     NSArray *markers;
     GMSCameraPosition *camera;
+    GMSMutablePath *path;
     AppDelegate *appDelegate;
     NSArray *nodeArray;
     NSDictionary *settingData;
