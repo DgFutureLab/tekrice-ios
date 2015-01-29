@@ -243,4 +243,19 @@
     [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
+- (NSString *) getParameterForChart:(NSString*)sensor_alias
+                      sensor_id:(int)sensor_id
+                    howManyDays:(int)days{
+    NSDate *currentDate = [NSDate date];
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:-1*days];
+    NSDate *xDaysAgo = [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:currentDate options:0];
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-M-d"];
+    NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
+    NSString *xDaysAgoString = [dateFormatter stringFromDate:xDaysAgo];
+    NSString *parameter = [NSString stringWithFormat:@"/readings?sensor_alias=%@&sensor_id=%d&from=%@&until=%@", sensor_alias, sensor_id, xDaysAgoString, currentDateString];
+    return parameter;
+}
+
 @end
