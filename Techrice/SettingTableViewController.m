@@ -52,6 +52,7 @@
     NSDictionary *setting = @{@"site":[NSNumber numberWithInteger:selectedSite],
                               @"minimumWaterLevel":[numberFormatter numberFromString:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].detailTextLabel.text]
                               };
+    NSLog(@"setting: %@", setting);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setObject:setting forKey:@"cache/setting"];
     BOOL successful = [defaults synchronize];

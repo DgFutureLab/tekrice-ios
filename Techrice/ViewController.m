@@ -22,7 +22,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // Hard code
+    // FIXME: hard code
     camera = [GMSCameraPosition cameraWithLatitude:35.14404025
                                          longitude:139.988354
                                               zoom:18.5];
@@ -32,6 +32,8 @@
     mapView_.mapType = kGMSTypeSatellite;
     path = [GMSMutablePath path];
     self.view = mapView_;
+    
+    // FIXME: should run the code below after setting and site Id should be equal to the id which is setted in setting view.
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
 
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
@@ -67,20 +69,16 @@
     [self setMarkerColor];
 }
 
+// get marker's data and marker's image using setMarkerColor function
 - (void) setMarker{
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
-
-    // update camera
-    NSLog(@"update camera to fit markers %lu", path.count);
-    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
-    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
-    [mapView_ moveCamera:update];
 }
 
+// set marker's color to red or green
 - (void)setMarkerColor{
     NSLog(@"setMarkerColor");
     // Creates a marker in the center of the map.
@@ -106,8 +104,15 @@
             }
         }
     }
+    
+    // update camera
+    NSLog(@"update camera to fit markers %lu", path.count);
+    GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
+    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
+    [mapView_ moveCamera:update];
 }
 
+// go to setting view
 - (void)settingButtonTapped{
     NSLog(@"settingButtonTapped");
     SettingTableViewController *settingTableViewController = [[SettingTableViewController alloc] init];
@@ -115,10 +120,20 @@
     [self presentViewController:navigationController animated:YES completion:nil];
 }
 
+// when tab bar tapped, map should be go to center of the site.
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     [self backToCenterButtonTapped];
 }
 
+// FIXME: hard code
+- (void)backToCenterButtonTapped{
+    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
+                                         longitude:139.988354
+                                              zoom:18.5];
+    [mapView_ animateToCameraPosition:camera];
+}
+
+// when marker is tapped, go to detail view
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
@@ -126,13 +141,6 @@
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
     return YES;
-}
-
-- (void)backToCenterButtonTapped{
-    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
-                                         longitude:139.988354
-                                              zoom:18.5];
-    [mapView_ animateToCameraPosition:camera];
 }
 
 - (void)didReceiveMemoryWarning
