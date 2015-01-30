@@ -14,8 +14,8 @@
     [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    UIView *_view = [self customView];
-    glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"ricefield.jpg"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:_view];
+    UIView *customView = [self customView];
+    glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"ricefield.jpg"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:customView];
     [self.view addSubview:glassScrollView];
     // FIXME: hard code - should be get how many days does the chart shows from setting data.
     howManyDays = 7;
