@@ -13,7 +13,6 @@
 @property (nonatomic,retain) NSArray *nodeArray;
 @property (nonatomic,retain) NSArray *distanceArray;
 
--(NSArray*)getDistance:(NSNumber*)nodeId parameter:(NSString*)parameter;
 -(NSDictionary*)getData:(NSString*)parameter;
 
 @end

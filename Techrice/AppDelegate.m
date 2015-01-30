@@ -6,25 +6,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Google Map setting
     [GMSServices provideAPIKey:@"AIzaSyD02od1MXyqSOzrvMI-W_Je4kk_huiwC3I"];
-    
-    
+    // Map view
     UINavigationController *navigationController1 = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
     navigationController1.tabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Map", nil)  image:[UIImage imageNamed:@"pin.png"] tag:1];
-    
+    // List View
     UINavigationController *navigationController2 = [[UINavigationController alloc] initWithRootViewController:[[TableViewController alloc] init]];
     navigationController2.tabBarItem =[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"List", nil) image:[UIImage imageNamed:@"list.png"] tag:0];
-    
+    // TabBar setting
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.0 green:0.7 blue:0.7 alpha:1.0]];;
-    
     NSArray *tabs = [NSArray arrayWithObjects:navigationController1, navigationController2, nil];
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    
     [tabBarController setViewControllers:tabs animated:NO];
     [self.window addSubview:tabBarController.view];
     self.window.rootViewController = tabBarController;
-
     
     return YES;
 }
@@ -54,45 +50,6 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
--(NSArray *)getDistance:(NSNumber*)nodeId parameter:(NSString*)parameter{
-    NSLog(@"AppDelegate-getDistance");
-    // get data
-    NSString *url;
-    if (parameter) {
-        url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString: parameter];
-    }else{
-        url = [[@"http://128.199.191.249/reading/node_" stringByAppendingString:[nodeId stringValue]] stringByAppendingString:@"/distance"];
-    }
-    //NSURLからNSURLRequestを作る
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
-    //サーバーとの通信を行う
-    NSData *json = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    if (json != nil) {
-        //ローカルに保存
-        NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:result forKey:[@"cache/" stringByAppendingString:parameter]];
-        BOOL successful = [defaults synchronize];
-        if (successful) {
-            NSLog(@"AppDelegate-getDistance: saved data successfully.");
-        }
-        //JSONをパース
-        NSArray *array = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingAllowFragments error:nil];
-//        float distance =  [[[[array valueForKey:@"objects"] lastObject] valueForKey:@"value"] floatValue];
-        return array;
-    }else{
-        NSLog(@"AppDelegate-getDistance: getdistance failed");
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSArray *array = [defaults arrayForKey:@"cache"];
-        if (array) {
-            return array;
-        } else {
-            NSLog(@"AppDelegate-getDistance: %@", @"no data in cache.");
-            return 0;
-        }
-    }
 }
 
 -(NSDictionary *)getData:(NSString*)parameter{

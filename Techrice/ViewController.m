@@ -128,8 +128,6 @@
     [self updateCameraToFitMarkers];
 }
 
-}
-
 // when marker is tapped, go to detail view
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
     NSLog(@"tapMarker");
@@ -140,8 +138,7 @@
     return YES;
 }
 
-- (void)didReceiveMemoryWarning
-{
+- (void)didReceiveMemoryWarning{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }

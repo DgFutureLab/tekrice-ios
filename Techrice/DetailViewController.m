@@ -13,14 +13,12 @@
     NSDictionary *attributeDictionary = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-
-    NSNumber *nodeIdNumber = [NSNumber numberWithInt:nodeId];
-    
     self.automaticallyAdjustsScrollViewInsets = NO;
     UIView *_view = [self customView];
     glassScrollView = [[BTGlassScrollView alloc] initWithFrame:self.view.frame BackgroundImage:[UIImage imageNamed:@"ricefield.jpg"] blurredImage:nil viewDistanceFromBottom:120 foregroundView:_view];
     [self.view addSubview:glassScrollView];
-    
+    // FIXME: hard code - should be get how many days does the chart shows from setting data.
+    howManyDays = 7;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,6 +31,7 @@
     // distance
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
+    // FIXME: uncomment below
 //    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
     [distanceLabel setText:@"--cm"];
     [distanceLabel setTextColor:[UIColor whiteColor]];
@@ -46,7 +45,7 @@
     NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box0, @"view",
                                     @"Water Level", @"title",
-                                    @"/distance?date_range=1week", @"parameter",
+                                    @"distance", @"sensorType",
                                     nil];
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
     [view addSubview:box0];
@@ -56,7 +55,7 @@
     NSDictionary *arguments2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box1, @"view",
                                     @"Humidity", @"title",
-                                    @"/humidity?date_range=1week", @"parameter",
+                                    @"humidity?", @"sensorType",
                                     nil];
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments2];
     [view addSubview:box1];
@@ -86,7 +85,7 @@
     NSDictionary *arguments3 = [NSDictionary dictionaryWithObjectsAndKeys:
                                 box3, @"view",
                                 @"Temperature", @"title",
-                                @"/temperature?date_range=1week", @"parameter",
+                                @"temperature", @"sensorType",
                                 nil];
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments3];
     
@@ -110,7 +109,7 @@
     // get each data from arguments(NSDictionary)
     UIView *view = [arguments objectForKey:@"view"];
     NSString *title = [arguments objectForKey:@"title"];
-    NSString *parameter = [arguments objectForKey:@"parameter"];
+    NSString *sensorType = [arguments objectForKey:@"sensorType"];
     
     // view design - background
     view.layer.cornerRadius = 3;
@@ -139,25 +138,15 @@
     // chart
     // API call should be once per second
     if ([title isEqualToString:@"Water Level"]){
-//        requestDate = [NSDate date];
-//        NSLog(@"gaga distance %@", requestDate);
         [NSThread sleepForTimeInterval:0.0];
-    }
-    else if ([title isEqualToString:@"Humidity"]) {
-//        requestDate = [requestDate dateByAddingTimeInterval:1.0];
-//        NSLog(@"gaga huimidity %@", requestDate);
-//        [NSThread sleepUntilDate:requestDate];
+    } else if ([title isEqualToString:@"Humidity"]) {
         [NSThread sleepForTimeInterval:1.5];
     } else if ([title isEqualToString:@"Temperature"]){
-//        requestDate = [requestDate dateByAddingTimeInterval:1.0];
-//        NSLog(@"gaga temperature %@", requestDate);
-//        [NSThread sleepUntilDate:[requestDate dateByAddingTimeInterval:1.0]];
         [NSThread sleepForTimeInterval:3.0];
     }else{
         NSLog(@"something wrong");
     }
-    //should be replaced below to NSArray *data = [appDelegate getData:<#(NSString *)#>]
-    NSArray *data = [appDelegate getDistance:[NSNumber numberWithInt:nodeId] parameter:parameter];
+    NSDictionary *data = [appDelegate getData:[self getParameterForChart:sensorType sensor_id:nodeId howManyDays:howManyDays]];
     NSArray *dataArray = [data valueForKeyPath:@"objects.value"];
     if (dataArray.count > 0) {
         // chart - design
@@ -243,6 +232,7 @@
     [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
+// get string of parameter to get x days data for making chart
 - (NSString *) getParameterForChart:(NSString*)sensor_alias
                       sensor_id:(int)sensor_id
                     howManyDays:(int)days{
@@ -254,7 +244,7 @@
     [dateFormatter setDateFormat:@"yyyy-M-d"];
     NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
     NSString *xDaysAgoString = [dateFormatter stringFromDate:xDaysAgo];
-    NSString *parameter = [NSString stringWithFormat:@"/readings?sensor_alias=%@&sensor_id=%d&from=%@&until=%@", sensor_alias, sensor_id, xDaysAgoString, currentDateString];
+    NSString *parameter = [NSString stringWithFormat:@"readings?sensor_alias=%@&sensor_id=%d&from=%@&until=%@", sensor_alias, sensor_id, xDaysAgoString, currentDateString];
     return parameter;
 }
 

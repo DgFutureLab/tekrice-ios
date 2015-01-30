@@ -13,6 +13,7 @@
     float lastDistance;
     UILabel *distanceLabel;
     NSDate *requestDate;
+    int howManyDays;
 @public
     int nodeId;
 }
