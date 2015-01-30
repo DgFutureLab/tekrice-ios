@@ -33,9 +33,6 @@
     path = [GMSMutablePath path];
     self.view = mapView_;
     
-    // FIXME: should run the code below after setting and site Id should be equal to the id which is setted in setting view.
-    [self performSelectorInBackground:@selector(setMarker) withObject:nil];
-
     UITabBar *tabBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height-50, self.view.frame.size.width, 50)];
     [self.view addSubview:tabBar];
     
@@ -66,6 +63,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     NSLog(@"viewWillAppear");
     self.tabBarController.delegate = self;
+    [self performSelectorInBackground:@selector(setMarker) withObject:nil];
     [self setMarkerColor];
 }
 
@@ -84,6 +82,7 @@
     // Creates a marker in the center of the map.
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
+    [path removeAllCoordinates];
     for (int i =0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
@@ -106,6 +105,10 @@
     }
     
     // update camera
+    [self updateCameraToFitMarkers];
+}
+
+- (void)updateCameraToFitMarkers{
     NSLog(@"update camera to fit markers %lu", path.count);
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
     GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
@@ -122,15 +125,9 @@
 
 // when tab bar tapped, map should be go to center of the site.
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
-    [self backToCenterButtonTapped];
+    [self updateCameraToFitMarkers];
 }
 
-// FIXME: hard code
-- (void)backToCenterButtonTapped{
-    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
-                                         longitude:139.988354
-                                              zoom:18.5];
-    [mapView_ animateToCameraPosition:camera];
 }
 
 // when marker is tapped, go to detail view
