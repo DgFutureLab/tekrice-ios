@@ -64,16 +64,42 @@
     NSLog(@"viewWillAppear");
     self.tabBarController.delegate = self;
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
-    [self setMarkerColor];
+    [self updateCameraToFitMarkers];
+}
+
+-(NSMutableArray *)getDummyData{
+    NSMutableArray *outputArray = [NSMutableArray array];
+    [outputArray addObject:[self setDummyData:42.2 latitude:35.14404025 longitude:139.988354 id:0]];
+    [outputArray addObject:[self setDummyData:10.2 latitude:35.14354 longitude:139.988104 id:1]];
+    return outputArray;
+}
+
+- (NSDictionary *)setDummyData:(float)value
+                      latitude:(float)latitude
+                     longitude:(float)longitude
+                            id:(int)ID{
+    NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
+    NSMutableDictionary *mutableDictionary = [NSMutableDictionary dictionary];
+    [mutableDictionary setObject:@"distance" forKey:@"alias"];
+    NSDictionary *valueDictionary = @{@"value":[NSNumber numberWithFloat:value]};
+    [mutableDictionary setObject:valueDictionary forKey:@"latest_reading"];
+    [mutableArray addObject:mutableDictionary];
+    NSDictionary *dictionary = @{@"sensors":mutableArray,
+                                 @"latitude":[NSNumber numberWithFloat:latitude],
+                                 @"longitude":[NSNumber numberWithFloat:longitude],
+                                 @"id":[NSNumber numberWithInt:ID]};
+    return dictionary;
 }
 
 // get marker's data and marker's image using setMarkerColor function
 - (void) setMarker{
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+//    nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+    nodeArray = [self getDummyData];
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
+
 }
 
 // set marker's color to red or green
@@ -103,15 +129,12 @@
             }
         }
     }
-    
-    // update camera
-    [self updateCameraToFitMarkers];
 }
 
 - (void)updateCameraToFitMarkers{
     NSLog(@"update camera to fit markers %lu", path.count);
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
-    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds];
+    GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withEdgeInsets:UIEdgeInsetsMake(150, 50, 100, 50)];
     [mapView_ moveCamera:update];
 }
 
