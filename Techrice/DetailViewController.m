@@ -55,7 +55,7 @@
     NSDictionary *arguments2 = [NSDictionary dictionaryWithObjectsAndKeys:
                                     box1, @"view",
                                     @"Humidity", @"title",
-                                    @"humidity?", @"sensorType",
+                                    @"humidity", @"sensorType",
                                     nil];
     [self performSelectorInBackground:@selector(setChartView:) withObject:arguments2];
     [view addSubview:box1];
@@ -144,9 +144,11 @@
     } else if ([title isEqualToString:@"Temperature"]){
         [NSThread sleepForTimeInterval:3.0];
     }else{
-        NSLog(@"something wrong");
+        NSLog(@"chart: something wrong");
     }
-    NSDictionary *data = [appDelegate getData:[self getParameterForChart:sensorType sensor_id:nodeId howManyDays:howManyDays]];
+//    NSDictionary *data = [appDelegate getData:[self getParameterForChart:sensorType sensor_id:nodeId howManyDays:howManyDays]];
+    NSDictionary *data = [self getDummyData:sensorType];
+    NSLog(@"data cat: %@", data);
     NSArray *dataArray = [data valueForKeyPath:@"objects.value"];
     if (dataArray.count > 0) {
         // chart - design
@@ -246,6 +248,26 @@
     NSString *xDaysAgoString = [dateFormatter stringFromDate:xDaysAgo];
     NSString *parameter = [NSString stringWithFormat:@"readings?sensor_alias=%@&sensor_id=%d&from=%@&until=%@", sensor_alias, sensor_id, xDaysAgoString, currentDateString];
     return parameter;
+}
+
+- (NSDictionary *)getDummyData:(NSString*)sensorType{
+    NSArray *valueArray = [[NSArray alloc] init];
+    NSArray *timeStampArray = [[NSArray alloc] init];
+    if ([sensorType isEqualToString:@"distance"]) {
+        valueArray =  @[[NSNumber numberWithInt:60+arc4random()%5], [NSNumber numberWithInt:60+arc4random()%5], [NSNumber numberWithInt:60+arc4random()%5], [NSNumber numberWithInt:60+arc4random()%5], [NSNumber numberWithInt:60+arc4random()%5], [NSNumber numberWithInt:60+arc4random()%5]];
+        timeStampArray = @[@"2015-02-01-12:12:12:00", @"2015-02-02-13:00:00:00", @"2015-02-03-13:00:00:00", @"2015-02-04-13:00:00:00", @"2015-02-05-13:00:00:00", @"2015-02-06-13:00:00:00"];
+    }else if ([sensorType isEqualToString:@"humidity"]) {
+        valueArray =  @[[NSNumber numberWithInt:30+arc4random()%30], [NSNumber numberWithInt:30+arc4random()%30], [NSNumber numberWithInt:30+arc4random()%30], [NSNumber numberWithInt:30+arc4random()%30], [NSNumber numberWithInt:30+arc4random()%30], [NSNumber numberWithInt:30+arc4random()%30]];
+        timeStampArray = @[@"2015-02-01-12:12:12:00", @"2015-02-02-13:00:00:00", @"2015-02-03-13:00:00:00", @"2015-02-04-13:00:00:00", @"2015-02-05-13:00:00:00", @"2015-02-06-13:00:00:00"];
+    }else if ([sensorType isEqualToString:@"temperature"]){
+        valueArray = @[[NSNumber numberWithInt:10+arc4random()%5], [NSNumber numberWithInt:10+arc4random()%5], [NSNumber numberWithInt:10+arc4random()%5], [NSNumber numberWithInt:10+arc4random()%5], [NSNumber numberWithInt:10+arc4random()%5], [NSNumber numberWithInt:10+arc4random()%5]];
+        timeStampArray = @[@"2015-02-01-12:12:12:00", @"2015-02-02-13:00:00:00", @"2015-02-03-13:00:00:00", @"2015-02-04-13:00:00:00", @"2015-02-05-13:00:00:00", @"2015-02-06-13:00:00:00"];
+    }
+    else{
+        NSLog(@"dummyData: something wrong");
+    }
+    NSDictionary *dictionary = @{@"value":valueArray, @"timestamp":timeStampArray};
+    return @{@"objects":dictionary};
 }
 
 @end
