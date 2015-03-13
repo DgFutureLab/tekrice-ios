@@ -95,9 +95,8 @@
 
 // get marker's data and marker's image using setMarkerColor function
 - (void) setMarker{
-    NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray = [[[appDelegate getData:[NSString stringWithFormat:@"site/%d", _currentSite]] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+    nodeArray = [[[appDelegate getData:[NSString stringWithFormat:@"site/%d", appDelegate->currentSite]] valueForKey:@"objects"][0] objectForKey:@"nodes"];
 //    nodeArray = [self getDummyData]; //dummy
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
