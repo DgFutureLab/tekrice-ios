@@ -97,7 +97,6 @@
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     nodeArray = [[[appDelegate getData:@"site/85"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
-    NSLog(@"ginza: %@", nodeArray);
 //    nodeArray = [self getDummyData]; //dummy
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
@@ -130,7 +129,7 @@
                     [self updateCameraToFitMarkers];
                 }];
             }else{
-                NSLog(@"Did not add a marker on the map. The reasons is below:----");
+                NSLog(@"Did not add a marker on the map. The reasons is below:");
                 if ([[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
                     NSLog(@"Latest reading value is \"\"");
                 }
@@ -146,7 +145,7 @@
                 if (![[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"]) {
                     NSLog(@"No alias named water_level:%@", [sensors[j] valueForKey:@"alias"]);
                 }
-                NSLog(@"----------------------------------------------------------");
+                NSLog(@"------------------------------------------------------");
             }
         }
     }

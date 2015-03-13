@@ -185,9 +185,7 @@
         NSLog(@"chart: something wrong");
     }
     NSDictionary *data = [appDelegate getData:[self getParameterForChart:sensorId]];
-//    NSLog(@"green cat:%@", data1);
 //    NSDictionary *data = [self getDummyData:sensorType];
-    NSLog(@"data+++++++++++++++++++++++++++++++++: %@", data);
     NSArray *dataArray = [data valueForKeyPath:@"objects.value"];
     if (dataArray.count > 0) {
         // chart - design
@@ -243,7 +241,6 @@
             [formatter setDateFormat:@"HHa"];
             [displayLabelFormattedArray addObject:[formatter stringFromDate:date_converted]];
         }
-        NSLog(@"ss: %@", displayLabelFormattedArray);
         [lineChart setXLabels:displayLabelFormattedArray];
         
         // chart - chart data setting
