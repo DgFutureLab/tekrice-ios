@@ -9,7 +9,12 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
-    self.title = [NSString stringWithFormat:@"Node ID:%d", nodeId];
+    NSString *nodeAlias = [nodeData valueForKey:@"alias"];
+    if (![nodeAlias isEqual:[NSNull null]]) {
+        self.title = nodeAlias;
+    }else{
+        self.title = [NSString stringWithFormat:@"Node ID:%d", nodeId];
+    }
     NSDictionary *attributeDictionary = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [self.navigationController.navigationBar setTitleTextAttributes:attributeDictionary];
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -35,71 +40,104 @@
 //    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
     [distanceLabel setText:@"--cm"];
     [distanceLabel setTextColor:[UIColor whiteColor]];
-    [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:120]];
+    [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:100]];
     [view addSubview:distanceLabel];
+    
+    // subtitle for big water level label;
+    UILabel *subDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, -70, 310, 120)];
+    [subDistanceLabel setText:@"Water Level"];
+    [subDistanceLabel setTextColor:[UIColor whiteColor]];
+    [subDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:28]];
+    [view addSubview:subDistanceLabel];
+    
+    
     
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
     
-    // chart - distance
-    UIView *box0 = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
-    NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    box0, @"view",
-                                    @"Water Level", @"title",
-                                    @"distance", @"sensorType",
-                                    nil];
-    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
-    [view addSubview:box0];
+    // chart - water level
+    // FIXME: shold use for loop for waterlevel, humidity, and temperature.
+    
+    for (int i = 0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
+        if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"water_level"]) {
+            // water level
+            int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
+            NSString *title = @"Water Level";
+            UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
+            NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       box, @"view",
+                                       title, @"title",
+                                       @"water_level", @"sensorType",
+                                       [NSNumber numberWithInt:sensorId], @"sensorId",
+                                       nil];
+            [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+            [view addSubview:box];
+        }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"air humidity"]){
+            // air humidity
+            int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
+            NSString *title = @"Humidity";
+            UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 495, self.view.frame.size.width-10, 350)];
+            NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       box, @"view",
+                                       title, @"title",
+                                       @"air humidity", @"sensorType",
+                                       [NSNumber numberWithInt:sensorId], @"sensorId",
+                                       nil];
+            [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+            [view addSubview:box];
+        }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"ambient temperature"]){
+            // ambient temperature
+            int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
+            NSString *title = @"Temperature";
+            UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 850, self.view.frame.size.width-10, 350)];
+            NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+                                       box, @"view",
+                                       title, @"title",
+                                       @"ambient temperature", @"sensorType",
+                                       [NSNumber numberWithInt:sensorId], @"sensorId",
+                                       nil];
+            [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+            [view addSubview:box];
+        }else{
+            NSLog(@"something wrong: no valid data for making chart");
+        }
+    }
+    
+    
+    
+//    for (int i=0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
+//        UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
+//        
+//        
+//        NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                   box, @"view",
+//                                   @"test title", @"title",
+//                                   @"water_level", @"sensorType",
+//                                   nil];
+//        [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+//        [view addSubview:box0];
+//    }
+    
+
     
     // chart - humidity
-    UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 495, self.view.frame.size.width-10, 350)];
-    NSDictionary *arguments2 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                    box1, @"view",
-                                    @"Humidity", @"title",
-                                    @"humidity", @"sensorType",
-                                    nil];
-    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments2];
-    [view addSubview:box1];
-    
-    // wind speed
-//    UIView *box2 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, 310, 350)];
-//    box2.layer.cornerRadius = 3;
-//    box2.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
-//    UILabel *windSpeedLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-//    [windSpeedLabel setText:[NSString stringWithFormat:@"%.0dm/s", 2]];
-//    [windSpeedLabel setTextColor:[UIColor whiteColor]];
-//    [windSpeedLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:32]];
-//    [box2 addSubview:windSpeedLabel];
-//    // windmill - base
-//    UIImageView *windSpeedImageViewPole = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_pole.png"]];
-//    windSpeedImageViewPole.frame = CGRectMake(35, 20, 5, 30);
-//    [box2 addSubview:windSpeedImageViewPole];
-//    // windminll - fan
-//    UIImageView *windSpeedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"windmill_fan.png"]];
-//    windSpeedImageView.frame = CGRectMake(17, 0, 40, 40);
-//    [self runSpinAnimationOnView:windSpeedImageView duration:0.05 rotations:1 repeat:MAXFLOAT];
-//    [box2 addSubview:windSpeedImageView];
-//    [view addSubview:box2];
-    
-    // tempereture
-    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, self.view.frame.size.width-10, 350)];
-    NSDictionary *arguments3 = [NSDictionary dictionaryWithObjectsAndKeys:
-                                box3, @"view",
-                                @"Temperature", @"title",
-                                @"temperature", @"sensorType",
-                                nil];
-    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments3];
-    
-    // tempereture - thermometer
-//    UIProgressView *temperatureProgressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-//    temperatureProgressView.frame = CGRectMake(20, 25, 30, 10);
-//    temperatureProgressView.progressTintColor = [UIColor redColor];
-//    temperatureProgressView.transform = CGAffineTransformMakeRotation( -90.0f * M_PI / 180.0f );
-//    [temperatureProgressView setProgress:1.0 animated:YES];
-//    [box3 addSubview:temperatureProgressView];
-//    UIImageView *thermometerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"thermometer.png"]];
-//    thermometerImageView.frame = CGRectMake(10, 0, 50, 50);
-//    [box3 addSubview:thermometerImageView];
-    [view addSubview:box3];
+//    UIView *box1 = [[UIView alloc] initWithFrame:CGRectMake(5, 495, self.view.frame.size.width-10, 350)];
+//    NSDictionary *arguments2 = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                    box1, @"view",
+//                                    @"Humidity", @"title",
+//                                    @"air humidity", @"sensorType",
+//                                    nil];
+//    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments2];
+//    [view addSubview:box1];
+//    
+//    // tempereture
+//    UIView *box3 = [[UIView alloc] initWithFrame:CGRectMake(5, 850, self.view.frame.size.width-10, 350)];
+//    NSDictionary *arguments3 = [NSDictionary dictionaryWithObjectsAndKeys:
+//                                box3, @"view",
+//                                @"Temperature", @"title",
+//                                @"ambient temperature", @"sensorType",
+//                                nil];
+//    [self performSelectorInBackground:@selector(setChartView:) withObject:arguments3];
+//    [view addSubview:box3];
     
     return view;
 }
@@ -110,7 +148,7 @@
     UIView *view = [arguments objectForKey:@"view"];
     NSString *title = [arguments objectForKey:@"title"];
     NSString *sensorType = [arguments objectForKey:@"sensorType"];
-    
+    int sensorId = [[arguments objectForKey:@"sensorId"] intValue];
     // view design - background
     view.layer.cornerRadius = 3;
     view.backgroundColor = [UIColor colorWithWhite:0 alpha:.15];
@@ -146,9 +184,10 @@
     }else{
         NSLog(@"chart: something wrong");
     }
-//    NSDictionary *data = [appDelegate getData:[self getParameterForChart:sensorType sensor_id:nodeId howManyDays:howManyDays]];
-    NSDictionary *data = [self getDummyData:sensorType];
-    NSLog(@"data cat: %@", data);
+    NSDictionary *data = [appDelegate getData:[self getParameterForChart:sensorId]];
+//    NSLog(@"green cat:%@", data1);
+//    NSDictionary *data = [self getDummyData:sensorType];
+    NSLog(@"data+++++++++++++++++++++++++++++++++: %@", data);
     NSArray *dataArray = [data valueForKeyPath:@"objects.value"];
     if (dataArray.count > 0) {
         // chart - design
@@ -234,9 +273,8 @@
     [view.layer addAnimation:rotationAnimation forKey:@"rotationAnimation"];
 }
 
-// get string of parameter to get x days data for making chart
-- (NSString *) getParameterForChart:(NSString*)sensor_alias
-                      sensor_id:(int)sensor_id
+// get string of parameter to get x days data from today for making chart
+- (NSString *) getParameterForChartFromToday:(int)sensor_id
                     howManyDays:(int)days{
     NSDate *currentDate = [NSDate date];
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
@@ -246,9 +284,18 @@
     [dateFormatter setDateFormat:@"yyyy-M-d"];
     NSString *currentDateString = [dateFormatter stringFromDate:currentDate];
     NSString *xDaysAgoString = [dateFormatter stringFromDate:xDaysAgo];
-    NSString *parameter = [NSString stringWithFormat:@"readings?sensor_alias=%@&sensor_id=%d&from=%@&until=%@", sensor_alias, sensor_id, xDaysAgoString, currentDateString];
+    NSString *parameter = [NSString stringWithFormat:@"readings?sensor_id=%d&from=%@&until=%@", sensor_id, xDaysAgoString, currentDateString];
+    NSLog(@"parameter: %@", parameter);
     return parameter;
 }
+
+// get string of parameter to get data for making chart
+- (NSString *) getParameterForChart:(int)sensor_id{
+    NSString *parameter = [NSString stringWithFormat:@"readings?sensor_id=%d", sensor_id];
+    NSLog(@"parameter: %@", parameter);
+    return parameter;
+}
+
 
 - (NSDictionary *)getDummyData:(NSString*)sensorType{
     NSArray *valueArray = [[NSArray alloc] init];

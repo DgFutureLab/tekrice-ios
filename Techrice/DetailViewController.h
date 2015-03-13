@@ -16,5 +16,6 @@
     int howManyDays;
 @public
     int nodeId;
+    NSDictionary *nodeData;
 }
 @end

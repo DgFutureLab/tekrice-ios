@@ -23,9 +23,9 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // FIXME: hard code
-    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
-                                         longitude:139.988354
-                                              zoom:18.5];
+//    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
+//                                         longitude:139.988354
+//                                              zoom:18.5];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.delegate = self;
     mapView_.myLocationEnabled = YES;
@@ -64,7 +64,8 @@
     NSLog(@"viewWillAppear");
     self.tabBarController.delegate = self;
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
-    [self updateCameraToFitMarkers];
+
+    
 }
 
 -(NSMutableArray *)getDummyData{
@@ -95,11 +96,11 @@
 - (void) setMarker{
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//    nodeArray = [[[appDelegate getData:@"site/1"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
-    nodeArray = [self getDummyData];
+    nodeArray = [[[appDelegate getData:@"site/85"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+    NSLog(@"ginza: %@", nodeArray);
+//    nodeArray = [self getDummyData]; //dummy
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];
-
 }
 
 // set marker's color to red or green
@@ -112,12 +113,13 @@
     for (int i =0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
-            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"distance"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
+            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
                 // Google Maps SDK must happend on the main thread
                 [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     GMSMarker *marker = [[GMSMarker alloc] init];
                     marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
                     [path addCoordinate:marker.position];
+                    NSLog(@"added a coordinate to GMSMutablePath and now count is %lu", path.count);
                     if (DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue] > appDelegate->minimumWaterLevel) {
                         marker.icon = iconImage;
                     }else{
@@ -125,7 +127,26 @@
                     }
                     marker.userData = [nodeArray[i] valueForKey:@"id"];
                     marker.map = mapView_;
+                    [self updateCameraToFitMarkers];
                 }];
+            }else{
+                NSLog(@"Did not add a marker on the map. The reasons is below:----");
+                if ([[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
+                    NSLog(@"Latest reading value is \"\"");
+                }
+                if([[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]]){
+                    NSLog(@"Latest reading value is null");
+                }
+                if([[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]]){
+                    NSLog(@"Latitude is null");
+                }
+                if ([[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]]) {
+                    NSLog(@"Longitude is null");
+                }
+                if (![[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"]) {
+                    NSLog(@"No alias named water_level:%@", [sensors[j] valueForKey:@"alias"]);
+                }
+                NSLog(@"----------------------------------------------------------");
             }
         }
     }
@@ -135,7 +156,10 @@
     NSLog(@"update camera to fit markers %lu", path.count);
     GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:path];
     GMSCameraUpdate *update = [GMSCameraUpdate fitBounds:bounds withEdgeInsets:UIEdgeInsetsMake(150, 50, 100, 50)];
-    [mapView_ moveCamera:update];
+    //Accessing UI Thread
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [mapView_ moveCamera:update];
+    }];
 }
 
 // go to setting view
@@ -153,9 +177,14 @@
 
 // when marker is tapped, go to detail view
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
-    NSLog(@"tapMarker");
+    NSLog(@"tapMarker and go to detail view for node id %d", [marker.userData intValue]);
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController->nodeId = marker.userData;
+    detailViewController->nodeId = [marker.userData intValue];
+    for (int i = 0; i<nodeArray.count; i++) {
+        if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
+            detailViewController->nodeData = nodeArray[i];
+        }
+    }
     detailViewController.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:detailViewController animated:YES];
     return YES;

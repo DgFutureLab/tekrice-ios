@@ -108,10 +108,10 @@
             }
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text =  NSLocalizedString(@"Kamogawa", nil);
+                    cell.textLabel.text =  NSLocalizedString(@"Hacker Farm", nil);
                     break;
                 case 1:
-                    cell.textLabel.text =  NSLocalizedString(@"Hacker Farm", nil);
+                    cell.textLabel.text =  NSLocalizedString(@"DG Camp Kamakura", nil);
                     break;
                 case 2:
                     cell.textLabel.text = NSLocalizedString(@"Digital Garage", nil);
