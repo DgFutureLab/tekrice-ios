@@ -51,7 +51,7 @@
     if (!settingData) {
         NSLog(@"%@", @"ViewController_viewDidLoad: no setting data in cache");
         _minimumWaterLevel = 0;
-        _currentSite = [[[[appDelegate getData:@"sites"] objectForKey:@"objects"][2] objectForKey:@"id"] intValue]; // FIXME: hard code
+        _currentSite = [[[[appDelegate getData:@"sites"] objectForKey:@"objects"][0] objectForKey:@"id"] intValue];
     }else{
         NSLog(@"%@", settingData);
         _currentSite = [[settingData objectForKey:@"site"] intValue];
