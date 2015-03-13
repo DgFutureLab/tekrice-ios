@@ -17,7 +17,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     NSLog(@"viewWillAppear");
     mininumWaterLevel = appDelegate->minimumWaterLevel;
-    selectedSite = appDelegate->currentSite;
+    selectedSiteId = appDelegate->currentSite;
     [self.tableView reloadData];
 }
 
@@ -41,6 +41,7 @@
     self.navigationItem.rightBarButtonItem = doneButton;
     self.tableView.allowsMultipleSelection = NO;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    sites = [appDelegate getData:@"sites"];
 }
 
 - (void)doneButtonTapped{
@@ -49,7 +50,7 @@
     //ローカルに保存
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSDictionary *setting = @{@"site":[NSNumber numberWithInteger:selectedSite],
+    NSDictionary *setting = @{@"site":[NSNumber numberWithInteger:selectedSiteId],
                               @"minimumWaterLevel":[numberFormatter numberFromString:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].detailTextLabel.text]
                               };
     NSLog(@"setting: %@", setting);
@@ -59,7 +60,7 @@
     if (successful) {
         NSLog(@"%@", @"SettingTableViewController-doneButtonTapped: saved data successfully");
     }
-    appDelegate->currentSite = selectedSite;
+    appDelegate->currentSite = selectedSiteId;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -79,7 +80,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 3;
+            return [[sites objectForKey:@"objects"] count];
             break;
         case 1:
             return 1;
@@ -101,24 +102,12 @@
     }
     switch (indexPath.section) {
         case 0:{
-            if (indexPath.row == selectedSite) {
+            if ([[[sites objectForKey:@"objects"][(int)indexPath.row] objectForKey:@"id"] intValue]  == selectedSiteId) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }else{
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
-            switch (indexPath.row) {
-                case 0:
-                    cell.textLabel.text =  NSLocalizedString(@"Hacker Farm", nil);
-                    break;
-                case 1:
-                    cell.textLabel.text =  NSLocalizedString(@"DG Camp Kamakura", nil);
-                    break;
-                case 2:
-                    cell.textLabel.text = NSLocalizedString(@"Digital Garage", nil);
-                    break;
-                default:
-                    break;
-            }
+            cell.textLabel.text = [[sites objectForKey:@"objects"][(int)indexPath.row] objectForKey:@"alias"];
             break;
         }
         case 1:{
@@ -150,7 +139,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     switch (indexPath.section) {
         case 0:{
-            selectedSite = (int)indexPath.row;
+            selectedSiteId = [[[sites objectForKey:@"objects"][(int)indexPath.row] objectForKey:@"id"] intValue];
+            NSLog(@"checking %d", selectedSiteId);
             [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationNone];
             break;
         }

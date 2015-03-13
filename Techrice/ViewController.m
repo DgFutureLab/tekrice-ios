@@ -50,11 +50,14 @@
     settingData = [defaults objectForKey:@"cache/setting"];
     if (!settingData) {
         NSLog(@"%@", @"ViewController_viewDidLoad: no setting data in cache");
+        _minimumWaterLevel = 0;
+        _currentSite = [[[[appDelegate getData:@"sites"] objectForKey:@"objects"][2] objectForKey:@"id"] intValue]; // FIXME: hard code
     }else{
         NSLog(@"%@", settingData);
+        _currentSite = [[settingData objectForKey:@"site"] intValue];
+        _minimumWaterLevel = [[settingData objectForKey:@"minimumWaterLevel"] intValue];
     }
-    _currentSite = [[settingData objectForKey:@"site"] intValue];
-    _minimumWaterLevel = [[settingData objectForKey:@"minimumWaterLevel"] intValue];
+    NSLog(@"read from setting data:_currentSite%d - _minimumWaterLevel%d", _currentSite, _minimumWaterLevel);
     
     appDelegate->currentSite = _currentSite;
     appDelegate->minimumWaterLevel = _minimumWaterLevel;
@@ -64,8 +67,6 @@
     NSLog(@"viewWillAppear");
     self.tabBarController.delegate = self;
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
-
-    
 }
 
 -(NSMutableArray *)getDummyData{
@@ -96,7 +97,7 @@
 - (void) setMarker{
     NSLog(@"ViewController-setMarker");
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray = [[[appDelegate getData:@"site/85"] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+    nodeArray = [[[appDelegate getData:[NSString stringWithFormat:@"site/%d", _currentSite]] valueForKey:@"objects"][0] objectForKey:@"nodes"];
 //    nodeArray = [self getDummyData]; //dummy
     appDelegate.nodeArray = nodeArray;
     [self setMarkerColor];

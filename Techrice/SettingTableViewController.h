@@ -5,7 +5,8 @@
 @interface SettingTableViewController : UITableViewController<MFMailComposeViewControllerDelegate>{
     AppDelegate *appDelegate;
     NSDictionary *settingData;
-    int selectedSite;
+    NSDictionary *sites;
+    int selectedSiteId;
     int mininumWaterLevel;
 }
 
