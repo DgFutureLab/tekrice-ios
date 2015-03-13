@@ -109,7 +109,7 @@
     }
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = [@"Node ID:" stringByAppendingString:[NSString stringWithFormat:@"%@", [displayDataArray[indexPath.row] valueForKey:@"nodeId"]]];
-    cell.textLabel.text = [[displayDataArray[indexPath.row] valueForKey:@"alias"] stringByAppendingString:@" - water level"];
+    cell.textLabel.text = [[displayDataArray[indexPath.row] valueForKey:@"alias"] stringByAppendingString:[NSString stringWithFormat:@" - %@", NSLocalizedString(@"Water Level", nil)]];
     
     float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
     if (distance > appDelegate->minimumWaterLevel) {
