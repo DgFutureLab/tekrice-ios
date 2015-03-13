@@ -238,7 +238,7 @@
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyy-MM-dd-HH:mm:ss:SSSSSS"];
             NSDate* date_converted = [formatter dateFromString:displayLabelArray[i]];
-            [formatter setDateFormat:@"HHa"];
+            [formatter setDateFormat:[NSDateFormatter dateFormatFromTemplate:@"MMMd" options:0 locale:[NSLocale currentLocale]]];
             [displayLabelFormattedArray addObject:[formatter stringFromDate:date_converted]];
         }
         [lineChart setXLabels:displayLabelFormattedArray];
