@@ -205,7 +205,7 @@
         mailPicker.mailComposeDelegate = self;
         [mailPicker setSubject:NSLocalizedString(@"About Techrice", nil)];
         
-        NSString *message = @"\n\n\n-----\nPlease do not delete below.\n";
+        NSString *message = NSLocalizedString(@"\n\n\n-----\nPlease do not delete below.\n", nil);
         [mailPicker setMessageBody:[message stringByAppendingPathComponent:[NSString stringWithFormat:@"System Info : %@\nOS : %@\nApp Version : %@",
                                                                             [self platformString],
                                                                             [self iOSVersion],

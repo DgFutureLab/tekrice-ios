@@ -9,8 +9,8 @@
 "MORE" = "その他";
 "Setting" = "設定";
 "Done" = "決定";
-"Techrice is an open data sensor network based in Kamogawa, Japan. Techrice wants to help local farmers monitoring rice fields water levels.\n\nStar topology sensor network designed using Freaklabs open hardware. Hatake (畑) is the Japanese name for \"rice field\".\n\nThis is an open source / open hardware collaboration by Freaklabs( http://www.freaklabs.org/ ), Hacker Farm and Future Lab( http://www.fljapan.com/about )." =
-"Techriceはオープンデータのセンサーネットワークです。Techriceは田んぼの水の高さを計測するなどして、田んぼの状態をモニタリングすることで、農作業を支援します。\n\n Techriceは、オープンソース、そしてオープンハードウェアのプロジェクトです。また、Techriceの開発は、Freaklab( http://www.freaklabs.org/ ), Hacker Farm, Future Lab( http://www.fljapan.com/about )とのコラボレーションによるものです。";
+"Techrice app shows the temperature, water level, humidituy in the ricefield which are sensored by Techrice's original sensor device.\nTechrice( http://www.techrice.jp/ ) is an open data sensor network. Techrice wants to help local farmers monitoring rice field water levels. The star topology sensor network is designed using Freaklabs open hardware. This is a collaboration project by Digital Garage Inc. Future Lab( http://www.fljapan.com/about ), Freaklabs( http://www.freaklabs.org/ ), Hacker Farm." =
+"Techriceは水位の高さを計測するなど田んぼの状態をモニタリングすることで、農作業の効率化を支援します。スマートフォンアプリを使用し計測用のハードウェアからクラウドにアップされたデータを見ることができます。現時点で確認できるデータは「水位」「気温」「湿度」です。\nTechrice( http://www.techrice.jp/ )はオープンデータのセンサーネットワーク研究プロジェクトです。Techriceは、オープンソース、そしてオープンハードウェアのプロジェクトです。センサーネットワークはFreaklabsがデザインしています。また、Techriceの開発は、Digital Garage, Inc.のFuture Lab( http://www.fljapan.com/about ), Freaklabs( http://www.freaklabs.org/ ), Hacker Farmとのコラボレーションによるものです。";
 "Map" = "地図";
 "List" = "リスト";
 "Ascending" = "昇順";
@@ -21,3 +21,4 @@
 "Humidity" = "湿度";
 "Temperature" = "気温";
 "DG Camp Kamakura" = "DG Camp Kamakura";
+"\n\n\n-----\nPlease do not delete below.\n" = "\n\n\n-----\n以下は削除しないで下さい。\n";

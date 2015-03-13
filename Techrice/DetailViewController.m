@@ -45,7 +45,7 @@
     
     // subtitle for big water level label;
     UILabel *subDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, -70, 310, 120)];
-    [subDistanceLabel setText:@"Water Level"];
+    [subDistanceLabel setText:NSLocalizedString(@"Water Level", nil)];
     [subDistanceLabel setTextColor:[UIColor whiteColor]];
     [subDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:28]];
     [view addSubview:subDistanceLabel];
