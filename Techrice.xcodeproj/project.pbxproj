@@ -13,11 +13,8 @@
 		B23D75C21A30310400C4B29D /* darkgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B23D75C11A30310400C4B29D /* darkgreen.png */; };
 		B24487AB1A1B21150039F030 /* SettingTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487AA1A1B21150039F030 /* SettingTableViewController.m */; };
 		B24487B11A1B24A30039F030 /* SettingValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487B01A1B24A30039F030 /* SettingValueViewController.m */; };
-		B24487B31A1B43BC0039F030 /* pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B24487B21A1B43BC0039F030 /* pin@2x.png */; };
-		B24487B71A1B45B10039F030 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B24487B61A1B45B10039F030 /* list@2x.png */; };
 		B25CC17D1A78D37900F3BD3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B25CC17F1A78D37900F3BD3C /* Localizable.strings */; };
 		B26CE96B1A318DA900414E87 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26CE96A1A318DA900414E87 /* AboutViewController.m */; };
-		B27AE3261A0CDF4F00A84929 /* ricefield.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B27AE3251A0CDF4F00A84929 /* ricefield.jpg */; };
 		B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE219EE73A80079BC3F /* DetailViewController.m */; };
 		B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE619EE75870079BC3F /* UIImage+ImageEffects.m */; };
 		B2AF9EEA19EE75870079BC3F /* BTGlassScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE819EE75870079BC3F /* BTGlassScrollView.m */; };
@@ -51,26 +48,7 @@
 		B2FA5FDB19CAC54700FCE828 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FDA19CAC54700FCE828 /* OpenGLES.framework */; };
 		B2FA5FDD19CAC55200FCE828 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FDC19CAC55200FCE828 /* QuartzCore.framework */; };
 		B2FA5FDF19CAC55D00FCE828 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5FDE19CAC55D00FCE828 /* SystemConfiguration.framework */; };
-		B2FA5FF619CAC86A00FCE828 /* windmill_pole.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF219CAC86A00FCE828 /* windmill_pole.png */; };
-		B2FA5FF719CAC86A00FCE828 /* windmill_fan.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF319CAC86A00FCE828 /* windmill_fan.png */; };
-		B2FA5FF819CAC86A00FCE828 /* thermometer.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF419CAC86A00FCE828 /* thermometer.png */; };
-		B2FA5FF919CAC86A00FCE828 /* tabBar_sample.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */; };
 		B2FA600019CAC90700FCE828 /* darkgreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */; };
-		B2FA600119CAC90700FCE828 /* lightgreen.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFD19CAC90700FCE828 /* lightgreen.png */; };
-		B2FA600219CAC90700FCE828 /* red.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA5FFE19CAC90700FCE828 /* red.png */; };
-		B2FA600819CAC90E00FCE828 /* cleanwater2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600419CAC90E00FCE828 /* cleanwater2@2x.png */; };
-		B2FA600919CAC90E00FCE828 /* cleanwater@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600519CAC90E00FCE828 /* cleanwater@2x.png */; };
-		B2FA600A19CAC90E00FCE828 /* dirtywater2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600619CAC90E00FCE828 /* dirtywater2@2x.png */; };
-		B2FA600B19CAC90E00FCE828 /* dirtywater@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600719CAC90E00FCE828 /* dirtywater@2x.png */; };
-		B2FA600F19CAC91500FCE828 /* techricelogo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600D19CAC91500FCE828 /* techricelogo.jpg */; };
-		B2FA601019CAC91500FCE828 /* techricelogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA600E19CAC91500FCE828 /* techricelogo@2x.png */; };
-		B2FA601619CAC91C00FCE828 /* antena-green1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601219CAC91C00FCE828 /* antena-green1@2x.png */; };
-		B2FA601719CAC91C00FCE828 /* antena-green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601319CAC91C00FCE828 /* antena-green@2x.png */; };
-		B2FA601819CAC91C00FCE828 /* antena-red1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601419CAC91C00FCE828 /* antena-red1@2x.png */; };
-		B2FA601919CAC91C00FCE828 /* antena-red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601519CAC91C00FCE828 /* antena-red@2x.png */; };
-		B2FA601C19CAC92800FCE828 /* mud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601B19CAC92800FCE828 /* mud@2x.png */; };
-		B2FA602019CAC93500FCE828 /* happyrice.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601E19CAC93500FCE828 /* happyrice.png */; };
-		B2FA602119CAC93500FCE828 /* sadrice.png in Resources */ = {isa = PBXBuildFile; fileRef = B2FA601F19CAC93500FCE828 /* sadrice.png */; };
 		EFE46F7E08E44E338D56E769 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BC70EEAD21A46CB93FEC891 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -98,8 +76,6 @@
 		B24487AA1A1B21150039F030 /* SettingTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingTableViewController.m; sourceTree = "<group>"; };
 		B24487AF1A1B24A30039F030 /* SettingValueViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingValueViewController.h; sourceTree = "<group>"; };
 		B24487B01A1B24A30039F030 /* SettingValueViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingValueViewController.m; sourceTree = "<group>"; };
-		B24487B21A1B43BC0039F030 /* pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin@2x.png"; sourceTree = "<group>"; };
-		B24487B61A1B45B10039F030 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
 		B25CC1771A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPhone.strings; sourceTree = "<group>"; };
 		B25CC1781A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main_iPad.strings; sourceTree = "<group>"; };
 		B25CC1791A78D23C00F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -108,7 +84,6 @@
 		B25CC1801A78D3A100F3BD3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B26CE9691A318DA900414E87 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		B26CE96A1A318DA900414E87 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		B27AE3251A0CDF4F00A84929 /* ricefield.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ricefield.jpg; sourceTree = "<group>"; };
 		B2AF9EE119EE73A80079BC3F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		B2AF9EE219EE73A80079BC3F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		B2AF9EE519EE75870079BC3F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -150,26 +125,7 @@
 		B2FA5FDA19CAC54700FCE828 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		B2FA5FDC19CAC55200FCE828 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B2FA5FDE19CAC55D00FCE828 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		B2FA5FF219CAC86A00FCE828 /* windmill_pole.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = windmill_pole.png; sourceTree = "<group>"; };
-		B2FA5FF319CAC86A00FCE828 /* windmill_fan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = windmill_fan.png; sourceTree = "<group>"; };
-		B2FA5FF419CAC86A00FCE828 /* thermometer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thermometer.png; sourceTree = "<group>"; };
-		B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tabBar_sample.png; sourceTree = "<group>"; };
 		B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "darkgreen@2x.png"; sourceTree = "<group>"; };
-		B2FA5FFD19CAC90700FCE828 /* lightgreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightgreen.png; sourceTree = "<group>"; };
-		B2FA5FFE19CAC90700FCE828 /* red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red.png; sourceTree = "<group>"; };
-		B2FA600419CAC90E00FCE828 /* cleanwater2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cleanwater2@2x.png"; sourceTree = "<group>"; };
-		B2FA600519CAC90E00FCE828 /* cleanwater@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cleanwater@2x.png"; sourceTree = "<group>"; };
-		B2FA600619CAC90E00FCE828 /* dirtywater2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirtywater2@2x.png"; sourceTree = "<group>"; };
-		B2FA600719CAC90E00FCE828 /* dirtywater@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirtywater@2x.png"; sourceTree = "<group>"; };
-		B2FA600D19CAC91500FCE828 /* techricelogo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = techricelogo.jpg; sourceTree = "<group>"; };
-		B2FA600E19CAC91500FCE828 /* techricelogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "techricelogo@2x.png"; sourceTree = "<group>"; };
-		B2FA601219CAC91C00FCE828 /* antena-green1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-green1@2x.png"; sourceTree = "<group>"; };
-		B2FA601319CAC91C00FCE828 /* antena-green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-green@2x.png"; sourceTree = "<group>"; };
-		B2FA601419CAC91C00FCE828 /* antena-red1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-red1@2x.png"; sourceTree = "<group>"; };
-		B2FA601519CAC91C00FCE828 /* antena-red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "antena-red@2x.png"; sourceTree = "<group>"; };
-		B2FA601B19CAC92800FCE828 /* mud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mud@2x.png"; sourceTree = "<group>"; };
-		B2FA601E19CAC93500FCE828 /* happyrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happyrice.png; sourceTree = "<group>"; };
-		B2FA601F19CAC93500FCE828 /* sadrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadrice.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -307,19 +263,7 @@
 		B2FA5F8A19CABE0C00FCE828 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				B24487B61A1B45B10039F030 /* list@2x.png */,
-				B24487B21A1B43BC0039F030 /* pin@2x.png */,
-				B27AE3251A0CDF4F00A84929 /* ricefield.jpg */,
-				B2FA601D19CAC93500FCE828 /* rice */,
-				B2FA601A19CAC92800FCE828 /* mud */,
-				B2FA601119CAC91C00FCE828 /* antena */,
-				B2FA600C19CAC91500FCE828 /* logo */,
-				B2FA600319CAC90E00FCE828 /* water */,
 				B2FA5FFA19CAC90700FCE828 /* marker */,
-				B2FA5FF219CAC86A00FCE828 /* windmill_pole.png */,
-				B2FA5FF319CAC86A00FCE828 /* windmill_fan.png */,
-				B2FA5FF419CAC86A00FCE828 /* thermometer.png */,
-				B2FA5FF519CAC86A00FCE828 /* tabBar_sample.png */,
 				B2FA5F8B19CABE0C00FCE828 /* Techrice-Info.plist */,
 				B2FA5F8C19CABE0C00FCE828 /* InfoPlist.strings */,
 				B25CC17F1A78D37900F3BD3C /* Localizable.strings */,
@@ -354,58 +298,8 @@
 				B23D75BF1A302FA100C4B29D /* allred.png */,
 				B2AF9EED19EFC7C80079BC3F /* allred@2x.png */,
 				B2FA5FFC19CAC90700FCE828 /* darkgreen@2x.png */,
-				B2FA5FFD19CAC90700FCE828 /* lightgreen.png */,
-				B2FA5FFE19CAC90700FCE828 /* red.png */,
 			);
 			path = marker;
-			sourceTree = "<group>";
-		};
-		B2FA600319CAC90E00FCE828 /* water */ = {
-			isa = PBXGroup;
-			children = (
-				B2FA600419CAC90E00FCE828 /* cleanwater2@2x.png */,
-				B2FA600519CAC90E00FCE828 /* cleanwater@2x.png */,
-				B2FA600619CAC90E00FCE828 /* dirtywater2@2x.png */,
-				B2FA600719CAC90E00FCE828 /* dirtywater@2x.png */,
-			);
-			path = water;
-			sourceTree = "<group>";
-		};
-		B2FA600C19CAC91500FCE828 /* logo */ = {
-			isa = PBXGroup;
-			children = (
-				B2FA600D19CAC91500FCE828 /* techricelogo.jpg */,
-				B2FA600E19CAC91500FCE828 /* techricelogo@2x.png */,
-			);
-			path = logo;
-			sourceTree = "<group>";
-		};
-		B2FA601119CAC91C00FCE828 /* antena */ = {
-			isa = PBXGroup;
-			children = (
-				B2FA601219CAC91C00FCE828 /* antena-green1@2x.png */,
-				B2FA601319CAC91C00FCE828 /* antena-green@2x.png */,
-				B2FA601419CAC91C00FCE828 /* antena-red1@2x.png */,
-				B2FA601519CAC91C00FCE828 /* antena-red@2x.png */,
-			);
-			path = antena;
-			sourceTree = "<group>";
-		};
-		B2FA601A19CAC92800FCE828 /* mud */ = {
-			isa = PBXGroup;
-			children = (
-				B2FA601B19CAC92800FCE828 /* mud@2x.png */,
-			);
-			path = mud;
-			sourceTree = "<group>";
-		};
-		B2FA601D19CAC93500FCE828 /* rice */ = {
-			isa = PBXGroup;
-			children = (
-				B2FA601E19CAC93500FCE828 /* happyrice.png */,
-				B2FA601F19CAC93500FCE828 /* sadrice.png */,
-			);
-			path = rice;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -490,38 +384,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2FA600A19CAC90E00FCE828 /* dirtywater2@2x.png in Resources */,
-				B24487B71A1B45B10039F030 /* list@2x.png in Resources */,
 				B2FA5F9A19CABE0C00FCE828 /* Main_iPad.storyboard in Resources */,
-				B2FA5FF719CAC86A00FCE828 /* windmill_fan.png in Resources */,
-				B2FA600119CAC90700FCE828 /* lightgreen.png in Resources */,
 				B2FA5F9F19CABE0C00FCE828 /* Images.xcassets in Resources */,
-				B2FA601C19CAC92800FCE828 /* mud@2x.png in Resources */,
-				B2FA600B19CAC90E00FCE828 /* dirtywater@2x.png in Resources */,
-				B2FA600919CAC90E00FCE828 /* cleanwater@2x.png in Resources */,
-				B2FA601619CAC91C00FCE828 /* antena-green1@2x.png in Resources */,
 				B2AF9EEE19EFC7C80079BC3F /* allred@2x.png in Resources */,
-				B2FA601719CAC91C00FCE828 /* antena-green@2x.png in Resources */,
-				B2FA600219CAC90700FCE828 /* red.png in Resources */,
 				B25CC17D1A78D37900F3BD3C /* Localizable.strings in Resources */,
-				B2FA602119CAC93500FCE828 /* sadrice.png in Resources */,
 				B2FA5F9719CABE0C00FCE828 /* Main_iPhone.storyboard in Resources */,
-				B24487B31A1B43BC0039F030 /* pin@2x.png in Resources */,
-				B2FA601919CAC91C00FCE828 /* antena-red@2x.png in Resources */,
-				B2FA602019CAC93500FCE828 /* happyrice.png in Resources */,
 				B23D75C21A30310400C4B29D /* darkgreen.png in Resources */,
 				B2FA600019CAC90700FCE828 /* darkgreen@2x.png in Resources */,
 				B23D75C01A302FA100C4B29D /* allred.png in Resources */,
-				B2FA600819CAC90E00FCE828 /* cleanwater2@2x.png in Resources */,
 				B2FA5F8E19CABE0C00FCE828 /* InfoPlist.strings in Resources */,
 				B2FA5FC719CAC45B00FCE828 /* GoogleMaps.bundle in Resources */,
-				B2FA5FF919CAC86A00FCE828 /* tabBar_sample.png in Resources */,
-				B2FA5FF819CAC86A00FCE828 /* thermometer.png in Resources */,
-				B2FA601819CAC91C00FCE828 /* antena-red1@2x.png in Resources */,
-				B2FA600F19CAC91500FCE828 /* techricelogo.jpg in Resources */,
-				B2FA5FF619CAC86A00FCE828 /* windmill_pole.png in Resources */,
-				B27AE3261A0CDF4F00A84929 /* ricefield.jpg in Resources */,
-				B2FA601019CAC91500FCE828 /* techricelogo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
