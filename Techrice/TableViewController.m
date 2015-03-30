@@ -121,10 +121,11 @@
     cell.textLabel.text = [[displayDataArray[indexPath.row] valueForKey:@"alias"] stringByAppendingString:[NSString stringWithFormat:@" - %@", NSLocalizedString(@"Water Level", nil)]];
     
     float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
+    NSLog(@"dog %f", distance);
     if (distance > appDelegate->minimumWaterLevel) {
-        cell.detailTextLabel.textColor = [UIColor redColor];
-    }else{
         cell.detailTextLabel.textColor = [UIColor blackColor];
+    }else{
+        cell.detailTextLabel.textColor = [UIColor redColor];
     }
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%0.2fcm", distance];
     
@@ -136,9 +137,9 @@
     float distance = DISTANCE_TO_GROUND-[[displayDataArray[indexPath.row] valueForKey:@"value"] floatValue];
 
     if (distance > appDelegate->minimumWaterLevel) {
-        cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];
-    }else{
         cell.backgroundColor = [UIColor whiteColor];
+    }else{
+        cell.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.09 brightness:0.99 alpha:1.0];
     }
 }
 

@@ -64,7 +64,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    NSLog(@"ViewController:viewWillAppear");
+    NSLog(@"ViewController: viewWillAppear");
     self.tabBarController.delegate = self;
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
 }
@@ -109,6 +109,7 @@
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
     [path removeAllCoordinates];
+    [mapView_ clear];
     for (int i =0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
