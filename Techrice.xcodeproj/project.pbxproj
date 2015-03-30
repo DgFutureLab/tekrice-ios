@@ -616,7 +616,7 @@
 				GCC_PREFIX_HEADER = "Techrice/Techrice-Prefix.pch";
 				INFOPLIST_FILE = "Techrice/Techrice-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c4ddac42-f7a9-41f9-8cf7-88c643ecc7d8";
+				PROVISIONING_PROFILE = "fbbf4c9b-d8c9-494a-8223-68b84d357083";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -637,7 +637,7 @@
 				GCC_PREFIX_HEADER = "Techrice/Techrice-Prefix.pch";
 				INFOPLIST_FILE = "Techrice/Techrice-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c4ddac42-f7a9-41f9-8cf7-88c643ecc7d8";
+				PROVISIONING_PROFILE = "fbbf4c9b-d8c9-494a-8223-68b84d357083";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

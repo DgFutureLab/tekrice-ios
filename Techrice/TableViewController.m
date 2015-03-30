@@ -8,7 +8,10 @@
 @implementation TableViewController
 
 - (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"TableViewController: viewWillAppear");
     self.tabBarController.delegate = self;
+    [self setListData];
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -22,21 +25,7 @@
     
     self.tabBarController.delegate = self;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray = appDelegate.nodeArray;
     displayDataArray = [[NSMutableArray alloc] init];
-    numberOfRows = 0;
-    for (int i=0; i<nodeArray.count; i++) {
-        NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
-        for (int j = 0; j<sensors.count; j++) {
-            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
-                numberOfRows++;
-                NSMutableDictionary *displayDictionary = [[sensors[j] valueForKey:@"latest_reading"] mutableCopy];
-                [displayDictionary setObject:[nodeArray[i] valueForKey:@"id"] forKey:@"nodeId"];
-                [displayDictionary setObject:[nodeArray[i] valueForKey:@"alias"] forKey:@"alias"];
-                [displayDataArray addObject:displayDictionary];
-            }   
-        }
-    }
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     NSArray *arr = @[NSLocalizedString(@"Ascending", nil), NSLocalizedString(@"Descending", nil)];
     seg = [[UISegmentedControl alloc] initWithItems:arr];
@@ -53,6 +42,26 @@
     NSDictionary *fontDictionary = @{NSFontAttributeName : customFont};
     [settingButton setTitleTextAttributes:fontDictionary forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = settingButton;
+}
+
+- (void)setListData{
+    NSLog(@"setListData");
+    nodeArray = [[[appDelegate getData:[NSString stringWithFormat:@"site/%d", appDelegate->currentSite]] valueForKey:@"objects"][0] objectForKey:@"nodes"];
+    appDelegate.nodeArray = nodeArray;
+    [displayDataArray removeAllObjects];
+    numberOfRows = 0;
+    for (int i=0; i<nodeArray.count; i++) {
+        NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
+        for (int j = 0; j<sensors.count; j++) {
+            if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
+                numberOfRows++;
+                NSMutableDictionary *displayDictionary = [[sensors[j] valueForKey:@"latest_reading"] mutableCopy];
+                [displayDictionary setObject:[nodeArray[i] valueForKey:@"id"] forKey:@"nodeId"];
+                [displayDictionary setObject:[nodeArray[i] valueForKey:@"alias"] forKey:@"alias"];
+                [displayDataArray addObject:displayDictionary];
+            }
+        }
+    }
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {

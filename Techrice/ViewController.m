@@ -64,7 +64,7 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated{
-    NSLog(@"viewWillAppear");
+    NSLog(@"ViewController:viewWillAppear");
     self.tabBarController.delegate = self;
     [self performSelectorInBackground:@selector(setMarker) withObject:nil];
 }
