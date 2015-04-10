@@ -35,28 +35,22 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 1200)];
     // distance
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
-    // FIXME: uncomment below
-//    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", 42]];
+    distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(IS_PAD?20:5, IS_PAD?-120:5, IS_PAD?760:310, IS_PAD?240:120)];
     [distanceLabel setText:@"--cm"];
     [distanceLabel setTextColor:[UIColor whiteColor]];
-    [distanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-UltraLight" size:100]];
+    [distanceLabel setFont:[UIFont fontWithName:IS_PAD?@"HelveticaNeue-Thin":@"HelveticaNeue-UltraLight" size:IS_PAD?240:100]];
     [view addSubview:distanceLabel];
     
     // subtitle for big water level label;
-    UILabel *subDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, -70, 310, 120)];
+    UILabel *subDistanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(IS_PAD?40:10, IS_PAD?-195:-70, 310, 120)];
     [subDistanceLabel setText:NSLocalizedString(@"Water Level", nil)];
     [subDistanceLabel setTextColor:[UIColor whiteColor]];
-    [subDistanceLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:28]];
+    [subDistanceLabel setFont:[UIFont fontWithName:IS_PAD?@"HelveticaNeue-Thin":@"HelveticaNeue-Light" size:IS_PAD?64:28]];
     [view addSubview:subDistanceLabel];
-    
-    
     
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
     
     // chart - water level
-    // FIXME: shold use for loop for waterlevel, humidity, and temperature.
-    
     for (int i = 0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
         if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"water_level"]) {
             // water level
