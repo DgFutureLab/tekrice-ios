@@ -22,10 +22,6 @@
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.0 green:0.1 blue:0.1 alpha:1.0];
     self.view.backgroundColor = [UIColor whiteColor];
     
-    // FIXME: hard code
-//    camera = [GMSCameraPosition cameraWithLatitude:35.14404025
-//                                         longitude:139.988354
-//                                              zoom:18.5];
     mapView_ = [GMSMapView mapWithFrame:CGRectZero camera:camera];
     mapView_.delegate = self;
     mapView_.myLocationEnabled = YES;
@@ -109,13 +105,13 @@
     UIImage *iconImage = [UIImage imageNamed:@"darkgreen.png"];
     UIImage *iconImageProblem = [UIImage imageNamed:@"allred.png"];
     [path removeAllCoordinates];
+    // Google Maps SDK must happend on the main thread
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
     [mapView_ clear];
     for (int i =0; i<nodeArray.count; i++) {
         NSArray *sensors =[NSArray arrayWithArray:[nodeArray[i] valueForKey:@"sensors"]];
         for (int j=0; j<sensors.count; j++) {
             if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] && ![[nodeArray[i] valueForKey:@"latitude"] isEqual:[NSNull null]] && ![[nodeArray[i] valueForKey:@"longitude"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:[NSNull null]] && ![[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
-                // Google Maps SDK must happend on the main thread
-                [[NSOperationQueue mainQueue] addOperationWithBlock:^{
                     GMSMarker *marker = [[GMSMarker alloc] init];
                     marker.position = CLLocationCoordinate2DMake([[nodeArray[i] valueForKey:@"latitude"] doubleValue], [[nodeArray[i] valueForKey:@"longitude"] doubleValue]);
                     [path addCoordinate:marker.position];
@@ -128,7 +124,6 @@
                     marker.userData = [nodeArray[i] valueForKey:@"id"];
                     marker.map = mapView_;
                     [self updateCameraToFitMarkers];
-                }];
             }else{
                 NSLog(@"Did not add a marker on the map. The reasons is below:");
                 if ([[sensors[j] valueForKey:@"latest_reading"] isEqual:@""]) {
@@ -150,6 +145,7 @@
             }
         }
     }
+    }];
 }
 
 - (void)updateCameraToFitMarkers{
