@@ -542,8 +542,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Garage Inc (M6TJK4GHCY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Garage Inc (M6TJK4GHCY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuta Toga (9558RPVRV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuta Toga (9558RPVRV2)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -559,7 +559,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -582,8 +582,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Digital Garage Inc (M6TJK4GHCY)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Digital Garage Inc (M6TJK4GHCY)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuta Toga (9558RPVRV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuta Toga (9558RPVRV2)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -593,7 +593,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -606,8 +606,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iOS Development: Yuta Toga (93S32JAU53)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Yuta Toga (93S32JAU53)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuta Toga (9558RPVRV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuta Toga (9558RPVRV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -616,7 +616,7 @@
 				GCC_PREFIX_HEADER = "Techrice/Techrice-Prefix.pch";
 				INFOPLIST_FILE = "Techrice/Techrice-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fbbf4c9b-d8c9-494a-8223-68b84d357083";
+				PROVISIONING_PROFILE = "dad0a80c-eb1f-4d79-98a7-d9eb50bcaf4a";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -627,8 +627,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iOS Development: Yuta Toga (93S32JAU53)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Yuta Toga (93S32JAU53)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuta Toga (9558RPVRV2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yuta Toga (9558RPVRV2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -637,7 +637,7 @@
 				GCC_PREFIX_HEADER = "Techrice/Techrice-Prefix.pch";
 				INFOPLIST_FILE = "Techrice/Techrice-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "fbbf4c9b-d8c9-494a-8223-68b84d357083";
+				PROVISIONING_PROFILE = "dad0a80c-eb1f-4d79-98a7-d9eb50bcaf4a";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
