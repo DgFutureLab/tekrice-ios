@@ -8,6 +8,7 @@
     NSDictionary *sites;
     int selectedSiteId;
     int mininumWaterLevel;
+    bool demo;
 }
 
 @end

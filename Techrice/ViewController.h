@@ -13,6 +13,7 @@
     
     int _minimumWaterLevel;
     int _currentSite;
+    bool _demo;
 }
 
 @end

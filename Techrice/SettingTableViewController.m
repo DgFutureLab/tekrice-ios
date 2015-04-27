@@ -18,6 +18,7 @@
     NSLog(@"viewWillAppear");
     mininumWaterLevel = appDelegate->minimumWaterLevel;
     selectedSiteId = appDelegate->currentSite;
+    demo = appDelegate->demo;
     [self.tableView reloadData];
 }
 
@@ -51,7 +52,8 @@
     NSNumberFormatter * numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSDictionary *setting = @{@"site":[NSNumber numberWithInteger:selectedSiteId],
-                              @"minimumWaterLevel":[numberFormatter numberFromString:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].detailTextLabel.text]
+                              @"minimumWaterLevel":[numberFormatter numberFromString:[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]].detailTextLabel.text],
+                              @"demo":[NSNumber numberWithBool:demo]
                               };
     NSLog(@"setting: %@", setting);
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -60,7 +62,9 @@
     if (successful) {
         NSLog(@"%@", @"SettingTableViewController-doneButtonTapped: saved data successfully");
     }
+    // app delegate
     appDelegate->currentSite = selectedSiteId;
+    appDelegate->demo = demo;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -74,7 +78,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -87,6 +91,9 @@
             break;
         case 2:
             return 2;
+            break;
+        case 3:
+            return 1;
             break;
         default:
             return 0;
@@ -130,10 +137,27 @@
             }
             break;
         }
+        case 3:{
+            cell.textLabel.text = @"detail view for demo";
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            UISwitch *switchView = [[UISwitch alloc] initWithFrame:CGRectZero];
+            cell.accessoryView = switchView;
+            [switchView setOn:demo animated:NO];
+            [switchView addTarget:self action:@selector(switchChanged:) forControlEvents:UIControlEventValueChanged];
+            break;
+        }
         default:
             break;
     }
     return cell;
+}
+
+- (void) switchChanged:(id)sender {
+    NSLog(@"smoky: %@", sender);
+    UISwitch* switchControl = sender;
+    demo = switchControl.on;
+    NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );
+    
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -178,6 +202,7 @@
         case 0: return NSLocalizedString(@"SITES", nil);
         case 1: return NSLocalizedString(@"SENSORS", nil);
         case 2: return NSLocalizedString(@"MORE", nil);
+        case 3: return NSLocalizedString(@"DEMO", nil);
         default: return @"";
     }
 }

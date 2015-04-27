@@ -48,15 +48,18 @@
         NSLog(@"%@", @"ViewController_viewDidLoad: no setting data in cache");
         _minimumWaterLevel = 0;
         _currentSite = [[[[appDelegate getData:@"sites"] objectForKey:@"objects"][0] objectForKey:@"id"] intValue];
+        _demo = false;
     }else{
         NSLog(@"%@", settingData);
         _currentSite = [[settingData objectForKey:@"site"] intValue];
         _minimumWaterLevel = [[settingData objectForKey:@"minimumWaterLevel"] intValue];
+        _demo = [[settingData objectForKey:@"demo"] boolValue];
     }
     NSLog(@"read from setting data:_currentSite%d - _minimumWaterLevel%d", _currentSite, _minimumWaterLevel);
     
     appDelegate->currentSite = _currentSite;
     appDelegate->minimumWaterLevel = _minimumWaterLevel;
+    appDelegate->demo = _demo;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
