@@ -153,7 +153,6 @@
 }
 
 - (void) switchChanged:(id)sender {
-    NSLog(@"smoky: %@", sender);
     UISwitch* switchControl = sender;
     demo = switchControl.on;
     NSLog( @"The switch is %@", switchControl.on ? @"ON" : @"OFF" );

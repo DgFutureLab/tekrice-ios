@@ -176,16 +176,23 @@
 
 // when marker is tapped, go to detail view
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
-    NSLog(@"tapMarker and go to detail view for node id %d", [marker.userData intValue]);
-    DetailViewController *detailViewController = [[DetailViewController alloc] init];
-    detailViewController->nodeId = [marker.userData intValue];
-    for (int i = 0; i<nodeArray.count; i++) {
-        if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
-            detailViewController->nodeData = nodeArray[i];
+    if (appDelegate->demo) {
+        NSLog(@"tapMarker and go to demo detail view");
+        ConditionViewController *conditionViewController = [[ConditionViewController alloc] init];
+        conditionViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:conditionViewController animated:YES];
+    }else{
+        NSLog(@"tapMarker and go to detail view for node id %d", [marker.userData intValue]);
+        DetailViewController *detailViewController = [[DetailViewController alloc] init];
+        detailViewController->nodeId = [marker.userData intValue];
+        for (int i = 0; i<nodeArray.count; i++) {
+            if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
+                detailViewController->nodeData = nodeArray[i];
+            }
         }
+        detailViewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:detailViewController animated:YES];
     }
-    detailViewController.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:detailViewController animated:YES];
     return YES;
 }
 
