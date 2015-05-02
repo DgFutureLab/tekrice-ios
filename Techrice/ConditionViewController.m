@@ -80,6 +80,7 @@
 }
 
 -(void)hoge:(NSTimer*)timer{
+    NSLog(@"hoge");
 //    NSLog(@"update");
     // ここに何かの処理を記述する
     // （引数の timer には呼び出し元のNSTimerオブジェクトが引き渡されてきます）
@@ -145,6 +146,16 @@
     kfa.repeatCount = HUGE_VALF;
     // 実行
     [layer addAnimation:kfa forKey:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    NSLog(@"ConditionViewController: viewWillAppear");
+    [self performSelectorInBackground:@selector(updateSensorData) withObject:nil];
+}
+
+- (void)updateSensorData{
+    NSLog(@"updateSensorData");
+//    [self updateSensorData];
 }
 
 - (void)didReceiveMemoryWarning
