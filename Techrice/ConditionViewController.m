@@ -1,11 +1,3 @@
-//
-//  ConditionViewController.m
-//  mapboxtest
-//
-//  Created by 藤賀 雄太 on 8/27/14.
-//  Copyright (c) 2014 Yuta Toga. All rights reserved.
-//
-
 #import "ConditionViewController.h"
 
 @interface ConditionViewController ()
@@ -26,18 +18,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSArray *sensors =[NSArray arrayWithArray:[nodeData valueForKey:@"sensors"]];
+    for (int j=0; j<sensors.count; j++) {
+        if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] ){
+            latestWaterLevel = DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue];
+        }
+    }
+
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0]];
     
-    appDelegate = appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
-    float distance = 42; // FIXME: hard code
+    appDelegate=(AppDelegate*)[[UIApplication sharedApplication] delegate];
     //rice
     conditionImageViewRice = [[UIImageView alloc] init];
     [conditionImageViewRice setFrame:CGRectMake(0, 50, self.view.bounds.size.width, self.view.bounds.size.height)];
     [self.view addSubview:conditionImageViewRice];
     //water
     conditionImageViewWater = [[UIImageView alloc] init];
-    if (distance < THRESHOLD) {
+    if (latestWaterLevel > THRESHOLD) {
         goodCondition = true;
         conditionImageViewRice.image = [UIImage imageNamed:@"happyrice.png"];
         conditionImageViewWater.image = [UIImage imageNamed:@"cleanwater.png"];
@@ -58,36 +56,26 @@
     [conditionImageViewMud setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height+50)];
     [self.view addSubview:conditionImageViewMud];
     
-//    UILabel *waterLevelLabel = [[UILabel alloc] init];
-//    waterLevelLabel.frame = CGRectMake(0, 430, 320, 32);
-//    waterLevelLabel.textAlignment = NSTextAlignmentCenter;
-//    waterLevelLabel.text = [NSString stringWithFormat:@"Distance: %.0f", distance];
-//    [self.view addSubview:waterLevelLabel];
-    
     UIBarButtonItem *detailButton = [[UIBarButtonItem alloc] initWithTitle:@"Detail" style:UIBarButtonItemStylePlain target:self action:@selector(pressDetailButton)];
     self.navigationItem.rightBarButtonItem = detailButton;
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(hoge:) userInfo:nil repeats:YES];
+    NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(animate:) userInfo:nil repeats:YES];
     
-    // debug(delete me)
-//    slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 300, 200, 20)];
-//    slider.minimumValue = 0.0;
-//    slider.maximumValue = 1.0;
-//    slider.value = 0.5;
-//    [self.view addSubview:slider];
+    //distance label
+    distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(IS_PAD?20:5, IS_PAD?self.view.frame.size.height-225:self.view.frame.size.height-105, IS_PAD?760:310, IS_PAD?240:120)];
+    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", latestWaterLevel]];
+    [distanceLabel setTextColor:[UIColor whiteColor]];
+    [distanceLabel setFont:[UIFont fontWithName:IS_PAD?@"HelveticaNeue-Thin":@"HelveticaNeue-UltraLight" size:IS_PAD?240:100]];
+    [self.view addSubview:distanceLabel];
 }
 
--(void)hoge:(NSTimer*)timer{
-    NSLog(@"hoge");
+-(void)animate:(NSTimer*)timer{
 //    NSLog(@"update");
     // ここに何かの処理を記述する
     // （引数の timer には呼び出し元のNSTimerオブジェクトが引き渡されてきます）
-    float distance = 42; // FIXME: hard code
-    
-//    float th = slider.value*100;//debug (delete me)
-    if (distance < THRESHOLD) {
+    if (latestWaterLevel > THRESHOLD) {
         if (!goodCondition) {
             goodCondition = true;
             conditionImageViewRice.image = [UIImage imageNamed:@"happyrice.png"];
@@ -105,8 +93,9 @@
 }
 
 - (void)pressDetailButton{
-//    NSLog(@"go to the detail view");
+    NSLog(@"DetailButton is tapped.");
     DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    detailViewController->nodeData = nodeData;
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
@@ -155,6 +144,9 @@
 
 - (void)updateSensorData{
     NSLog(@"updateSensorData");
+//    [appDelegate getData:<#(NSString *)#>];
+    
+    
 //    [self updateSensorData];
 }
 

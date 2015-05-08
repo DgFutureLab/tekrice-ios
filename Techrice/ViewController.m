@@ -179,6 +179,11 @@
     if (appDelegate->demo) {
         NSLog(@"tapMarker and go to demo detail view");
         ConditionViewController *conditionViewController = [[ConditionViewController alloc] init];
+        for (int i = 0; i<nodeArray.count; i++) {
+            if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
+                conditionViewController->nodeData = nodeArray[i];
+            }
+        }
         conditionViewController.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:conditionViewController animated:YES];
     }else{
