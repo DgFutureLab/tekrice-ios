@@ -64,6 +64,7 @@
     NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(animate:) userInfo:nil repeats:YES];
     
     //distance label
+    enableUpdating = true;
     distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(IS_PAD?20:5, IS_PAD?self.view.frame.size.height-225:self.view.frame.size.height-105, IS_PAD?760:310, IS_PAD?240:120)];
     [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", latestWaterLevel]];
     [distanceLabel setTextColor:[UIColor whiteColor]];
@@ -101,7 +102,7 @@
 
 - (void)sinAnimation:(CALayer *)layer waterLevel:(float)waterLevel{
     // アニメーションの開始点
-    CGPoint start = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height*1.1-(IS_PAD?waterLevel*2:waterLevel));// FIXME: height should be changed by waterLevel
+    CGPoint start = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height*1.1-(IS_PAD?waterLevel*2:waterLevel));
     // アニメーションの時間
     CFTimeInterval duration = 2;
     // fps
@@ -139,15 +140,26 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     NSLog(@"ConditionViewController: viewWillAppear");
+    enableUpdating = true;
     [self performSelectorInBackground:@selector(updateSensorData) withObject:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated{
+    enableUpdating = false;
+}
+
 - (void)updateSensorData{
-    NSLog(@"updateSensorData");
-//    [appDelegate getData:<#(NSString *)#>];
-    
-    
-//    [self updateSensorData];
+    if (enableUpdating) {
+        NSLog(@"updateSensorData");
+        int nodeId = [[nodeData valueForKey:@"id"] intValue];
+        NSDate *start = [NSDate date];
+        nodeData = [[appDelegate getData:[NSString stringWithFormat:@"node/%d", nodeId]] objectForKey:@"objects"][0];
+        NSTimeInterval timeInterval = [start timeIntervalSinceNow];
+        if (timeInterval < 2) {
+            [NSThread sleepForTimeInterval:2-timeInterval];
+        }
+        [self updateSensorData];
+    }
 }
 
 - (void)didReceiveMemoryWarning

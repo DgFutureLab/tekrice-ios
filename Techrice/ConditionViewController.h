@@ -14,6 +14,7 @@
     UISlider *slider;
     NSDictionary *latestWaterLevelData;
     float latestWaterLevel;
+    bool enableUpdating;
 @public
     NSDictionary *nodeData;
 }
