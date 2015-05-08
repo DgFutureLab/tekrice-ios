@@ -101,7 +101,7 @@
 
 - (void)sinAnimation:(CALayer *)layer waterLevel:(float)waterLevel{
     // アニメーションの開始点
-    CGPoint start = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height*1.1);// FIXME: height should be changed by waterLevel
+    CGPoint start = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height*1.1-(IS_PAD?waterLevel*2:waterLevel));// FIXME: height should be changed by waterLevel
     // アニメーションの時間
     CFTimeInterval duration = 2;
     // fps
