@@ -95,10 +95,13 @@
 // get marker's data and marker's image using setMarkerColor function
 - (void) setMarker{
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    nodeArray = [[[appDelegate getData:[NSString stringWithFormat:@"site/%d", appDelegate->currentSite]] valueForKey:@"objects"][0] objectForKey:@"nodes"];
-//    nodeArray = [self getDummyData]; //dummy
-    appDelegate.nodeArray = nodeArray;
-    [self setMarkerColor];
+    NSDictionary *currentSiteData = [appDelegate getData:[NSString stringWithFormat:@"site/%d", appDelegate->currentSite]];
+    if ([currentSiteData valueForKey:@"objects"] && [[currentSiteData valueForKey:@"objects"] count] > 0 && [[currentSiteData valueForKey:@"objects"][0] objectForKey:@"nodes"]) {
+        nodeArray = [[currentSiteData valueForKey:@"objects"][0] objectForKey:@"nodes"];
+//      nodeArray = [self getDummyData]; //dummy
+        appDelegate.nodeArray = nodeArray;
+        [self setMarkerColor];
+    }
 }
 
 // set marker's color to red or green

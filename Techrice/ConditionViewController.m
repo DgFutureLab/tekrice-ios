@@ -73,9 +73,6 @@
 }
 
 -(void)animate:(NSTimer*)timer{
-//    NSLog(@"update");
-    // ここに何かの処理を記述する
-    // （引数の timer には呼び出し元のNSTimerオブジェクトが引き渡されてきます）
     if (latestWaterLevel > THRESHOLD) {
         if (!goodCondition) {
             goodCondition = true;
@@ -150,16 +147,28 @@
 
 - (void)updateSensorData{
     if (enableUpdating) {
-        NSLog(@"updateSensorData");
         int nodeId = [[nodeData valueForKey:@"id"] intValue];
         NSDate *start = [NSDate date];
-        nodeData = [[appDelegate getData:[NSString stringWithFormat:@"node/%d", nodeId]] objectForKey:@"objects"][0];
-        NSTimeInterval timeInterval = [start timeIntervalSinceNow];
-        if (timeInterval < 2) {
-            [NSThread sleepForTimeInterval:2-timeInterval];
+        if ([[appDelegate getData:[NSString stringWithFormat:@"node/%d", nodeId]] objectForKey:@"objects"]) {
+            nodeData = [[appDelegate getData:[NSString stringWithFormat:@"node/%d", nodeId]] objectForKey:@"objects"][0];
+            NSTimeInterval timeInterval = [start timeIntervalSinceNow];
+            if (timeInterval < 2) {
+                [NSThread sleepForTimeInterval:2-timeInterval];
+            }
+            NSArray *sensors =[NSArray arrayWithArray:[nodeData valueForKey:@"sensors"]];
+            for (int j=0; j<sensors.count; j++) {
+                if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] ){
+                    latestWaterLevel = DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue];
+                    [self performSelectorOnMainThread:@selector(updateLabel) withObject:nil waitUntilDone:NO];
+                }
+            }
         }
         [self updateSensorData];
     }
+}
+
+- (void)updateLabel{
+    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", latestWaterLevel]];
 }
 
 - (void)didReceiveMemoryWarning

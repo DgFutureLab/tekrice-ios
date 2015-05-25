@@ -57,7 +57,7 @@
     // get data
     NSString *url;
     if (parameter) {
-        url = [@"http://satoyamacloud.com/" stringByAppendingString: parameter];
+        url = [@"http://127.0.0.1:8080/" stringByAppendingString: parameter];
     }else{
         url = @"http://satoyamacloud.com/nodes";
     }
@@ -70,12 +70,25 @@
         NSDictionary *result = [NSJSONSerialization JSONObjectWithData:json options:NSJSONReadingMutableContainers error:nil];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSData *dataSave = [NSKeyedArchiver archivedDataWithRootObject:result];
-        [defaults setObject:dataSave forKey:[@"cache/node/" stringByAppendingString:parameter]];
-        BOOL successful = [defaults synchronize];
-        if (successful) {
-            NSLog(@"AppDelegate-getDistance: saved data successfully.");
+        if ([[result valueForKey:@"status"] intValue] != 429) {
+            [defaults setObject:dataSave forKey:[@"cache/node/" stringByAppendingString:parameter]];
+            BOOL successful = [defaults synchronize];
+            if (successful) {
+                NSLog(@"AppDelegate-getDistance: saved data successfully.");
+            }
+            return result;
+        }else{
+            //too many requests
+            NSLog(@"error: %@", result);
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[@"cache/node/" stringByAppendingString:parameter]];
+            NSDictionary *savedDictionary = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            if (savedDictionary) {
+                return savedDictionary;
+            } else {
+                NSLog(@"AppDelegate-getDistance: %@", @"no data in cache.");
+                return 0;
+            }
         }
-        return result;
     }else{
         NSLog(@"AppDelegate-getDistance: getdistance failed");
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:[@"cache/node/" stringByAppendingString:parameter]];
