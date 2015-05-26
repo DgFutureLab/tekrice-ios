@@ -7,7 +7,6 @@
 @public
     int minimumWaterLevel;
     int currentSite;
-    bool demo;
 }
 
 @property (strong, nonatomic) UIWindow *window;

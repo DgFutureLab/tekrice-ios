@@ -48,18 +48,15 @@
         NSLog(@"%@", @"ViewController_viewDidLoad: no setting data in cache");
         _minimumWaterLevel = 0;
         _currentSite = [[[[appDelegate getData:@"sites"] objectForKey:@"objects"][0] objectForKey:@"id"] intValue];
-        _demo = false;
     }else{
         NSLog(@"%@", settingData);
         _currentSite = [[settingData objectForKey:@"site"] intValue];
         _minimumWaterLevel = [[settingData objectForKey:@"minimumWaterLevel"] intValue];
-        _demo = [[settingData objectForKey:@"demo"] boolValue];
     }
     NSLog(@"read from setting data:_currentSite%d - _minimumWaterLevel%d", _currentSite, _minimumWaterLevel);
     
     appDelegate->currentSite = _currentSite;
     appDelegate->minimumWaterLevel = _minimumWaterLevel;
-    appDelegate->demo = _demo;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -179,28 +176,16 @@
 
 // when marker is tapped, go to detail view
 - (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker{
-    if (appDelegate->demo) {
-        NSLog(@"tapMarker and go to demo detail view");
-        ConditionViewController *conditionViewController = [[ConditionViewController alloc] init];
-        for (int i = 0; i<nodeArray.count; i++) {
-            if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
-                conditionViewController->nodeData = nodeArray[i];
-            }
+    NSLog(@"tapMarker and go to detail view for node id %d", [marker.userData intValue]);
+    DetailViewController *detailViewController = [[DetailViewController alloc] init];
+    detailViewController->nodeId = [marker.userData intValue];
+    for (int i = 0; i<nodeArray.count; i++) {
+        if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
+            detailViewController->nodeData = nodeArray[i];
         }
-        conditionViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:conditionViewController animated:YES];
-    }else{
-        NSLog(@"tapMarker and go to detail view for node id %d", [marker.userData intValue]);
-        DetailViewController *detailViewController = [[DetailViewController alloc] init];
-        detailViewController->nodeId = [marker.userData intValue];
-        for (int i = 0; i<nodeArray.count; i++) {
-            if ([nodeArray[i] valueForKey:@"id"] == marker.userData) {
-                detailViewController->nodeData = nodeArray[i];
-            }
-        }
-        detailViewController.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:detailViewController animated:YES];
     }
+    detailViewController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:detailViewController animated:YES];
     return YES;
 }
 

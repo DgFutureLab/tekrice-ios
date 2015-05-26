@@ -57,7 +57,7 @@
     // get data
     NSString *url;
     if (parameter) {
-        url = [@"http://127.0.0.1:8080/" stringByAppendingString: parameter];
+        url = [@"http://satoyamacloud.com/" stringByAppendingString: parameter];
     }else{
         url = @"http://satoyamacloud.com/nodes";
     }

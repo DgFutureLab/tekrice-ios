@@ -15,21 +15,13 @@
 		B24487B11A1B24A30039F030 /* SettingValueViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B24487B01A1B24A30039F030 /* SettingValueViewController.m */; };
 		B25CC17D1A78D37900F3BD3C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B25CC17F1A78D37900F3BD3C /* Localizable.strings */; };
 		B26671891AEE342200EE99C0 /* ricefield.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B26671881AEE342100EE99C0 /* ricefield.jpg */; };
-		B266718D1AEE39C500EE99C0 /* happyrice.png in Resources */ = {isa = PBXBuildFile; fileRef = B266718B1AEE39C500EE99C0 /* happyrice.png */; };
-		B266718E1AEE39C500EE99C0 /* sadrice.png in Resources */ = {isa = PBXBuildFile; fileRef = B266718C1AEE39C500EE99C0 /* sadrice.png */; };
-		B26671951AEE3DF300EE99C0 /* happyrice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B26671911AEE3DF300EE99C0 /* happyrice@2x.png */; };
-		B26671961AEE3DF300EE99C0 /* sadrice@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B26671921AEE3DF300EE99C0 /* sadrice@2x.png */; };
-		B26671981AEE3EBA00EE99C0 /* mud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B26671971AEE3EBA00EE99C0 /* mud@2x.png */; };
 		B266719B1AEE41AA00EE99C0 /* list@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B26671991AEE41AA00EE99C0 /* list@2x.png */; };
 		B266719C1AEE41AA00EE99C0 /* pin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B266719A1AEE41AA00EE99C0 /* pin@2x.png */; };
 		B26CE96B1A318DA900414E87 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B26CE96A1A318DA900414E87 /* AboutViewController.m */; };
-		B2839BD81AEE4B1C00BBFB34 /* cleanwater@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2839BD61AEE4B1C00BBFB34 /* cleanwater@2x.png */; };
-		B2839BD91AEE4B1C00BBFB34 /* dirtywater@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2839BD71AEE4B1C00BBFB34 /* dirtywater@2x.png */; };
 		B2AF9EE319EE73A80079BC3F /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE219EE73A80079BC3F /* DetailViewController.m */; };
 		B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE619EE75870079BC3F /* UIImage+ImageEffects.m */; };
 		B2AF9EEA19EE75870079BC3F /* BTGlassScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AF9EE819EE75870079BC3F /* BTGlassScrollView.m */; };
 		B2AF9EEE19EFC7C80079BC3F /* allred@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2AF9EED19EFC7C80079BC3F /* allred@2x.png */; };
-		B2CBE1001AEE29C30044D857 /* ConditionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CBE0FF1AEE29C30044D857 /* ConditionViewController.m */; };
 		B2FA5F8419CABE0C00FCE828 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5F8319CABE0C00FCE828 /* Foundation.framework */; };
 		B2FA5F8619CABE0C00FCE828 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5F8519CABE0C00FCE828 /* CoreGraphics.framework */; };
 		B2FA5F8819CABE0C00FCE828 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FA5F8719CABE0C00FCE828 /* UIKit.framework */; };
@@ -94,17 +86,10 @@
 		B25CC17E1A78D37900F3BD3C /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B25CC1801A78D3A100F3BD3C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		B26671881AEE342100EE99C0 /* ricefield.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ricefield.jpg; sourceTree = "<group>"; };
-		B266718B1AEE39C500EE99C0 /* happyrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = happyrice.png; sourceTree = "<group>"; };
-		B266718C1AEE39C500EE99C0 /* sadrice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sadrice.png; sourceTree = "<group>"; };
-		B26671911AEE3DF300EE99C0 /* happyrice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "happyrice@2x.png"; sourceTree = "<group>"; };
-		B26671921AEE3DF300EE99C0 /* sadrice@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sadrice@2x.png"; sourceTree = "<group>"; };
-		B26671971AEE3EBA00EE99C0 /* mud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mud@2x.png"; sourceTree = "<group>"; };
 		B26671991AEE41AA00EE99C0 /* list@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "list@2x.png"; sourceTree = "<group>"; };
 		B266719A1AEE41AA00EE99C0 /* pin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pin@2x.png"; sourceTree = "<group>"; };
 		B26CE9691A318DA900414E87 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		B26CE96A1A318DA900414E87 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
-		B2839BD61AEE4B1C00BBFB34 /* cleanwater@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cleanwater@2x.png"; sourceTree = "<group>"; };
-		B2839BD71AEE4B1C00BBFB34 /* dirtywater@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dirtywater@2x.png"; sourceTree = "<group>"; };
 		B2AF9EE119EE73A80079BC3F /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		B2AF9EE219EE73A80079BC3F /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		B2AF9EE519EE75870079BC3F /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
@@ -112,8 +97,6 @@
 		B2AF9EE719EE75870079BC3F /* BTGlassScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTGlassScrollView.h; sourceTree = "<group>"; };
 		B2AF9EE819EE75870079BC3F /* BTGlassScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTGlassScrollView.m; sourceTree = "<group>"; };
 		B2AF9EED19EFC7C80079BC3F /* allred@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "allred@2x.png"; sourceTree = "<group>"; };
-		B2CBE0FE1AEE29C30044D857 /* ConditionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConditionViewController.h; sourceTree = "<group>"; };
-		B2CBE0FF1AEE29C30044D857 /* ConditionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConditionViewController.m; sourceTree = "<group>"; };
 		B2FA5F8019CABE0C00FCE828 /* Techrice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Techrice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2FA5F8319CABE0C00FCE828 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B2FA5F8519CABE0C00FCE828 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -198,20 +181,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B266718A1AEE395E00EE99C0 /* ConditionViewController */ = {
-			isa = PBXGroup;
-			children = (
-				B2839BD61AEE4B1C00BBFB34 /* cleanwater@2x.png */,
-				B2839BD71AEE4B1C00BBFB34 /* dirtywater@2x.png */,
-				B26671971AEE3EBA00EE99C0 /* mud@2x.png */,
-				B26671911AEE3DF300EE99C0 /* happyrice@2x.png */,
-				B26671921AEE3DF300EE99C0 /* sadrice@2x.png */,
-				B266718B1AEE39C500EE99C0 /* happyrice.png */,
-				B266718C1AEE39C500EE99C0 /* sadrice.png */,
-			);
-			name = ConditionViewController;
-			sourceTree = "<group>";
-		};
 		B2AF9EE419EE73BE0079BC3F /* BTGlassScrollView */ = {
 			isa = PBXGroup;
 			children = (
@@ -293,8 +262,6 @@
 				B24487B01A1B24A30039F030 /* SettingValueViewController.m */,
 				B26CE9691A318DA900414E87 /* AboutViewController.h */,
 				B26CE96A1A318DA900414E87 /* AboutViewController.m */,
-				B2CBE0FE1AEE29C30044D857 /* ConditionViewController.h */,
-				B2CBE0FF1AEE29C30044D857 /* ConditionViewController.m */,
 			);
 			path = Techrice;
 			sourceTree = "<group>";
@@ -305,7 +272,6 @@
 				B26671991AEE41AA00EE99C0 /* list@2x.png */,
 				B266719A1AEE41AA00EE99C0 /* pin@2x.png */,
 				B26671881AEE342100EE99C0 /* ricefield.jpg */,
-				B266718A1AEE395E00EE99C0 /* ConditionViewController */,
 				B2FA5FFA19CAC90700FCE828 /* marker */,
 				B2FA5F8B19CABE0C00FCE828 /* Techrice-Info.plist */,
 				B2FA5F8C19CABE0C00FCE828 /* InfoPlist.strings */,
@@ -429,23 +395,16 @@
 			files = (
 				B2FA5F9A19CABE0C00FCE828 /* Main_iPad.storyboard in Resources */,
 				B2FA5F9F19CABE0C00FCE828 /* Images.xcassets in Resources */,
-				B26671951AEE3DF300EE99C0 /* happyrice@2x.png in Resources */,
 				B2AF9EEE19EFC7C80079BC3F /* allred@2x.png in Resources */,
 				B25CC17D1A78D37900F3BD3C /* Localizable.strings in Resources */,
 				B2FA5F9719CABE0C00FCE828 /* Main_iPhone.storyboard in Resources */,
 				B23D75C21A30310400C4B29D /* darkgreen.png in Resources */,
 				B2FA600019CAC90700FCE828 /* darkgreen@2x.png in Resources */,
-				B2839BD81AEE4B1C00BBFB34 /* cleanwater@2x.png in Resources */,
-				B2839BD91AEE4B1C00BBFB34 /* dirtywater@2x.png in Resources */,
 				B26671891AEE342200EE99C0 /* ricefield.jpg in Resources */,
 				B23D75C01A302FA100C4B29D /* allred.png in Resources */,
-				B26671981AEE3EBA00EE99C0 /* mud@2x.png in Resources */,
-				B266718D1AEE39C500EE99C0 /* happyrice.png in Resources */,
 				B266719C1AEE41AA00EE99C0 /* pin@2x.png in Resources */,
 				B2FA5F8E19CABE0C00FCE828 /* InfoPlist.strings in Resources */,
-				B266718E1AEE39C500EE99C0 /* sadrice.png in Resources */,
 				B266719B1AEE41AA00EE99C0 /* list@2x.png in Resources */,
-				B26671961AEE3DF300EE99C0 /* sadrice@2x.png in Resources */,
 				B2FA5FC719CAC45B00FCE828 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,7 +459,6 @@
 			files = (
 				B21A2D2E19F0F5E500633CEF /* TabBarController.m in Sources */,
 				B2FA5F9D19CABE0C00FCE828 /* ViewController.m in Sources */,
-				B2CBE1001AEE29C30044D857 /* ConditionViewController.m in Sources */,
 				B2AF9EEA19EE75870079BC3F /* BTGlassScrollView.m in Sources */,
 				B2AF9EE919EE75870079BC3F /* UIImage+ImageEffects.m in Sources */,
 				B24487AB1A1B21150039F030 /* SettingTableViewController.m in Sources */,
