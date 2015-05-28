@@ -65,8 +65,11 @@
     
     //distance label
     enableUpdating = true;
-    distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(IS_PAD?20:5, IS_PAD?self.view.frame.size.height-225:self.view.frame.size.height-105, IS_PAD?760:310, IS_PAD?240:120)];
+    distanceLabel = [[UICountingLabel alloc] initWithFrame:CGRectMake(IS_PAD?20:5, IS_PAD?self.view.frame.size.height-225:self.view.frame.size.height-105, IS_PAD?760:310, IS_PAD?240:120)];
+    distanceLabel.format = @"%.0fcm";
+    distanceLabel.method = UILabelCountingMethodEaseInOut;
     [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", latestWaterLevel]];
+    [distanceLabel countFrom:latestWaterLevel to:latestWaterLevel];
     [distanceLabel setTextColor:[UIColor whiteColor]];
     [distanceLabel setFont:[UIFont fontWithName:IS_PAD?@"HelveticaNeue-Thin":@"HelveticaNeue-UltraLight" size:IS_PAD?240:100]];
     [self.view addSubview:distanceLabel];
@@ -168,7 +171,7 @@
 }
 
 - (void)updateLabel{
-    [distanceLabel setText:[NSString stringWithFormat:@"%.0fcm", latestWaterLevel]];
+    [distanceLabel countFromCurrentValueTo:latestWaterLevel];
 }
 
 - (void)didReceiveMemoryWarning

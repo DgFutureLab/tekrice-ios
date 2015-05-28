@@ -3,12 +3,13 @@
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
 #import "AppDelegate.h"
+#import "UICountingLabel.h"
 @interface ConditionViewController : UIViewController{
 @private
     AppDelegate *appDelegate;
     UIImageView *conditionImageViewRice, *conditionImageViewWater;
     bool goodCondition;
-    UILabel *distanceLabel;
+    UICountingLabel *distanceLabel;
     
     //debug
     UISlider *slider;
