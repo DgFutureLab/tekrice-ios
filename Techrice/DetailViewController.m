@@ -242,7 +242,7 @@
         PNLineChartData *lineChartDataDistance = [PNLineChartData new];
         lineChartDataDistance.color = PNFreshGreen;
         lineChartDataDistance.itemCount = lineChart.xLabels.count;
-        lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCircle;
+        lineChartDataDistance.inflexionPointStyle = PNLineChartPointStyleCycle;
         lineChartDataDistance.getData = ^(NSUInteger index) {
             CGFloat yValue = [displayDistanceDataArray[index] floatValue];
             return [PNLineChartDataItem dataItemWithY:yValue];

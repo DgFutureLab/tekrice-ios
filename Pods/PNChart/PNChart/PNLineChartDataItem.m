@@ -5,20 +5,28 @@
 
 #import "PNLineChartDataItem.h"
 
-@interface PNLineChartDataItem ()
 
+//------------------------------------------------------------------------------------------------
+// private interface declaration
+//------------------------------------------------------------------------------------------------
+@interface PNLineChartDataItem ()
 - (id)initWithY:(CGFloat)y;
 
 @property (readwrite) CGFloat y; // should be within the y range
-
 @end
 
+
+
+//------------------------------------------------------------------------------------------------
+// public interface implementation
+//------------------------------------------------------------------------------------------------
 @implementation PNLineChartDataItem
 
 + (PNLineChartDataItem *)dataItemWithY:(CGFloat)y
 {
     return [[PNLineChartDataItem alloc] initWithY:y];
 }
+
 
 - (id)initWithY:(CGFloat)y
 {
@@ -28,5 +36,6 @@
 
     return self;
 }
+
 
 @end

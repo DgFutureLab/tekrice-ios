@@ -9,25 +9,23 @@
 #import <Foundation/Foundation.h>
 
 @protocol PNChartDelegate <NSObject>
-@optional
+
 /**
- * Callback method that gets invoked when the user taps on the chart line.
+ * When user click on the chart line
+ *
  */
 - (void)userClickedOnLinePoint:(CGPoint)point lineIndex:(NSInteger)lineIndex;
 
 /**
- * Callback method that gets invoked when the user taps on a chart line key point.
+ * When user click on the chart line key point
+ *
  */
-- (void)userClickedOnLineKeyPoint:(CGPoint)point
-                        lineIndex:(NSInteger)lineIndex
-                       pointIndex:(NSInteger)pointIndex;
+- (void)userClickedOnLineKeyPoint:(CGPoint)point lineIndex:(NSInteger)lineIndex andPointIndex:(NSInteger)pointIndex;
 
 /**
- * Callback method that gets invoked when the user taps on a chart bar.
+ * When user click on a chart bar
+ *
  */
-- (void)userClickedOnBarAtIndex:(NSInteger)barIndex;
+- (void)userClickedOnBarCharIndex:(NSInteger)barIndex;
 
-
-- (void)userClickedOnPieIndexItem:(NSInteger)pieIndex;
-- (void)didUnselectPieItem;
 @end

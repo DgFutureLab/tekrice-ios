@@ -22,36 +22,7 @@ typedef NS_ENUM (NSUInteger, PNChartFormatType) {
 
 - (void)strokeChart;
 - (void)growChartByAmount:(NSNumber *)growAmount;
-- (void)updateChartByCurrent:(NSNumber *)current;
-- (void)updateChartByCurrent:(NSNumber *)current byTotal:(NSNumber *)total;
-- (id)initWithFrame:(CGRect)frame
-              total:(NSNumber *)total
-            current:(NSNumber *)current
-          clockwise:(BOOL)clockwise;
-
-- (id)initWithFrame:(CGRect)frame
-              total:(NSNumber *)total
-            current:(NSNumber *)current
-          clockwise:(BOOL)clockwise
-             shadow:(BOOL)hasBackgroundShadow
-        shadowColor:(UIColor *)backgroundShadowColor;
-
-- (id)initWithFrame:(CGRect)frame
-              total:(NSNumber *)total
-            current:(NSNumber *)current
-          clockwise:(BOOL)clockwise
-             shadow:(BOOL)hasBackgroundShadow
-        shadowColor:(UIColor *)backgroundShadowColor
-displayCountingLabel:(BOOL)displayCountingLabel;
-
-- (id)initWithFrame:(CGRect)frame
-              total:(NSNumber *)total
-            current:(NSNumber *)current
-          clockwise:(BOOL)clockwise
-             shadow:(BOOL)hasBackgroundShadow
-        shadowColor:(UIColor *)backgroundShadowColor
-displayCountingLabel:(BOOL)displayCountingLabel
-  overrideLineWidth:(NSNumber *)overrideLineWidth;
+- (id)initWithFrame:(CGRect)frame andTotal:(NSNumber *)total andCurrent:(NSNumber *)current andClockwise:(BOOL)clockwise andShadow:(BOOL)hasBackgroundShadow;
 
 @property (strong, nonatomic) UICountingLabel *countingLabel;
 @property (nonatomic) UIColor *strokeColor;
@@ -62,11 +33,7 @@ displayCountingLabel:(BOOL)displayCountingLabel
 @property (nonatomic) NSTimeInterval duration;
 @property (nonatomic) PNChartFormatType chartType;
 
-
 @property (nonatomic) CAShapeLayer *circle;
-@property (nonatomic) CAShapeLayer *gradientMask;
-@property (nonatomic) CAShapeLayer *circleBackground;
-
-@property (nonatomic) BOOL displayCountingLabel;
+@property (nonatomic) CAShapeLayer *circleBG;
 
 @end
