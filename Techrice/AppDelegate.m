@@ -57,9 +57,9 @@
     // get data
     NSString *url;
     if (parameter) {
-        url = [@"http://127.0.0.1:8080/" stringByAppendingString: parameter];
+        url = [@"http://128.199.120.30/" stringByAppendingString: parameter];
     }else{
-        url = @"http://satoyamacloud.com/nodes";
+        url = @"http://128.199.120.30/nodes";
     }
     //NSURLからNSURLRequestを作る
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];

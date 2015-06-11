@@ -49,51 +49,55 @@
     [view addSubview:subDistanceLabel];
     
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
-    
+
     // chart - water level
     for (int i = 0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
-        if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"water_level"]) {
-            // water level
-            int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
-            NSString *title = @"Water Level";
-            UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
-            NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       box, @"view",
-                                       title, @"title",
-                                       @"water_level", @"sensorType",
-                                       [NSNumber numberWithInt:sensorId], @"sensorId",
-                                       nil];
-            [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
-            [view addSubview:box];
-        }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"air humidity"]){
-            // air humidity
-            int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
-            NSString *title = @"Humidity";
-            UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 495, self.view.frame.size.width-10, 350)];
-            NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       box, @"view",
-                                       title, @"title",
-                                       @"air humidity", @"sensorType",
-                                       [NSNumber numberWithInt:sensorId], @"sensorId",
-                                       nil];
-            [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
-            [view addSubview:box];
-        }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"ambient temperature"]){
-            // ambient temperature
-            int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
-            NSString *title = @"Temperature";
-            UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 850, self.view.frame.size.width-10, 350)];
-            NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
-                                       box, @"view",
-                                       title, @"title",
-                                       @"ambient temperature", @"sensorType",
-                                       [NSNumber numberWithInt:sensorId], @"sensorId",
-                                       nil];
-            [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
-            [view addSubview:box];
-        }else{
-            NSLog(@"something wrong: no valid data for making chart");
+        if([[nodeData valueForKey:@"sensors"][0] valueForKeyPath:@"latest_reading.sensor.alias"] != [NSNull null]){
+            if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"water_level"]) {
+                // water level
+                int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
+                NSString *title = @"Water Level";
+                UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 140, self.view.frame.size.width-10, 350)];
+                NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           box, @"view",
+                                           title, @"title",
+                                           @"water_level", @"sensorType",
+                                           [NSNumber numberWithInt:sensorId], @"sensorId",
+                                           nil];
+                [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+                [view addSubview:box];
+            }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"air humidity"]){
+                // air humidity
+                int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
+                NSString *title = @"Humidity";
+                UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 495, self.view.frame.size.width-10, 350)];
+                NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           box, @"view",
+                                           title, @"title",
+                                           @"air humidity", @"sensorType",
+                                           [NSNumber numberWithInt:sensorId], @"sensorId",
+                                           nil];
+                [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+                [view addSubview:box];
+            }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"ambient temperature"]){
+                // ambient temperature
+                int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
+                NSString *title = @"Temperature";
+                UIView *box = [[UIView alloc] initWithFrame:CGRectMake(5, 850, self.view.frame.size.width-10, 350)];
+                NSDictionary *arguments = [NSDictionary dictionaryWithObjectsAndKeys:
+                                           box, @"view",
+                                           title, @"title",
+                                           @"ambient temperature", @"sensorType",
+                                           [NSNumber numberWithInt:sensorId], @"sensorId",
+                                           nil];
+                [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+                [view addSubview:box];
+            }else{
+                NSLog(@"something wrong: no valid data for making chart");
+            }
+        
         }
+
     }
     
     

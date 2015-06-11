@@ -43,6 +43,7 @@
     self.tableView.allowsMultipleSelection = NO;
     appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     sites = [appDelegate getData:@"sites"];
+    NSLog(@"sites: %@", sites);
 }
 
 - (void)doneButtonTapped{
