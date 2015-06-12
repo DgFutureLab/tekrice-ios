@@ -51,6 +51,7 @@
     //box: marning left: 5px, bottom 5px | size width: 310, height: 350
 
     // chart - water level
+    int boxNumber = 0;
     for (int i = 0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
         if([[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"] != [NSNull null]){
             if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"water_level"]) {
@@ -65,6 +66,7 @@
                                            [NSNumber numberWithInt:sensorId], @"sensorId",
                                            nil];
                 [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+                boxNumber++;
                 [view addSubview:box];
             }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"air humidity"]){
                 // air humidity
@@ -78,6 +80,7 @@
                                            [NSNumber numberWithInt:sensorId], @"sensorId",
                                            nil];
                 [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+                boxNumber++;
                 [view addSubview:box];
             }else if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"ambient temperature"]){
                 // ambient temperature
@@ -91,15 +94,15 @@
                                            [NSNumber numberWithInt:sensorId], @"sensorId",
                                            nil];
                 [self performSelectorInBackground:@selector(setChartView:) withObject:arguments];
+                boxNumber++;
                 [view addSubview:box];
             }else{
                 NSLog(@"something wrong: no valid data for making chart");
             }
         
         }
-
     }
-    
+    [view setFrame:CGRectMake(0, 0, self.view.frame.size.width, 150+350*boxNumber)];
     
     
 //    for (int i=0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
