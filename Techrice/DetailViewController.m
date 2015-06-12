@@ -52,7 +52,7 @@
 
     // chart - water level
     for (int i = 0; i<[[nodeData valueForKey:@"sensors"] count]; i++) {
-        if([[nodeData valueForKey:@"sensors"][0] valueForKeyPath:@"latest_reading.sensor.alias"] != [NSNull null]){
+        if([[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"] != [NSNull null]){
             if ([[NSString stringWithFormat:@"%@", [[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.alias"][0]] isEqualToString:@"water_level"]) {
                 // water level
                 int sensorId = [[[nodeData valueForKey:@"sensors"][i] valueForKeyPath:@"latest_reading.sensor.id"][0] intValue];
@@ -204,7 +204,6 @@
         }else{
             displayDistanceDataArray= [dataArray mutableCopy];
         }
-        
         // chart - title
         UILabel *boxLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 310, 120)];
         if ([title isEqualToString:@"Water Level"]) {
