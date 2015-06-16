@@ -1,4 +1,6 @@
 #import "ConditionViewController.h"
+#define POSITION_MIN self.view.center.y*1.5
+#define POSITION_MAX self.view.center.y*2.15
 
 @interface ConditionViewController ()
 
@@ -88,16 +90,15 @@
     chase.removedOnCompletion = NO;
     chase.fillMode = kCAFillModeForwards;
     [CATransaction begin];
-    [CATransaction setValue:[NSNumber numberWithFloat:0.750] forKey:kCATransactionAnimationDuration];
+    float animationDuration = remapWidthConstrain(fabsf(toPoint.y-fromPoint.y), 0, POSITION_MAX-POSITION_MIN, 0, 1.0);
+    [CATransaction setValue:[NSNumber numberWithFloat:animationDuration] forKey:kCATransactionAnimationDuration];
     [imageView.layer addAnimation:chase forKey:@"easing"];
     [CATransaction commit];
     imageView.center = toPoint;
 }
 
 -(float)convertWaterlevelToPositionY:(float)_latestWaterLevel{
-    // max: self.view.center.y*1.5
-    // min: self.view.center.y*2.15
-    return remapWidthConstrain(DISTANCE_TO_GROUND-_latestWaterLevel, 0, DISTANCE_TO_GROUND, self.view.center.y*1.5, self.view.center.y*2.15);
+    return remapWidthConstrain(DISTANCE_TO_GROUND-_latestWaterLevel, 0, DISTANCE_TO_GROUND, POSITION_MIN, POSITION_MAX);
 }
 
 -(void)updateAnimation:(NSTimer*)timer{
