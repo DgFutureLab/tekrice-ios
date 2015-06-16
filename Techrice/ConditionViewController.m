@@ -22,6 +22,7 @@
     for (int j=0; j<sensors.count; j++) {
         if ([[sensors[j] valueForKey:@"alias"] isEqualToString:@"water_level"] ){
             latestWaterLevel = DISTANCE_TO_GROUND-[[[sensors[j] valueForKey:@"latest_reading"] valueForKey:@"value"] floatValue];
+            oldWaterLevel = latestWaterLevel;
         }
     }
 
@@ -35,20 +36,20 @@
     [self.view addSubview:conditionImageViewRice];
     //water
     conditionImageViewWater = [[UIImageView alloc] init];
+    [conditionImageViewWater setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    [self.view addSubview:conditionImageViewWater];
     if (latestWaterLevel > THRESHOLD) {
         goodCondition = true;
         conditionImageViewRice.image = [UIImage imageNamed:@"happyrice.png"];
         conditionImageViewWater.image = [UIImage imageNamed:@"cleanwater.png"];
-        [self sinAnimation:conditionImageViewWater.layer waterLevel:150];
     }else{
         goodCondition = false;
         conditionImageViewRice.image = [UIImage imageNamed:@"sadrice.png"];
         conditionImageViewWater.image = [UIImage imageNamed:@"dirtywater.png"];
-        [self sinAnimation:conditionImageViewWater.layer waterLevel:50];
     }
-    [conditionImageViewWater setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
-    
-    [self.view addSubview:conditionImageViewWater];
+    // sine animation
+    conditionImageViewWater.center = CGPointMake(self.view.center.x, [self convertWaterlevelToPositionY:latestWaterLevel]);
+    [self sinAnimation:conditionImageViewWater.layer];
     
     //mud
     UIImageView *conditionImageViewMud = [[UIImageView alloc] init];
@@ -61,7 +62,7 @@
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(animate:) userInfo:nil repeats:YES];
+    NSTimer *tm = [NSTimer scheduledTimerWithTimeInterval:0.5f target:self selector:@selector(updateAnimation:) userInfo:nil repeats:YES];
     
     //distance label
     enableUpdating = true;
@@ -75,22 +76,63 @@
     [self.view addSubview:distanceLabel];
 }
 
--(void)animate:(NSTimer*)timer{
+- (void)easingImageViewFromOrigin:(UIImageView*)imageView movePoint:(CGPoint)movePoint{
+    [self easingImageView:imageView fromPoint:conditionImageViewWater.center toPoint:movePoint]; // [[conditionImageViewWater.layer presentationLayer] position]
+}
+- (void)easingImageView:(UIImageView*)imageView fromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint{
+    CAAnimation *chase = [CAKeyframeAnimation animationWithKeyPath:@"position"
+                                                          function:SineEaseIn
+                                                         fromPoint:fromPoint
+                                                           toPoint:toPoint];
+    [chase setDelegate:self];
+    chase.removedOnCompletion = NO;
+    chase.fillMode = kCAFillModeForwards;
+    [CATransaction begin];
+    [CATransaction setValue:[NSNumber numberWithFloat:0.750] forKey:kCATransactionAnimationDuration];
+    [imageView.layer addAnimation:chase forKey:@"easing"];
+    [CATransaction commit];
+    imageView.center = toPoint;
+}
+
+-(float)convertWaterlevelToPositionY:(float)_latestWaterLevel{
+    // max: self.view.center.y*1.5
+    // min: self.view.center.y*2.15
+    return remapWidthConstrain(DISTANCE_TO_GROUND-_latestWaterLevel, 0, DISTANCE_TO_GROUND, self.view.center.y*1.5, self.view.center.y*2.15);
+}
+
+-(void)updateAnimation:(NSTimer*)timer{
+    // change condition image
     if (latestWaterLevel > THRESHOLD) {
         if (!goodCondition) {
             goodCondition = true;
             conditionImageViewRice.image = [UIImage imageNamed:@"happyrice.png"];
             conditionImageViewWater.image = [UIImage imageNamed:@"cleanwater.png"];
-            [self sinAnimation:conditionImageViewWater.layer waterLevel:150];
+            [self sinAnimation:conditionImageViewWater.layer];
         }
     }else{
         if (goodCondition) {
             goodCondition = false;
             conditionImageViewRice.image = [UIImage imageNamed:@"sadrice.png"];
             conditionImageViewWater.image = [UIImage imageNamed:@"dirtywater.png"];
-            [self sinAnimation:conditionImageViewWater.layer waterLevel:50];
+            [self sinAnimation:conditionImageViewWater.layer];
         }
     }
+    if (latestWaterLevel != oldWaterLevel) {
+        NSLog(@"lastestWaterLevel: %f | %f", latestWaterLevel, oldWaterLevel);
+        // do easing
+        [conditionImageViewWater.layer removeAnimationForKey:@"sinAnimation"];
+        [self easingImageViewFromOrigin:conditionImageViewWater movePoint:CGPointMake(conditionImageViewWater.center.x, [self convertWaterlevelToPositionY:latestWaterLevel])];
+    }
+    oldWaterLevel = latestWaterLevel;
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag{
+    NSLog(@"animation stopped");
+    if (anim == [conditionImageViewWater.layer animationForKey:@"easing"]) {
+        // start sinAnimation
+        [self sinAnimation:conditionImageViewWater.layer];
+    }
+    animating = NO;
 }
 
 - (void)pressDetailButton{
@@ -100,9 +142,29 @@
     [self.navigationController pushViewController:detailViewController animated:YES];
 }
 
-- (void)sinAnimation:(CALayer *)layer waterLevel:(float)waterLevel{
+static double remap(double value, double inputMin, double inputMax, double outputMin, double outputMax){
+    value = constrain(value, inputMin, inputMax);
+    return (value - inputMin) * ((outputMax - outputMin) / (inputMax - inputMin)) + outputMin;
+}
+
+static double constrain(double value, double inputMin, double inputMax){
+    if (value < inputMin) {
+        return inputMin;
+    }else if (value > inputMax) {
+         return inputMax;
+    }
+    return value;
+}
+
+static double remapWidthConstrain(double value, double inputMin, double inputMax, double outputMin, double outputMax){
+    value = constrain(value, inputMin, inputMax);
+    value = remap(value, inputMin, inputMax, outputMin, outputMax);
+    return value;
+}
+
+- (void)sinAnimation:(CALayer *)layer{
     // アニメーションの開始点
-    CGPoint start = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height*1.1-(IS_PAD?waterLevel*2:waterLevel));
+    CGPoint start = layer.position;
     // アニメーションの時間
     CFTimeInterval duration = 2;
     // fps
@@ -135,7 +197,7 @@
     // サイクルアニメーションにする
     kfa.repeatCount = HUGE_VALF;
     // 実行
-    [layer addAnimation:kfa forKey:nil];
+    [layer addAnimation:kfa forKey:@"sinAnimation"];
 }
 
 - (void)viewWillAppear:(BOOL)animated{

@@ -1,20 +1,36 @@
 PODS:
-  - PNChart (0.6.0):
-    - UICountingLabel (~> 1.0.0)
-  - UICountingLabel (1.0.0)
+  - AHEasing (1.3.1)
+  - PNChart (0.8.3):
+    - UICountingLabel (~> 1.2.0)
+  - UICountingLabel (1.2.0)
 
 DEPENDENCIES:
+  - AHEasing (from `https://github.com/warrenm/AHEasing`)
   - PNChart (from `https://github.com/kevinzhow/PNChart`)
   - UICountingLabel (from `https://github.com/dataxpress/UICountingLabel`)
 
 EXTERNAL SOURCES:
+  AHEasing:
+    :git: https://github.com/warrenm/AHEasing
   PNChart:
     :git: https://github.com/kevinzhow/PNChart
   UICountingLabel:
     :git: https://github.com/dataxpress/UICountingLabel
 
-SPEC CHECKSUMS:
-  PNChart: 83e33ef86e61fa3486500ce2cf03faab9b8220a5
-  UICountingLabel: 540feeca6bbb78be892c8ab75b6ad02313cb2b10
+CHECKOUT OPTIONS:
+  AHEasing:
+    :commit: d36ae14a2fcd97cae0f44bd955264ed154d6ad02
+    :git: https://github.com/warrenm/AHEasing
+  PNChart:
+    :commit: a5f7b01aa7db3442909266034c9988daa5193d5e
+    :git: https://github.com/kevinzhow/PNChart
+  UICountingLabel:
+    :commit: 1015cdb5f2d5cedf25b901c623b4576d970b5e09
+    :git: https://github.com/dataxpress/UICountingLabel
 
-COCOAPODS: 0.34.4
+SPEC CHECKSUMS:
+  AHEasing: a47b04e264eb5f3a058b248d9aac6978257b6c42
+  PNChart: 8d81e061ec4845915184755d8da84f385ca1cb28
+  UICountingLabel: 1db4e7d023e1762171eb226d6dff47a7a84f27aa
+
+COCOAPODS: 0.37.2
