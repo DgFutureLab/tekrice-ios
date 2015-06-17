@@ -1,5 +1,3 @@
-#define THRESHOLD 55
-
 #import <UIKit/UIKit.h>
 #import "DetailViewController.h"
 #import "AppDelegate.h"

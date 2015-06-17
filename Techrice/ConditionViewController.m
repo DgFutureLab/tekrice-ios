@@ -40,7 +40,7 @@
     conditionImageViewWater = [[UIImageView alloc] init];
     [conditionImageViewWater setFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     [self.view addSubview:conditionImageViewWater];
-    if (latestWaterLevel > THRESHOLD) {
+    if (latestWaterLevel > appDelegate->minimumWaterLevel) {
         goodCondition = true;
         conditionImageViewRice.image = [UIImage imageNamed:@"happyrice.png"];
         conditionImageViewWater.image = [UIImage imageNamed:@"cleanwater.png"];
@@ -103,7 +103,7 @@
 
 -(void)updateAnimation:(NSTimer*)timer{
     // change condition image
-    if (latestWaterLevel > THRESHOLD) {
+    if (latestWaterLevel > appDelegate->minimumWaterLevel) {
         if (!goodCondition) {
             goodCondition = true;
             conditionImageViewRice.image = [UIImage imageNamed:@"happyrice.png"];
